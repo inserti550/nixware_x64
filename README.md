@@ -1,23 +1,17 @@
-### Nixware
+# Nixware
 
 > [!WARNING]
-> ### nixware IS NO LONGER SUPPORTED
+> ### Nixware IS NO LONGER SUPPORTED
 > #### Always updated, more functional, our cheat is only for $2: [Ignite](https://ignitecheat.xyz/)
 
 This is a cheat for [Garry's Mod](https://store.steampowered.com/app/4000/Garrys_Mod/) x64
 
 The cheat almost completely repeats the old nixware menu, which is why it has such a name
 
-The cheat is updated every week on Monday (almost)
+### Communication
+- [Discord Server](https://discord.gg/FdezFJxMxd)
 
-Please write about problems and errors in [issues](https://github.com/pa1n-dev/nixware_x64/issues)
-
-I will also now attach the [virustotal](https://www.virustotal.com/gui/home/upload) to each update
-
-#### Communication
-[OUR DISCORD SERVER](https://discord.gg/FdezFJxMxd)
-
-#### Features
+# Features
 - Aimbot (Silent, Automatic fire, Penetrate walls (SWB, CW2), Hitbox, Priority, Smooth)
 - Predict spread ([m9k](https://steamcommunity.com/sharedfiles/filedetails/?id=128089118), [swb](https://steamcommunity.com/sharedfiles/filedetails/?id=2279720120), [ptp](https://steamcommunity.com/sharedfiles/filedetails/?id=187933083), cw2, hl2)
 - Disable recoil
@@ -31,7 +25,7 @@ I will also now attach the [virustotal](https://www.virustotal.com/gui/home/uplo
 - 1 second backtrack without fakeping ([cl_interp abuse](https://www.unknowncheats.me/forum/garry-s-mod/414371-cl_interp-abuse-1-backtrack-fakeping.html)) (not 100% accuracy)
 - Multicore support 
 
-#### Showcase
+# Showcase
 [Menu showcase](https://pa1n-dev.github.io/nixware/showcase/)
 
 ![image](https://github.com/pa1n-dev/nixware_x64/assets/74207477/d3606d10-8edf-4768-9d2c-2c6cc906e495)
@@ -44,32 +38,24 @@ I will also now attach the [virustotal](https://www.virustotal.com/gui/home/uplo
 ![image](https://github.com/pa1n-dev/nixware_x64/assets/74207477/fe282ba0-d4d1-471a-ba26-c46902a71ba1)
 ![image](https://github.com/pa1n-dev/nixware_x64/assets/74207477/c21beff3-5d31-45c7-a8ca-fafbeb5318a3)
 
-#### ToDo
-- Lua API
-- Netlogger
-- Legit bhop/strafe
-- M9K Autowall
-
-#### How to use
-Open properties: 
-
-![image](https://github.com/pa1n-dev/nixware_x64/assets/74207477/fc20776e-2fd9-4b0c-a078-193f379b92dd)
-
-Select beta version:
-
-![image](https://github.com/pa1n-dev/nixware_x64/assets/74207477/e26b3f7f-0723-40be-8e45-cdf56df507b6)
-
-Also, when starting the game, select x64
-
-Afterwards you need to inject via process hacker
-
-### Download
-- [releases](https://github.com/pa1n-dev/nixware_x64/releases)
+# How to use
+- Download [Release](https://github.com/pa1n-dev/nixware_x64/releases)
 
 > [!WARNING]
 > I cant guarantee safety of downloading cheat from other web sites
+- Open properties: 
 
-### Credits
+![image](https://github.com/pa1n-dev/nixware_x64/assets/74207477/fc20776e-2fd9-4b0c-a078-193f379b92dd)
+
+- Select **x86-64 Chromium** beta version:
+
+![image](https://github.com/pa1n-dev/nixware_x64/assets/74207477/e26b3f7f-0723-40be-8e45-cdf56df507b6)
+
+*Also, when starting the game, select x64*
+
+- Inject via process hacker or other injector
+
+# Credits
 #### Maintainers / Devs
 - [pa1n](https://github.com/pa1n-dev)
 
@@ -78,8 +64,8 @@ Afterwards you need to inject via process hacker
 - [theshezzee](https://github.com/THEshezzee) (partial)
 
 #### Special thanks to these cheats
-- [lemi_gmod_revolution](https://github.com/LemiProject/lemi_gmod_revolution/)
 - [GMod-SDK](https://github.com/Gaztoof/GMod-SDK/)
+- [lemi_gmod_revolution](https://github.com/LemiProject/lemi_gmod_revolution/)
 
 ### Software used
 - [ImGui](https://github.com/ocornut/imgui)

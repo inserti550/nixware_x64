@@ -5,6 +5,12 @@
 
 namespace utilities
 {
+
+	std::string get_steam_id(int index);
+	ImU32 Float4toImU32(float color[]);
+	ImVec2 RotatePoint(c_vector EntityPos, c_vector LocalPlayerPos, int posX, int posY, int sizeX, int sizeY, float angle, float zoom, bool* viewCheck);
+	bool get_entity_box_3d(c_base_entity* entity, dbox_t& box);
+
 	bool game_is_full_loaded();
 	void attach_console();
 	void detach_console();

@@ -1,5 +1,46 @@
 #include "utilities.h"
 
+std::string utilities::get_steam_id(int id) {
+	player_info_s info;
+	interfaces::engine->get_player_info(id, &info);
+	return info.guid;
+}
+
+ImVec2 utilities::RotatePoint(c_vector EntityPos, c_vector LocalPlayerPos, int posX, int posY, int sizeX, int sizeY, float angle, float zoom, bool* viewCheck)
+{
+	float r_1, r_2;
+	float x_1, y_1;
+	r_1 = -(EntityPos.y - LocalPlayerPos.y);
+	r_2 = EntityPos.x - LocalPlayerPos.x;
+	float Yaw = angle - 90.0f;
+	float yawToRadian = Yaw * (float)(math::PI_F / 180.0F);
+	x_1 = (float)(r_2 * (float)cos((double)(yawToRadian)) - r_1 * sin((double)(yawToRadian))) / 20;
+	y_1 = (float)(r_2 * (float)sin((double)(yawToRadian)) + r_1 * cos((double)(yawToRadian))) / 20;
+	*viewCheck = y_1 < 0;
+	x_1 *= zoom;
+	y_1 *= zoom;
+	int sizX = sizeX / 2;
+	int sizY = sizeY / 2;
+	x_1 += sizX;
+	y_1 += sizY;
+	if (x_1 < 5)
+		x_1 = 5;
+	if (x_1 > sizeX - 5)
+		x_1 = sizeX - 5;
+	if (y_1 < 5)
+		y_1 = 5;
+	if (y_1 > sizeY - 5)
+		y_1 = sizeY - 5;
+	x_1 += posX;
+	y_1 += posY;
+	return ImVec2(x_1, y_1);
+}
+
+ImU32 utilities::Float4toImU32(float color[])
+{
+	return ImGui::GetColorU32(ImVec4(color[0], color[1], color[2], color[3]));
+}
+
 bool utilities::game_is_full_loaded()
 {
 	return GetModuleHandleA(xorstr("client.dll"))
@@ -11,6 +52,7 @@ bool utilities::game_is_full_loaded()
 		&& GetModuleHandleA(xorstr("vstdlib.dll"))
 		&& GetModuleHandleA(xorstr("vgui2.dll"));
 }
+
 
 void utilities::attach_console()
 {

@@ -85,3 +85,8 @@ public:
 };
 
 using q_angle = c_vector;
+
+struct dbox_t
+{
+	c_vector points[8];
+};

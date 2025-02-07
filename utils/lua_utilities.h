@@ -20,6 +20,7 @@ struct swb_info
 namespace lua_utilities
 {
 	const char* get_name(c_base_entity* entity);
+	const char* get_steam_id(c_base_entity* entity);
 	const char* get_user_group(c_base_entity* entity);
 
 	const char* get_rank_table_name(c_base_entity* entity);

@@ -23,7 +23,29 @@ const char* lua_utilities::get_name(c_base_entity* entity)
 
 	return value;
 }
+const char* lua_utilities::get_steam_id(c_base_entity* entity)
+{
+	c_lua_interface* lua = interfaces::lua_shared->get_interface(lua_type_client);
+	if (!lua)
+		return "";
 
+	entity->push_entity();
+
+	lua->get_field(-1, xorstr("SteamID"));
+	if (!lua->is_type(-1, object_type_t::function))
+	{
+		lua->pop(2);
+		return get_rank_table_name(entity);
+	}
+
+	lua->push(-2);
+	lua->call(1, 1);
+
+	const char* value = lua->get_string(-1);
+	lua->pop(2);
+
+	return value;
+}
 const char* lua_utilities::get_user_group(c_base_entity* entity)
 {
 	c_lua_interface* lua = interfaces::lua_shared->get_interface(lua_type_client);

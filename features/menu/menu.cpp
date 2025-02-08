@@ -54,6 +54,89 @@ void menu::render()
             Checkbox(xorstr("Disable visual recoil"), &settings::aimbot::accuracy::disable_visual_recoil);
             SliderFloat(xorstr("Backtrack"), &settings::aimbot::accuracy::backtrack, 0.f, 1.f, xorstr("%.3f ms"), ImGuiSliderFlags_NoInput);
             SliderFloat(xorstr("Smooth"), &settings::aimbot::accuracy::smooth, 0.f, 20.f, xorstr("%.1f"), ImGuiSliderFlags_NoInput);
+            float column_width = GetColumnWidth();
+            static int selected_item = -1;
+            static std::string selected_key = "";
+            ImVec2 button_size = ImVec2((column_width / 2) - style.ItemInnerSpacing.x, 35.f);
+            PushItemWidth(column_width - 10.f);
+            if (globals::playerupdate)
+            {
+                for (int ia = 0; ia <= interfaces::entity_list->get_highest_entity_index(); ia++)
+                {
+                    if (!interfaces::engine->is_in_game())
+                        return;
+
+                    c_base_entity* entity = interfaces::entity_list->get_entity(ia);
+                    if (!entity)
+                        continue;
+
+                    if (!entity->is_player())
+                        continue;
+
+                    std::string sid = utilities::get_steam_id(ia);
+                    if (sid.empty())
+                        continue;
+
+                    if (settings::aimbot::accuracy::player_list.contains(sid))
+                        continue;
+
+                    settings::aimbot::accuracy::player_list.emplace(sid, false);
+                }
+                globals::playerupdate = false;
+            }
+
+            if (BeginListBox(xorstr("##Friend"), ImVec2(0, GetWindowHeight() - (GetCursorPosY() + 10.f))))
+            {
+                for (auto item : settings::aimbot::accuracy::friend_list.items())
+                {
+                    bool is_friend = true;
+
+                    PushStyleColor(ImGuiCol_Text, ImVec4(0.0f, 1.0f, 0.0f, 1.0f));
+
+                    if (Selectable(item.key().c_str(), selected_item == item.value(), 0, ImVec2(column_width, 0)))
+                    {
+                        selected_item = item.value();
+                        selected_key = item.key();
+                    }
+
+                    PopStyleColor();
+                }
+
+                for (auto item : settings::aimbot::accuracy::player_list.items())
+                {
+                    if (!settings::aimbot::accuracy::friend_list.contains(item.key()))
+                    {
+                        bool is_friend = false;
+
+                        if (Selectable(item.key().c_str(), selected_item == item.value(), 0, ImVec2(column_width, 0)))
+                        {
+                            selected_item = item.value();
+                            selected_key = item.key();
+                        }
+                    }
+                }
+
+                EndListBox();
+            }
+            if (Button(xorstr("Add friend"), button_size))
+            {
+                if (!settings::aimbot::accuracy::friend_list.contains(selected_key))
+                {
+                    settings::aimbot::accuracy::friend_list.emplace(selected_key, false);
+                }
+            }
+            SameLine();
+            if (Button(xorstr("Del friend"), button_size))
+            {
+                if (settings::aimbot::accuracy::friend_list.contains(selected_key))
+                {
+                    settings::aimbot::accuracy::friend_list.erase(selected_key);
+                }
+            }
+            if (Button(xorstr("Update list"), button_size))
+            {
+                globals::playerupdate = true;
+            }
         }
         EndChild();
 
@@ -64,7 +147,30 @@ void menu::render()
             Checkbox(xorstr("Fov"), &settings::aimbot::visuals::fov); ColorEdit4(xorstr("Fov"), settings::aimbot::visuals::colors::fov, color_edit4_flags);
             Checkbox(xorstr("Snaplines"), &settings::aimbot::visuals::snaplines); ColorEdit4(xorstr("Snaplines"), settings::aimbot::visuals::colors::snaplines, color_edit4_flags);
             Checkbox(xorstr("Backtrack"), &settings::aimbot::visuals::backtrack::enable); ColorEdit4(xorstr("Backtrack"), settings::aimbot::visuals::colors::backtrack, color_edit4_flags);
-            Combo(xorstr("Material"), &settings::aimbot::visuals::backtrack::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0"));
+            Combo(xorstr("Material"), &settings::aimbot::visuals::backtrack::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0"));
+        }
+        EndChild();
+
+        BeginChild(xorstr("KnifeBot"), child_size);
+        {
+            Checkbox(xorstr("Enable#2"), &settings::knifebot::globals::enable); custom::hotkey(xorstr("knifebot Hotkey"), &settings::knifebot::globals::hotkey);
+            Checkbox(xorstr("Silent#2"), &settings::knifebot::globals::silent);
+            Checkbox(xorstr("Automatic fire#2"), &settings::knifebot::globals::automatic_fire);
+            SliderFloat(xorstr("Fov#2"), &settings::knifebot::globals::fov, 0.f, 180.f, xorstr("%.1f"), ImGuiSliderFlags_NoInput);
+            Combo(xorstr("Hitbox#2"), &settings::knifebot::globals::hitbox, xorstr("Head\0" "Chest\0" "Stomach\0" "Hitscan\0"));
+            Combo(xorstr("Priority#2"), &settings::knifebot::globals::priority, xorstr("Fov\0" "Distance\0" "Health\0"));
+            SliderInt(xorstr("Max distance#2"), &settings::knifebot::globals::maxdistance, 0, 450);
+            Checkbox(xorstr("Draw fov##2"), &settings::knifebot::visuals::fov); ColorEdit4(xorstr("KnifeBot Fov"), settings::knifebot::visuals::colors::fov, color_edit4_flags);
+            Checkbox(xorstr("Draw snaplines##2"), &settings::knifebot::visuals::snaplines); ColorEdit4(xorstr("KnifeBot Snaplines"), settings::knifebot::visuals::colors::snaplines, color_edit4_flags);
+        }
+        EndChild();
+
+        SameLine();
+
+        BeginChild(xorstr("TriggerBot"), child_size);
+        {
+            Checkbox(xorstr("Enable##3"), &settings::TrigerBot::enable); custom::hotkey(xorstr("Triggerbot Hotkey"), &settings::TrigerBot::hotkey);
+            SliderFloat(xorstr("Max distance#3"), &settings::TrigerBot::maxdistance, 0.f, 15000.f, xorstr("%.1f"), ImGuiSliderFlags_NoInput);
         }
         EndChild();
 
@@ -81,7 +187,15 @@ void menu::render()
             Checkbox(xorstr("Fake duck"), &settings::antihit::fake_angles::fake_duck);
             Checkbox(xorstr("At target"), &settings::antihit::fake_angles::at_target);
             Checkbox(xorstr("Invert yaw"), &settings::antihit::fake_angles::invert_yaw);
-            Combo(xorstr("Yaw"), &settings::antihit::fake_angles::yaw, xorstr("LBY\0"));
+            Combo(xorstr("Yaw"), &settings::antihit::fake_angles::yaw, xorstr("None\0" "LBY\0" "Spin\0" "Adaptive\0" "Fake real\0"));
+            switch (settings::antihit::fake_angles::yaw)
+            {
+            case 2:
+                SliderFloat(xorstr("Spin speed"), &settings::antihit::fake_angles::spinspeed, 0.f, 360.f);
+                break;
+            default:
+                break;
+            }
             Combo(xorstr("Pitch"), &settings::antihit::fake_angles::pitch, xorstr("Down\0" "Up\0"));
         }
         EndChild();
@@ -93,6 +207,7 @@ void menu::render()
             Checkbox(xorstr("Enable"), &settings::antihit::fake_lags::enable);
             SliderInt(xorstr("Count"), &settings::antihit::fake_lags::count, 1, 24, xorstr("%d"), ImGuiSliderFlags_NoInput); /*sv_maxusrcmdprocessticks = 24*/
             Combo(xorstr("Method"), &settings::antihit::fake_lags::method, xorstr("On Ground\0" "In Air\0" "On Move\0" "On Stand\0" "Always\0"));
+            Checkbox(xorstr("LagPeak"), &settings::antihit::fake_lags::lagpeak); custom::hotkey(xorstr("LagPeak Hotkey"), &settings::antihit::fake_lags::hotkey);
         }
         EndChild();
 
@@ -101,7 +216,7 @@ void menu::render()
         BeginChild(xorstr("Visuals"), child_size);
         {
             Checkbox(xorstr("Fake model"), &settings::antihit::visuals::fake_model::enable); ColorEdit4(xorstr("Fake model"), settings::antihit::visuals::colors::fake_model, color_edit4_flags);
-            Combo(xorstr("Material"), &settings::antihit::visuals::fake_model::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0"));
+            Combo(xorstr("Material"), &settings::antihit::visuals::fake_model::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0"));
         }
         EndChild();
 
@@ -124,6 +239,16 @@ void menu::render()
                 Checkbox(xorstr("Enable"), &settings::visuals::esp::players::enable);
                 Checkbox(xorstr("Dormant"), &settings::visuals::esp::players::dormant);
                 Checkbox(xorstr("Box"), &settings::visuals::esp::players::box); ColorEdit4(xorstr("Box"), settings::visuals::esp::players::colors::box, color_edit4_flags);
+                Combo(xorstr("##Boxtype"), &settings::visuals::esp::players::boxtype, xorstr("2D\0" "2D corner\0" "3D\0" "Fill\0"));
+                if (settings::visuals::esp::players::boxtype == 1 || settings::visuals::esp::players::boxtype == 3)
+                    SliderFloat(xorstr("Edge size##1"), &settings::visuals::esp::players::edgesize, 0, 8);
+                Checkbox(xorstr("Health"), &settings::visuals::esp::players::health::enable); ColorEdit4(xorstr("ForwardColor"), settings::visuals::esp::players::health::colors::forward, color_edit4_flags);
+                if (settings::visuals::esp::players::health::enable)
+                {
+                    Checkbox(xorstr("Back##Health"), &settings::visuals::esp::players::health::back); ColorEdit4(xorstr("BackColor"), settings::visuals::esp::players::health::colors::backward, color_edit4_flags);
+                    Checkbox(xorstr("Outline##Health"), &settings::visuals::esp::players::health::outline); ColorEdit4(xorstr("OutlineColor"), settings::visuals::esp::players::health::colors::outline, color_edit4_flags);
+                    Checkbox(xorstr("Text##Health"), &settings::visuals::esp::players::health::text); ColorEdit4(xorstr("TextColor"), settings::visuals::esp::players::health::colors::text, color_edit4_flags);
+                }
                 Checkbox(xorstr("Name"), &settings::visuals::esp::players::name); ColorEdit4(xorstr("Name"), settings::visuals::esp::players::colors::name, color_edit4_flags);
                 Checkbox(xorstr("Rp team"), &settings::visuals::esp::players::rp_team); ColorEdit4(xorstr("Rp team"), settings::visuals::esp::players::colors::rp_team, color_edit4_flags);
                 Checkbox(xorstr("User group"), &settings::visuals::esp::players::user_group); ColorEdit4(xorstr("User group"), settings::visuals::esp::players::colors::user_group, color_edit4_flags);
@@ -174,7 +299,7 @@ void menu::render()
             {
                 Checkbox(xorstr("Enable"), &settings::visuals::chams::players::enable); ColorEdit4(xorstr("Chams"), settings::visuals::chams::colors::players, color_edit4_flags);
                 Checkbox(xorstr("Ignore walls"), &settings::visuals::chams::players::ignore_walls);
-                Combo(xorstr("Material"), &settings::visuals::chams::players::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0"));
+                Combo(xorstr("Material"), &settings::visuals::chams::players::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" ));
 
                 Checkbox(xorstr("Draw original model"), &settings::visuals::chams::players::draw_original_model);
 
@@ -184,7 +309,7 @@ void menu::render()
             {
                 Checkbox(xorstr("Enable"), &settings::visuals::chams::entity::enable); ColorEdit4(xorstr("Chams"), settings::visuals::chams::colors::entity, color_edit4_flags);
                 Checkbox(xorstr("Ignore walls"), &settings::visuals::chams::entity::ignore_walls);
-                Combo(xorstr("Material"), &settings::visuals::chams::entity::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0"));
+                Combo(xorstr("Material"), &settings::visuals::chams::entity::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" ));
 
                 Checkbox(xorstr("Draw original model"), &settings::visuals::chams::entity::draw_original_model);
 
@@ -207,7 +332,7 @@ void menu::render()
             case 2:
             {
                 Checkbox(xorstr("Enable"), &settings::visuals::chams::hands::enable); ColorEdit4(xorstr("Chams"), settings::visuals::chams::colors::hands, color_edit4_flags);
-                Combo(xorstr("Material"), &settings::visuals::chams::hands::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0"));
+                Combo(xorstr("Material"), &settings::visuals::chams::hands::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" ));
 
                 Checkbox(xorstr("Draw original model"), &settings::visuals::chams::hands::draw_original_model);
 
@@ -226,6 +351,18 @@ void menu::render()
 
             Checkbox(xorstr("Model fov changer"), &settings::visuals::world::model_fov_changer::enable);
             SliderFloat(xorstr("Value##2"), &settings::visuals::world::model_fov_changer::value, 30, 150, xorstr("%.1f"), ImGuiSliderFlags_NoInput);
+
+            Checkbox(xorstr("Radar"), &settings::visuals::radar::enable);
+            if (settings::visuals::radar::enable)
+            {
+                Checkbox(xorstr("Background"), &settings::visuals::radar::background); ColorEdit4(xorstr("Background Color"), settings::visuals::radar::colors::background, color_edit4_flags);
+                Checkbox(xorstr("Lines"), &settings::visuals::radar::lines); ColorEdit4(xorstr("Lines Color"), settings::visuals::radar::colors::Line, color_edit4_flags);
+                Checkbox(xorstr("Render players"), &settings::visuals::radar::players); ColorEdit4(xorstr("Player Color"), settings::visuals::radar::colors::Players, color_edit4_flags);
+                if (settings::visuals::radar::players)
+                    Checkbox(xorstr("Render friend"), &settings::visuals::radar::friends); ColorEdit4(xorstr("Friend Color"), settings::visuals::radar::colors::Friends, color_edit4_flags);
+                SliderFloat(xorstr("Max distance"), &settings::visuals::radar::distance, 150, 25000, xorstr("%.1f"));
+                SliderFloat(xorstr("Zoom"), &settings::visuals::radar::zoom, 1, 8, xorstr("%.1f"));
+            }
         }
         EndChild();
 
@@ -249,6 +386,8 @@ void menu::render()
         {
             Checkbox(xorstr("Bunny hop"), &settings::miscellaneous::movement::bhop);
             Checkbox(xorstr("Air strafe"), &settings::miscellaneous::movement::air_strafe);
+            Checkbox(xorstr("FastWalk"), &settings::miscellaneous::movement::fastwalk);
+            SliderFloat(xorstr("FastWalk offset"), &settings::miscellaneous::movement::fastwalk_offset, 2500, 5000);
         }
         EndChild();
 

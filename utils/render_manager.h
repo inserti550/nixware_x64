@@ -40,7 +40,42 @@ namespace render_manager
 	{
 		draw_list->AddRectFilled(from, to, GetColorU32(ImVec4(color[0], color[1], color[2], color[3])), rounding, flags);
 	}
+	inline void cornerbox(box_t box, float color[4], float thickness, float size)
+	{
+		ImU32 col = GetColorU32(ImVec4(color[0], color[1], color[2], color[3]));
+		float dotdist = (sqrt(pow(box.right - box.left, 2) + pow(box.top - box.top, 2))) / size;
+		//top-left
+		draw_list->AddLine(ImVec2(box.left, box.top), ImVec2(box.left + dotdist, box.top), col, thickness);
+		draw_list->AddLine(ImVec2(box.left, box.top), ImVec2(box.left, box.top - dotdist), col, thickness);
+		//top-right
+		draw_list->AddLine(ImVec2(box.right, box.top), ImVec2(box.right - dotdist, box.top), col, thickness);
+		draw_list->AddLine(ImVec2(box.right, box.top), ImVec2(box.right, box.top - dotdist), col, thickness);
+		//bottom-left
+		draw_list->AddLine(ImVec2(box.left, box.bottom), ImVec2(box.left + dotdist, box.bottom), col, thickness);
+		draw_list->AddLine(ImVec2(box.left, box.bottom), ImVec2(box.left, box.bottom + dotdist), col, thickness);
+		//bottom-right
+		draw_list->AddLine(ImVec2(box.right, box.bottom), ImVec2(box.right - dotdist, box.bottom), col, thickness);
+		draw_list->AddLine(ImVec2(box.right, box.bottom), ImVec2(box.right, box.bottom + dotdist), col, thickness);
+	}
 
+	inline void tdbox(c_vector screen_points[8], float color[4], float thickness)
+	{
+		ImU32 col = GetColorU32(ImVec4(color[0], color[1], color[2], color[3]));
+		draw_list->AddLine(ImVec2(screen_points[0].x, screen_points[0].y), ImVec2(screen_points[1].x, screen_points[1].y), col, thickness);
+		draw_list->AddLine(ImVec2(screen_points[1].x, screen_points[1].y), ImVec2(screen_points[2].x, screen_points[2].y), col, thickness);
+		draw_list->AddLine(ImVec2(screen_points[2].x, screen_points[2].y), ImVec2(screen_points[3].x, screen_points[3].y), col, thickness);
+		draw_list->AddLine(ImVec2(screen_points[3].x, screen_points[3].y), ImVec2(screen_points[0].x, screen_points[0].y), col, thickness);
+
+		draw_list->AddLine(ImVec2(screen_points[4].x, screen_points[4].y), ImVec2(screen_points[5].x, screen_points[5].y), col, thickness);
+		draw_list->AddLine(ImVec2(screen_points[5].x, screen_points[5].y), ImVec2(screen_points[6].x, screen_points[6].y), col, thickness);
+		draw_list->AddLine(ImVec2(screen_points[6].x, screen_points[6].y), ImVec2(screen_points[7].x, screen_points[7].y), col, thickness);
+		draw_list->AddLine(ImVec2(screen_points[7].x, screen_points[7].y), ImVec2(screen_points[4].x, screen_points[4].y), col, thickness);
+
+		draw_list->AddLine(ImVec2(screen_points[0].x, screen_points[0].y), ImVec2(screen_points[6].x, screen_points[6].y), col, thickness);
+		draw_list->AddLine(ImVec2(screen_points[1].x, screen_points[1].y), ImVec2(screen_points[5].x, screen_points[5].y), col, thickness);
+		draw_list->AddLine(ImVec2(screen_points[2].x, screen_points[2].y), ImVec2(screen_points[4].x, screen_points[4].y), col, thickness);
+		draw_list->AddLine(ImVec2(screen_points[3].x, screen_points[3].y), ImVec2(screen_points[7].x, screen_points[7].y), col, thickness);
+	}
 	inline void box(box_t box, float color[4], float thickness)
 	{
 		draw_list->AddRect(ImVec2(box.left, box.top), ImVec2(box.right, box.bottom), GetColorU32(ImVec4(color[0], color[1], color[2], color[3])), 0.f, 0, thickness);

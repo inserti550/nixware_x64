@@ -13,6 +13,8 @@ void __fastcall hooks::handles::create_move(c_hl_client* client, int sequence_nu
 	c_user_cmd old_cmd = *cmd;
 
 	engine_prediction::start(cmd);
+	triggerbot::run(cmd);
+	knifebot::run(cmd);
 	aimbot::run(cmd);
 	engine_prediction::end(cmd);
 	predict_spread::run(cmd);
@@ -23,7 +25,7 @@ void __fastcall hooks::handles::create_move(c_hl_client* client, int sequence_nu
 	fakelags::apply(send_packet);
 
 	movement::fix(cmd, old_cmd);
-
+	
 	verified_cmd->set_user_cmd(cmd);
 
 	lag_compensation::write_user_cmd_delta_to_buffer_callback();

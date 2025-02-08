@@ -9,6 +9,13 @@ void movement::run(c_user_cmd* cmd)
     if (local_player->get_move_type() == MOVETYPE_NOCLIP || local_player->get_move_type() == MOVETYPE_LADDER || local_player->get_flags() & FL_INWATER)
         return;
 
+    if (settings::miscellaneous::movement::fastwalk)
+        if (local_player->get_move_type() == MOVETYPE_WALK && cmd->forward_move != 0)
+            if (interfaces::global_vars->tick_count % 2 == 0)
+                cmd->side_move = (cmd->side_move + settings::miscellaneous::movement::fastwalk_offset);
+            else
+                cmd->side_move = (cmd->side_move - settings::miscellaneous::movement::fastwalk_offset);
+
     if (settings::miscellaneous::movement::bhop)
     {
         if (cmd->buttons & IN_JUMP && !(local_player->get_flags() & FL_ONGROUND))

@@ -4,6 +4,6 @@
 namespace visuals
 {
 	using namespace ImGui;
-
+	void renderMap();
 	void render();
 }

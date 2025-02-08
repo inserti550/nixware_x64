@@ -4,7 +4,7 @@
 namespace chams
 {
 	i_material* create_material(const char* name, bool flat, bool wireframe, bool add_shine);
-
+	i_material* createSelfillumMat(const char* name, bool flat, bool wireframe, bool add_shine);
 	void push_material_override(float color[4], int material_type);
 	void pop_material_override();
 

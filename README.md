@@ -1,18 +1,12 @@
 # Nixware
 
-> [!WARNING]
-> ### Nixware IS NO LONGER SUPPORTED
-> #### Always updated, more functional, our cheat is only for $2: [Ignite](https://ignitecheat.xyz/)
-
 This is a cheat for [Garry's Mod](https://store.steampowered.com/app/4000/Garrys_Mod/) x64
 
 The cheat almost completely repeats the old nixware menu, which is why it has such a name
 
-### Communication
-- [Discord Server](https://discord.gg/FdezFJxMxd)
-
 # Features
 - Aimbot (Silent, Automatic fire, Penetrate walls (SWB, CW2), Hitbox, Priority, Smooth)
+- ESP
 - Predict spread ([m9k](https://steamcommunity.com/sharedfiles/filedetails/?id=128089118), [swb](https://steamcommunity.com/sharedfiles/filedetails/?id=2279720120), [ptp](https://steamcommunity.com/sharedfiles/filedetails/?id=187933083), cw2, hl2)
 - Disable recoil
 - Backtrack
@@ -24,6 +18,9 @@ The cheat almost completely repeats the old nixware menu, which is why it has su
 - [AnimFix](https://www.unknowncheats.me/forum/garry-s-mod/502883-animfix-fake-chams.html)
 - 1 second backtrack without fakeping ([cl_interp abuse](https://www.unknowncheats.me/forum/garry-s-mod/414371-cl_interp-abuse-1-backtrack-fakeping.html)) (not 100% accuracy)
 - Multicore support 
+- TriggerBot
+- KnifeBot
+- LagPeak (I don't know what would be the correct name for this function)
 
 # Showcase
 [Menu showcase](https://pa1n-dev.github.io/nixware/showcase/)

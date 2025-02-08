@@ -41,6 +41,30 @@ ImU32 utilities::Float4toImU32(float color[])
 	return ImGui::GetColorU32(ImVec4(color[0], color[1], color[2], color[3]));
 }
 
+bool utilities::get_entity_box_3d(c_base_entity* entity, dbox_t& box)
+{
+	c_vector pos = entity->get_abs_origin();
+	c_vector mins = pos + entity->get_collidable()->mins();
+	c_vector maxs = pos + entity->get_collidable()->maxs();
+
+	box.points[0] = c_vector(mins.x, mins.y, mins.z);
+	box.points[1] = c_vector(mins.x, maxs.y, mins.z);
+	box.points[2] = c_vector(maxs.x, maxs.y, mins.z);
+	box.points[3] = c_vector(maxs.x, mins.y, mins.z);
+	box.points[4] = c_vector(maxs.x, maxs.y, maxs.z);
+	box.points[5] = c_vector(mins.x, maxs.y, maxs.z);
+	box.points[6] = c_vector(mins.x, mins.y, maxs.z);
+	box.points[7] = c_vector(maxs.x, mins.y, maxs.z);
+
+	for (int i = 0; i < 8; i++)
+	{
+		if (isnan(box.points[i].x) || isnan(box.points[i].y) || isnan(box.points[i].z))
+			return false;
+	}
+
+	return true;
+}
+
 bool utilities::game_is_full_loaded()
 {
 	return GetModuleHandleA(xorstr("client.dll"))

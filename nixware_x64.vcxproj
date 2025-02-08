@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{5025b03f-e9c6-486e-ba74-3962bef39381}</ProjectGuid>
+    <ProjectGuid>{AE24238E-581E-4761-9988-ADBD2E16AE4E}</ProjectGuid>
     <RootNamespace>nixwarex64</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -74,8 +74,8 @@
     <OutDir>$(SolutionDir)build\release\</OutDir>
     <IntDir>$(SolutionDir)build\release\obj\</IntDir>
     <TargetName>nixware</TargetName>
-    <IncludePath>D:\Source\DirectX SDK\Include;D:\Source\Freetype\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Source\DirectX SDK\Lib\x64;D:\Source\Freetype\win64;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\vs\Libs\DirectX\Include;D:\vs\Libs\x64\FreeType\iclude;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\vs\Libs\DirectX\Lib\x64;D:\vs\Libs\x64\FreeType\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)debug_x64\</OutDir>
@@ -146,6 +146,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <Optimization>Disabled</Optimization>
       <WholeProgramOptimization>false</WholeProgramOptimization>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

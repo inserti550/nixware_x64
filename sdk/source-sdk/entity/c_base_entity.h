@@ -231,4 +231,17 @@ public:
 
 		return get_class_name(this);
 	}
+
+	int get_maxhealth()
+	{
+		return *(int*)((uintptr_t)this + 0xcc); //DT_GMOD_Player 0xcc
+	}
+	int get_armor()
+	{
+		return *(int*)((uintptr_t)this + 0x25ec); //DT_PlayerResource 0x25ec
+	}
+	int get_maxarmor()
+	{
+		return *(int*)((uintptr_t)this + 0xcc); //DT_GMOD_Player 0xcc
+	}
 };

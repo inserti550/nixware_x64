@@ -17,6 +17,11 @@ namespace globals
 
     inline void* menu_panel = nullptr;
     inline std::atomic<std::pair<bool, const char*>> waiting_to_be_executed;
+    inline nlohmann::json players_list;
+    inline bool playerupdate = true;
+    inline bool is_in_freecam = false;
+    inline c_user_cmd* last_cmd;
+    inline q_angle* last_angle;
 }
 
 namespace settings
@@ -44,6 +49,44 @@ namespace settings
         }
     }
 
+    namespace knifebot
+    {
+        namespace globals
+        {
+            inline bool enable = false;
+            inline hotkey_t hotkey;
+            inline bool silent = false;
+            inline bool automatic_fire = false;
+            inline float fov = 0;
+            inline int hitbox = 0;
+            inline int priority = 0;
+            inline int maxdistance = 90.f;
+        }
+
+        namespace accuracy
+        {
+            inline float smooth = 0.f;
+        }
+        namespace visuals
+        {
+            inline bool fov = false;
+            inline bool snaplines = false;
+            inline bool attackdist = false;
+
+            namespace colors
+            {
+                inline float fov[4] = { 1.f, 1.f, 1.f, 1.f };
+                inline float snaplines[4] = { 1.f, 1.f, 1.f, 1.f };
+                inline float attackdist[4] = { 1.f, 1.f, 1.f, 1.f };
+            }
+        }
+    }
+    namespace TrigerBot
+    {
+        inline bool enable = false;
+        inline hotkey_t hotkey;
+        inline float maxdistance = 1500.f;
+    }
     namespace aimbot
     {
         namespace globals
@@ -67,6 +110,7 @@ namespace settings
             inline float smooth = 0.f;
             inline nlohmann::json team_list;
             inline nlohmann::json friend_list;
+            inline nlohmann::json player_list;
         }
 
         namespace visuals
@@ -96,6 +140,8 @@ namespace settings
             inline bool enable = false;
             inline int count = 1;
             inline int method = 0;
+            inline bool lagpeak = false;
+            inline hotkey_t hotkey;
         }
 
         namespace fake_angles
@@ -103,6 +149,7 @@ namespace settings
             inline bool enable = false;
             inline hotkey_t hotkey;
             inline int yaw = 0;
+            inline float spinspeed = 1;
             inline int pitch = 0;
             inline bool at_target = false;
             inline bool invert_yaw = false;
@@ -126,6 +173,25 @@ namespace settings
 
     namespace visuals
     {
+        namespace radar
+        {
+            inline bool enable = false;
+            inline bool background = false;
+            inline ImVec2 position = ImVec2(100, 100);
+            inline float distance = 1500.f;
+            inline bool players = false;
+            inline bool friends = false;
+            inline bool lines = false;
+            inline ImVec2 size = ImVec2(350, 350);
+            inline float zoom = 1.f;
+            namespace colors
+            {
+                inline float background[4] = { 1.f, 1.f, 1.f, 1.f };
+                inline float Players[4] = { 1.f, 1.f, 1.f, 1.f };
+                inline float Friends[4] = { 1.f, 1.f, 1.f, 1.f };
+                inline float Line[4] = { 1.f, 1.f, 1.f, 1.f };
+            }
+        }
         namespace esp
         {
             namespace players
@@ -133,6 +199,21 @@ namespace settings
                 inline bool enable = false;
                 inline bool dormant = false;
                 inline bool box = false;
+                inline int boxtype = 0;
+                inline float edgesize = 4;
+                namespace health {
+                    inline bool enable = false;
+                    inline bool back = false;
+                    inline bool outline = false;
+                    inline bool text = false;
+                    namespace colors
+                    {
+                        inline float outline[4] = { 1.f, 1.f, 1.f, 1.f };
+                        inline float text[4] = { 1.f, 1.f, 1.f, 1.f };
+                        inline float backward[4] = { 1.f, 1.f, 1.f, 1.f };
+                        inline float forward[4] = { 1.f, 1.f, 1.f, 1.f };
+                    }
+                }
                 inline bool name = false;
                 inline bool rp_team = false;
                 inline bool user_group = false;
@@ -235,12 +316,20 @@ namespace settings
                 inline hotkey_t hotkey;
                 inline int distance = 100;
             }
+            namespace freecam
+            {
+                inline bool enable = false;
+                inline hotkey_t hotkey;
+                inline int speed = 250;
+            }
         }
 
         namespace movement
         {
             inline bool bhop = false;
             inline bool air_strafe = false;
+            inline bool fastwalk = false;
+            inline float fastwalk_offset = 5000;
         }
     }
 

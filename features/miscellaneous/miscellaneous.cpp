@@ -21,6 +21,8 @@ void miscellaneous::third_person(c_view_setup& view)
 
 	if (!settings::miscellaneous::globals::third_person::hotkey.check())
 		return;
+	if (globals::is_in_freecam)
+		return;
 
 	//https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/game/client/in_camera.cpp#L59
 	interfaces::input->camera_in_third_person = true;
@@ -38,4 +40,22 @@ void miscellaneous::third_person(c_view_setup& view)
 	interfaces::engine_trace->trace_ray(ray, MASK_SOLID, &filter, &trace);
 
 	view.origin = trace.end;
+}
+//i made this later
+void freecam(c_view_setup& view)
+{
+	c_base_entity* local_player = interfaces::entity_list->get_entity(interfaces::engine->get_local_player());
+	if (!local_player)
+		return;
+
+	if (settings::miscellaneous::globals::freecam::enable && settings::miscellaneous::globals::freecam::hotkey.check())
+	{
+		interfaces::input->camera_in_third_person = true;
+		globals::is_in_freecam = true;
+	}
+	else
+	{
+		globals::is_in_freecam = false;
+		interfaces::input->camera_in_third_person = false;
+	}
 }

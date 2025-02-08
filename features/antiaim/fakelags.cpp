@@ -17,6 +17,9 @@ bool fakelags::run(c_user_cmd* cmd)
 		return true;
 	}
 
+	if (settings::antihit::fake_lags::lagpeak && settings::antihit::fake_lags::hotkey.check())
+		return false;
+
 	if (!settings::antihit::fake_lags::enable || cmd->buttons & IN_ATTACK)
 		return true;
 

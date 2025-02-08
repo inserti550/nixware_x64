@@ -36,15 +36,56 @@ i_material* chams::create_material(const char* name, bool flat, bool wireframe, 
 
     return created_material;
 }
+i_material* chams::createSelfillumMat(const char* name, bool flat, bool wireframe, bool add_shine)
+{
+    std::string material_data = std::format(R"("{}"
+    {{
+        "$basetexture" "vgui/white_additive"
+        "$bumpmap" "vgui/white_additive"
+        "$envmap" "{}"
+        "$normalmapalphaenvmapmask" "{}"
+        "$envmapcontrast" "{}"
+        "$model" "1"
+        "$nocull" "1"
+        "$nodecal" "1"
+        "$additive" "1"
+        "$selfIllum" = 1
+        "$selfIllumFresnel" = 1
+        "$selfIllumFresnelMinMaxExp" = "[0.0 0.3 0.6]"
+        "$selfillumtint" = "[0 0 0]"
+        "$halflambert" "1"
+        "$nofog" "0"
+        "$ignorez" "0"
+        "$znearer" "0"
+        "$wireframe" "{}"
+    }}
+    )", flat || wireframe ? "UnlitGeneric" : "VertexLitGeneric", add_shine ? "env_cubemap" : "", add_shine ? 1 : 0, add_shine ? 1 : 0, wireframe ? 1 : 0);
 
+    void* kv = key_values::key_values();
+    if (!kv)
+        return nullptr;
+
+    key_values::initialize(kv, name);
+    if (!key_values::load_from_buffer(kv, name, material_data.c_str()))
+        return nullptr;
+
+    i_material* created_material = interfaces::material_system->create_material(name, kv);
+    if (!created_material)
+        return nullptr;
+
+    created_material->increment_reference_count();
+
+    return created_material;
+}
 void chams::push_material_override(float color[4], int material_type)
 {
     static i_material* textured = chams::create_material(xorstr("textured_material"), false, false, false);
     static i_material* metal = chams::create_material(xorstr("metal_material"), false, false, true);
     static i_material* wireframe = chams::create_material(xorstr("wireframe_material"), false, true, false);
     static i_material* flat = chams::create_material(xorstr("flat_material"), true, false, false);
+    static i_material* selfillum = chams::createSelfillumMat(xorstr("selfillum_material"), false, false, false);
 
-    if (!textured || !metal || !wireframe || !flat)
+    if (!textured || !metal || !wireframe || !flat || !selfillum)
         return;
 
     interfaces::model_render->suppress_engine_lighting(true);
@@ -69,6 +110,9 @@ void chams::push_material_override(float color[4], int material_type)
         material = flat;
         break;
     case 4:
+        material = selfillum;
+        break;
+    case 5:
         break;
     }
 

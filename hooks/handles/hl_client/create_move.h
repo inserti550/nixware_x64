@@ -8,6 +8,16 @@ void __fastcall hooks::handles::create_move(c_hl_client* client, int sequence_nu
 	if (!cmd || !cmd->command_number)
 		return;
 
+	globals::last_cmd = *cmd;
+
+	if (globals::is_in_freecam) {
+		cmd->buttons = NULL;
+		cmd->forward_move = cmd->side_move = cmd->up_move = 0.f;
+		cmd->view_angles = globals::last_real_angle;
+	}
+	else
+		globals::last_real_angle = cmd->view_angles;
+
 	movement::run(cmd);
 
 	c_user_cmd old_cmd = *cmd;

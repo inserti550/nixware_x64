@@ -20,8 +20,8 @@ namespace globals
     inline nlohmann::json players_list;
     inline bool playerupdate = true;
     inline bool is_in_freecam = false;
-    inline c_user_cmd* last_cmd;
-    inline q_angle* last_angle;
+    inline c_user_cmd last_cmd;
+    inline q_angle last_real_angle;
 }
 
 namespace settings

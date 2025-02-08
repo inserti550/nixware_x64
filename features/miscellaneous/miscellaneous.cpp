@@ -41,21 +41,47 @@ void miscellaneous::third_person(c_view_setup& view)
 
 	view.origin = trace.end;
 }
-//i made this later
-void freecam(c_view_setup& view)
-{
-	c_base_entity* local_player = interfaces::entity_list->get_entity(interfaces::engine->get_local_player());
-	if (!local_player)
-		return;
 
-	if (settings::miscellaneous::globals::freecam::enable && settings::miscellaneous::globals::freecam::hotkey.check())
-	{
-		interfaces::input->camera_in_third_person = true;
-		globals::is_in_freecam = true;
-	}
-	else
-	{
-		globals::is_in_freecam = false;
-		interfaces::input->camera_in_third_person = false;
-	}
+static c_vector camPos = c_vector(0, 0, 0);
+
+void miscellaneous::freecam(c_view_setup& view)
+{
+    c_base_entity* local_player = interfaces::entity_list->get_entity(interfaces::engine->get_local_player());
+
+    if (!local_player)
+        return;
+
+    if (settings::miscellaneous::globals::freecam::enable && settings::miscellaneous::globals::freecam::hotkey.check())
+    {
+
+        interfaces::input->camera_in_third_person = true;
+        globals::is_in_freecam = true;
+
+        if (camPos == c_vector(0, 0, 0))
+            camPos = view.origin;
+
+        float speed = settings::miscellaneous::globals::freecam::speed;
+
+        if (globals::last_cmd.buttons & IN_SPEED)
+            speed *= 5.f;
+        if (globals::last_cmd.buttons & IN_DUCK)
+            speed *= 0.5f;
+        if (globals::last_cmd.buttons & IN_JUMP)
+            camPos.z += speed;
+        if (globals::last_cmd.buttons & IN_MOVELEFT)
+            camPos += (utilities::side_vector(view.angles) * speed);
+        if (globals::last_cmd.buttons & IN_MOVERIGHT)
+            camPos -= (utilities::side_vector(view.angles) * speed);
+        if (globals::last_cmd.buttons & IN_FORWARD)
+            camPos += (utilities::to_vector(view.angles) * speed);
+        if (globals::last_cmd.buttons & IN_BACK)
+            camPos -= (utilities::to_vector(view.angles) * speed);
+
+        view.origin = camPos;
+    }
+    else
+    {
+        camPos = c_vector(0, 0, 0);
+        globals::is_in_freecam = false;
+    }
 }

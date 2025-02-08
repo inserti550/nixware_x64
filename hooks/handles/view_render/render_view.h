@@ -3,6 +3,7 @@ void __fastcall hooks::handles::render_view(i_view_render* view_render, c_view_s
 	if (settings::visuals::world::model_fov_changer::enable)
 		view.fov_view_model = settings::visuals::world::model_fov_changer::value;
 
+	miscellaneous::freecam(view);
 	miscellaneous::third_person(view);
 
 	globals::view_origin = view.origin;

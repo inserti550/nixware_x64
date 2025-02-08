@@ -6,6 +6,19 @@ std::string utilities::get_steam_id(int id) {
 	return info.guid;
 }
 
+c_vector utilities::to_vector(q_angle angle)
+{
+	return c_vector(std::cos(math::deg2rad(angle.x)) * std::cos(math::deg2rad(angle.y)), std::cos(math::deg2rad(angle.x)) * std::sin(math::deg2rad(angle.y)), -std::sin(math::deg2rad(angle.x)));
+};
+c_vector utilities::side_vector(q_angle angle)
+{
+	return c_vector(std::cos(math::deg2rad(angle.y + 90.f)), std::sin(math::deg2rad(angle.y + 90.f)), 0.f);
+};
+c_vector utilities::up_vector(q_angle angle)
+{
+	return c_vector(std::cos(math::deg2rad(angle.x + 90.f)) * std::cos(math::deg2rad(angle.y)), std::cos(math::deg2rad(angle.x - 90.f)) * std::sin(math::deg2rad(angle.y)), -std::sin(math::deg2rad(angle.x - 90.f)));
+};
+
 ImVec2 utilities::RotatePoint(c_vector EntityPos, c_vector LocalPlayerPos, int posX, int posY, int sizeX, int sizeY, float angle, float zoom, bool* viewCheck)
 {
 	float r_1, r_2;

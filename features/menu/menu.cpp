@@ -377,6 +377,8 @@ void menu::render()
         {
             Checkbox(xorstr("ThirdPerson"), &settings::miscellaneous::globals::third_person::enable); custom::hotkey(xorstr("Third person Hotkey"), &settings::miscellaneous::globals::third_person::hotkey);
             SliderInt(xorstr("ThirdPerson Distance"), &settings::miscellaneous::globals::third_person::distance, 10, 200);
+            Checkbox(xorstr("Freecam"), &settings::miscellaneous::globals::freecam::enable); custom::hotkey(xorstr("Freecam Hotkey"), &settings::miscellaneous::globals::freecam::hotkey);
+            SliderInt(xorstr("Freecam speed"), &settings::miscellaneous::globals::freecam::speed, 25, 350);
         }
         EndChild();
 
@@ -495,7 +497,7 @@ void menu::render()
             static int selected_item = -1;
             static std::string selected_config_name;
 
-            static char new_config_name[256] = "";
+            static char new_config_namse[256] = "";
 
             std::vector<std::string> file_list = utilities::get_files_from_folder(xorstr("C:/nixware/configs/"), "", xorstr(".nixware"));
 
@@ -527,10 +529,10 @@ void menu::render()
                 config_manager::save(selected_config_name);
 
             SetNextItemWidth(column_width);
-            InputText(xorstr("New config name"), new_config_name, IM_ARRAYSIZE(new_config_name));
+            InputText(xorstr("New config name"), new_config_namse, IM_ARRAYSIZE(new_config_namse));
 
             if (Button(xorstr("Create and save"), ImVec2(column_width, 35.f)))
-                config_manager::save(new_config_name);
+                config_manager::save(new_config_namse);
 
             if (Button(xorstr("Unload cheat"), ImVec2(column_width, 35.f)))
                 globals::unload = true;

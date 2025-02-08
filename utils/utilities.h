@@ -6,6 +6,9 @@
 namespace utilities
 {
 
+	c_vector to_vector(q_angle angle);
+	c_vector side_vector(q_angle angle);
+	c_vector up_vector(q_angle angle);
 	std::string get_steam_id(int index);
 	ImU32 Float4toImU32(float color[]);
 	ImVec2 RotatePoint(c_vector EntityPos, c_vector LocalPlayerPos, int posX, int posY, int sizeX, int sizeY, float angle, float zoom, bool* viewCheck);

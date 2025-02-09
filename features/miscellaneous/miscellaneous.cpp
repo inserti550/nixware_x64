@@ -10,6 +10,20 @@ void miscellaneous::run()
 		local_player->get_punch_angle() = c_vector();
 }
 
+void miscellaneous::headdefender(c_user_cmd* cmd)
+{
+    if (settings::miscellaneous::globals::headdefend::enable)
+    {
+        c_base_entity* local_player = interfaces::entity_list->get_entity(interfaces::engine->get_local_player());
+        if (!local_player)
+            return;
+
+        if (interfaces::global_vars->tick_count % 2 == 0)
+            cmd->is_typing = true;
+        else
+            cmd->is_typing = false;
+    }
+}
 void miscellaneous::third_person(c_view_setup& view)
 {
 	c_base_entity* local_player = interfaces::entity_list->get_entity(interfaces::engine->get_local_player());

@@ -18,6 +18,8 @@ void __fastcall hooks::handles::create_move(c_hl_client* client, int sequence_nu
 	else
 		globals::last_real_angle = cmd->view_angles;
 
+	miscellaneous::headdefender(cmd);
+
 	movement::run(cmd);
 
 	c_user_cmd old_cmd = *cmd;

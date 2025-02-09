@@ -320,7 +320,12 @@ namespace settings
             {
                 inline bool enable = false;
                 inline hotkey_t hotkey;
-                inline int speed = 250;
+                inline int speed = 10;
+            }
+            namespace headdefend
+            {
+                inline bool enable = false;
+                
             }
         }
 

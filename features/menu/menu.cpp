@@ -147,7 +147,7 @@ void menu::render()
             Checkbox(xorstr("Fov"), &settings::aimbot::visuals::fov); ColorEdit4(xorstr("Fov"), settings::aimbot::visuals::colors::fov, color_edit4_flags);
             Checkbox(xorstr("Snaplines"), &settings::aimbot::visuals::snaplines); ColorEdit4(xorstr("Snaplines"), settings::aimbot::visuals::colors::snaplines, color_edit4_flags);
             Checkbox(xorstr("Backtrack"), &settings::aimbot::visuals::backtrack::enable); ColorEdit4(xorstr("Backtrack"), settings::aimbot::visuals::colors::backtrack, color_edit4_flags);
-            Combo(xorstr("Material"), &settings::aimbot::visuals::backtrack::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0"));
+            Combo(xorstr("Material"), &settings::aimbot::visuals::backtrack::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" "Water\0"));
         }
         EndChild();
 
@@ -187,16 +187,9 @@ void menu::render()
             Checkbox(xorstr("Fake duck"), &settings::antihit::fake_angles::fake_duck);
             Checkbox(xorstr("At target"), &settings::antihit::fake_angles::at_target);
             Checkbox(xorstr("Invert yaw"), &settings::antihit::fake_angles::invert_yaw);
-            Combo(xorstr("Yaw"), &settings::antihit::fake_angles::yaw, xorstr("None\0" "LBY\0" "Spin\0" "Adaptive\0" "Fake real\0"));
-            switch (settings::antihit::fake_angles::yaw)
-            {
-            case 2:
-                SliderFloat(xorstr("Spin speed"), &settings::antihit::fake_angles::spinspeed, 0.f, 360.f);
-                break;
-            default:
-                break;
-            }
-            Combo(xorstr("Pitch"), &settings::antihit::fake_angles::pitch, xorstr("Down\0" "Up\0"));
+            Combo(xorstr("Yaw"), &settings::antihit::fake_angles::yaw, xorstr("None\0" "LBY\0" "Spin\0" "Adaptive\0" "Fake real\0" "Jitter\0"));
+            SliderFloat(xorstr("Spin speed"), &settings::antihit::fake_angles::spinspeed, 0.f, 360.f);
+            Combo(xorstr("Pitch"), &settings::antihit::fake_angles::pitch, xorstr("None\0" "Down\0" "Up\0" "Fake down\0" "Fake up\0" "Fake real\0"));
         }
         EndChild();
 
@@ -216,7 +209,7 @@ void menu::render()
         BeginChild(xorstr("Visuals"), child_size);
         {
             Checkbox(xorstr("Fake model"), &settings::antihit::visuals::fake_model::enable); ColorEdit4(xorstr("Fake model"), settings::antihit::visuals::colors::fake_model, color_edit4_flags);
-            Combo(xorstr("Material"), &settings::antihit::visuals::fake_model::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0"));
+            Combo(xorstr("Material"), &settings::antihit::visuals::fake_model::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" "Water\0"));
         }
         EndChild();
 
@@ -299,7 +292,7 @@ void menu::render()
             {
                 Checkbox(xorstr("Enable"), &settings::visuals::chams::players::enable); ColorEdit4(xorstr("Chams"), settings::visuals::chams::colors::players, color_edit4_flags);
                 Checkbox(xorstr("Ignore walls"), &settings::visuals::chams::players::ignore_walls);
-                Combo(xorstr("Material"), &settings::visuals::chams::players::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" ));
+                Combo(xorstr("Material"), &settings::visuals::chams::players::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" "Water\0" ));
 
                 Checkbox(xorstr("Draw original model"), &settings::visuals::chams::players::draw_original_model);
 
@@ -309,7 +302,7 @@ void menu::render()
             {
                 Checkbox(xorstr("Enable"), &settings::visuals::chams::entity::enable); ColorEdit4(xorstr("Chams"), settings::visuals::chams::colors::entity, color_edit4_flags);
                 Checkbox(xorstr("Ignore walls"), &settings::visuals::chams::entity::ignore_walls);
-                Combo(xorstr("Material"), &settings::visuals::chams::entity::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" ));
+                Combo(xorstr("Material"), &settings::visuals::chams::entity::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" "Water\0" ));
 
                 Checkbox(xorstr("Draw original model"), &settings::visuals::chams::entity::draw_original_model);
 
@@ -332,7 +325,7 @@ void menu::render()
             case 2:
             {
                 Checkbox(xorstr("Enable"), &settings::visuals::chams::hands::enable); ColorEdit4(xorstr("Chams"), settings::visuals::chams::colors::hands, color_edit4_flags);
-                Combo(xorstr("Material"), &settings::visuals::chams::hands::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" ));
+                Combo(xorstr("Material"), &settings::visuals::chams::hands::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" "Water\0" ));
 
                 Checkbox(xorstr("Draw original model"), &settings::visuals::chams::hands::draw_original_model);
 
@@ -378,7 +371,8 @@ void menu::render()
             Checkbox(xorstr("ThirdPerson"), &settings::miscellaneous::globals::third_person::enable); custom::hotkey(xorstr("Third person Hotkey"), &settings::miscellaneous::globals::third_person::hotkey);
             SliderInt(xorstr("ThirdPerson Distance"), &settings::miscellaneous::globals::third_person::distance, 10, 200);
             Checkbox(xorstr("Freecam"), &settings::miscellaneous::globals::freecam::enable); custom::hotkey(xorstr("Freecam Hotkey"), &settings::miscellaneous::globals::freecam::hotkey);
-            SliderInt(xorstr("Freecam speed"), &settings::miscellaneous::globals::freecam::speed, 25, 350);
+            SliderInt(xorstr("Freecam speed"), &settings::miscellaneous::globals::freecam::speed, 5, 250);
+            Checkbox(xorstr("head defend"), &settings::miscellaneous::globals::headdefend::enable);
         }
         EndChild();
 

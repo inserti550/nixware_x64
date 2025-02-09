@@ -77,6 +77,12 @@ void antiaim::run(c_user_cmd* cmd, bool send_packet)
     case 4:
         yaw = send_packet ^ settings::antihit::fake_angles::invert_yaw ? view.y : (view.y + 100.f);
         break;
+    case 5:
+        if (local_player->get_flags() & FL_ONGROUND)
+            yaw = send_packet ^ settings::antihit::fake_angles::invert_yaw ? view.y + (180 + lua_utilities::rand(-45, 45)) : view.y + (80 + lua_utilities::rand(-25, 25));
+        else
+            yaw += send_packet ^ settings::antihit::fake_angles::invert_yaw ? settings::antihit::fake_angles::spinspeed : settings::antihit::fake_angles::spinspeed + 180;
+        break;
     }
 
     cmd->view_angles.x = pitch;

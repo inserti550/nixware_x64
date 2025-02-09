@@ -33,8 +33,7 @@ public:
 protected:
     void grow_vector(int num = 1)
     {
-        if (m_size + num > m_memory.num_allocated())
-        {
+        if (m_size + num > m_memory.num_allocated()) {
             m_memory.grow(m_size + num - m_memory.num_allocated());
         }
 

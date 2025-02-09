@@ -30,6 +30,30 @@ void config_manager::load(std::string name)
         menu[xorstr("colors")][xorstr("frame_hovered_bg")].get_to(settings::menu::colors::frame_hovered_bg);
         menu[xorstr("colors")][xorstr("frame_active_bg")].get_to(settings::menu::colors::frame_active_bg);
 
+
+        nlohmann::json& triggerbot = json[xorstr("settings")][xorstr("triggerbot")];
+        triggerbot[xorstr("enable")].get_to(settings::TrigerBot::enable);
+        triggerbot[xorstr("hotkey")][xorstr("key")].get_to(settings::TrigerBot::hotkey.key);
+        triggerbot[xorstr("hotkey")][xorstr("type")].get_to(settings::TrigerBot::hotkey.type);
+        triggerbot[xorstr("maxdistance")].get_to(settings::TrigerBot::maxdistance);
+
+        nlohmann::json& knifebot = json[xorstr("settings")][xorstr("knifebot")];
+        knifebot[xorstr("globals")][xorstr("enable")].get_to(settings::knifebot::globals::enable);
+        knifebot[xorstr("globals")][xorstr("hotkey")][xorstr("key")].get_to(settings::knifebot::globals::hotkey.key);
+        knifebot[xorstr("globals")][xorstr("hotkey")][xorstr("type")].get_to(settings::knifebot::globals::hotkey.type);
+        knifebot[xorstr("globlas")][xorstr("silent")].get_to(settings::knifebot::globals::silent);
+        knifebot[xorstr("globlas")][xorstr("automatic_fire")].get_to(settings::knifebot::globals::automatic_fire);
+        knifebot[xorstr("globlas")][xorstr("fov")].get_to(settings::knifebot::globals::fov);
+        knifebot[xorstr("globlas")][xorstr("hitbox")].get_to(settings::knifebot::globals::hitbox);
+        knifebot[xorstr("globlas")][xorstr("priority")].get_to(settings::knifebot::globals::priority);
+        knifebot[xorstr("globlas")][xorstr("maxdistance")].get_to(settings::knifebot::globals::maxdistance);
+        
+        knifebot[xorstr("accuracy")][xorstr("smoth")].get_to(settings::knifebot::accuracy::smooth);
+        knifebot[xorstr("visuals")][xorstr("fov")].get_to(settings::knifebot::visuals::fov);
+        knifebot[xorstr("visuals")][xorstr("snapline")].get_to(settings::knifebot::visuals::snaplines);
+        knifebot[xorstr("visuals")][xorstr("colors")][xorstr("fov")].get_to(settings::knifebot::visuals::colors::fov);
+        knifebot[xorstr("visuals")][xorstr("colors")][xorstr("spaplines")].get_to(settings::knifebot::visuals::colors::snaplines);
+
         nlohmann::json& aimbot = json[xorstr("settings")][xorstr("aimbot")];
         aimbot[xorstr("globals")][xorstr("enable")].get_to(settings::aimbot::globals::enable);
         aimbot[xorstr("globals")][xorstr("hotkey")][xorstr("key")].get_to(settings::aimbot::globals::hotkey.key);
@@ -47,8 +71,9 @@ void config_manager::load(std::string name)
         aimbot[xorstr("accuracy")][xorstr("disable_visual_recoil")].get_to(settings::aimbot::accuracy::disable_visual_recoil);
         aimbot[xorstr("accuracy")][xorstr("backtrack")].get_to(settings::aimbot::accuracy::backtrack);
         aimbot[xorstr("accuracy")][xorstr("smooth")].get_to(settings::aimbot::accuracy::smooth);
+
         aimbot[xorstr("accuracy")][xorstr("friend_list")].get_to(settings::aimbot::accuracy::friend_list);
-        aimbot[xorstr("accuracy")][xorstr("friend_list")].get_to(settings::visuals::esp::entity::list);
+
         aimbot[xorstr("visuals")][xorstr("fov")].get_to(settings::aimbot::visuals::fov);
         aimbot[xorstr("visuals")][xorstr("snaplines")].get_to(settings::aimbot::visuals::snaplines);
 
@@ -59,33 +84,10 @@ void config_manager::load(std::string name)
         aimbot[xorstr("visuals")][xorstr("colors")][xorstr("snaplines")].get_to(settings::aimbot::visuals::colors::snaplines);
         aimbot[xorstr("visuals")][xorstr("colors")][xorstr("backtrack")].get_to(settings::aimbot::visuals::colors::backtrack);
 
-
-        nlohmann::json& knifebot = json[xorstr("settings")][xorstr("knifebot")];
-        knifebot[xorstr("globals")][xorstr("enable")].get_to(settings::knifebot::globals::enable);
-        knifebot[xorstr("globals")][xorstr("hotkey")][xorstr("key")].get_to(settings::knifebot::globals::hotkey.key);
-        knifebot[xorstr("globals")][xorstr("hotkey")][xorstr("type")].get_to(settings::knifebot::globals::hotkey.type);
-        knifebot[xorstr("globals")][xorstr("silent")].get_to(settings::knifebot::globals::silent);
-        knifebot[xorstr("globals")][xorstr("automatic_fire")].get_to(settings::knifebot::globals::automatic_fire);
-        knifebot[xorstr("globals")][xorstr("fov")].get_to(settings::knifebot::globals::fov);
-        knifebot[xorstr("globals")][xorstr("hitbox")].get_to(settings::knifebot::globals::hitbox);
-        knifebot[xorstr("globals")][xorstr("priority")].get_to(settings::knifebot::globals::priority);
-
-        knifebot[xorstr("visuals")][xorstr("colors")][xorstr("fov")].get_to(settings::knifebot::visuals::colors::fov);
-        knifebot[xorstr("visuals")][xorstr("colors")][xorstr("snaplines")].get_to(settings::knifebot::visuals::colors::snaplines);
-
-        nlohmann::json& triggerbot = json[xorstr("settings")][xorstr("triggerbot")];
-        triggerbot[xorstr("enable")].get_to(settings::TrigerBot::enable);
-        triggerbot[xorstr("maxdist")].get_to(settings::TrigerBot::maxdistance);
-        triggerbot[xorstr("enable")][xorstr("type")].get_to(settings::TrigerBot::hotkey.type);
-        triggerbot[xorstr("enable")][xorstr("key")].get_to(settings::TrigerBot::hotkey.key);
-
         nlohmann::json& antihit = json[xorstr("settings")][xorstr("antihit")];
         antihit[xorstr("fake_lags")][xorstr("enable")].get_to(settings::antihit::fake_lags::enable);
         antihit[xorstr("fake_lags")][xorstr("count")].get_to(settings::antihit::fake_lags::count);
         antihit[xorstr("fake_lags")][xorstr("method")].get_to(settings::antihit::fake_lags::method);
-        antihit[xorstr("fake_lags")][xorstr("lagpeak")].get_to(settings::antihit::fake_lags::lagpeak);
-        antihit[xorstr("fake_lags")][xorstr("hotkey")][xorstr("key")].get_to(settings::antihit::fake_lags::hotkey.key);
-        antihit[xorstr("fake_lags")][xorstr("hotkey")][xorstr("type")].get_to(settings::antihit::fake_lags::hotkey.type);
 
         antihit[xorstr("fake_angles")][xorstr("enable")].get_to(settings::antihit::fake_angles::enable);
         antihit[xorstr("fake_angles")][xorstr("hotkey")][xorstr("key")].get_to(settings::antihit::fake_angles::hotkey.key);
@@ -102,27 +104,46 @@ void config_manager::load(std::string name)
 
         antihit[xorstr("visuals")][xorstr("colors")][xorstr("fake_model")].get_to(settings::antihit::visuals::colors::fake_model);
 
+        nlohmann::json& radar = json[xorstr("settings")][xorstr("visuals")][xorstr("radar")];
+        radar[xorstr("enable")].get_to(settings::visuals::radar::enable);
+        radar[xorstr("background")].get_to(settings::visuals::radar::background);
+        radar[xorstr("position")][xorstr("x")].get_to(settings::visuals::radar::position.x);
+        radar[xorstr("position")][xorstr("y")].get_to(settings::visuals::radar::position.y);
+        radar[xorstr("size")][xorstr("x")].get_to(settings::visuals::radar::size.x);
+        radar[xorstr("size")][xorstr("y")].get_to(settings::visuals::radar::size.y);
+        radar[xorstr("distance")].get_to(settings::visuals::radar::distance);
+        radar[xorstr("players")].get_to(settings::visuals::radar::players);
+        radar[xorstr("friend")].get_to(settings::visuals::radar::friends);
+        radar[xorstr("lines")].get_to(settings::visuals::radar::lines);
+        radar[xorstr("zoom")].get_to(settings::visuals::radar::zoom);
+        radar[xorstr("colors")][xorstr("background")].get_to(settings::visuals::radar::colors::background);
+        radar[xorstr("colors")][xorstr("Players")].get_to(settings::visuals::radar::colors::Players);
+        radar[xorstr("colors")][xorstr("Friends")].get_to(settings::visuals::radar::colors::Friends);
+        radar[xorstr("colors")][xorstr("Line")].get_to(settings::visuals::radar::colors::Line);
+
         nlohmann::json& visuals = json[xorstr("settings")][xorstr("visuals")];
         visuals[xorstr("esp")][xorstr("players")][xorstr("enable")].get_to(settings::visuals::esp::players::enable);
         visuals[xorstr("esp")][xorstr("players")][xorstr("dormant")].get_to(settings::visuals::esp::players::dormant);
         visuals[xorstr("esp")][xorstr("players")][xorstr("box")].get_to(settings::visuals::esp::players::box);
         visuals[xorstr("esp")][xorstr("players")][xorstr("boxtype")].get_to(settings::visuals::esp::players::boxtype);
-        visuals[xorstr("esp")][xorstr("players")][xorstr("edgesize")].get_to(settings::visuals::esp::players::edgesize);    
+        visuals[xorstr("esp")][xorstr("players")][xorstr("edgesize")].get_to(settings::visuals::esp::players::edgesize);
+        
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("enable")].get_to(settings::visuals::esp::players::health::enable);
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("back")].get_to(settings::visuals::esp::players::health::back);
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("outline")].get_to(settings::visuals::esp::players::health::outline);
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("text")].get_to(settings::visuals::esp::players::health::text);
+
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("backward")].get_to(settings::visuals::esp::players::health::colors::backward);
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("forward")].get_to(settings::visuals::esp::players::health::colors::forward);
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("text")].get_to(settings::visuals::esp::players::health::colors::text);
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("outline")].get_to(settings::visuals::esp::players::health::colors::outline);
+
         visuals[xorstr("esp")][xorstr("players")][xorstr("name")].get_to(settings::visuals::esp::players::name);
         visuals[xorstr("esp")][xorstr("players")][xorstr("rp_team")].get_to(settings::visuals::esp::players::rp_team);
         visuals[xorstr("esp")][xorstr("players")][xorstr("user_group")].get_to(settings::visuals::esp::players::user_group);
         visuals[xorstr("esp")][xorstr("players")][xorstr("weapon_name")].get_to(settings::visuals::esp::players::weapon_name);
         visuals[xorstr("esp")][xorstr("players")][xorstr("distance")].get_to(settings::visuals::esp::players::distance);
         visuals[xorstr("esp")][xorstr("players")][xorstr("render_distance")].get_to(settings::visuals::esp::players::render_distance);
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("enable")].get_to(settings::visuals::esp::players::health::enable);
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("back")].get_to(settings::visuals::esp::players::health::back);
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("outline")].get_to(settings::visuals::esp::players::health::outline);
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("text")].get_to(settings::visuals::esp::players::health::text);
-
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("forward")].get_to(settings::visuals::esp::players::health::colors::forward);
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("backward")].get_to(settings::visuals::esp::players::health::colors::backward);
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("outline")].get_to(settings::visuals::esp::players::health::colors::outline);
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("text")].get_to(settings::visuals::esp::players::health::colors::text);
 
         visuals[xorstr("esp")][xorstr("players")][xorstr("colors")][xorstr("box")].get_to(settings::visuals::esp::players::colors::box);
         visuals[xorstr("esp")][xorstr("players")][xorstr("colors")][xorstr("name")].get_to(settings::visuals::esp::players::colors::name);
@@ -169,25 +190,21 @@ void config_manager::load(std::string name)
         visuals[xorstr("world")][xorstr("model_fov_changer")][xorstr("enable")].get_to(settings::visuals::world::model_fov_changer::enable);
         visuals[xorstr("world")][xorstr("model_fov_changer")][xorstr("value")].get_to(settings::visuals::world::model_fov_changer::value);
 
-        visuals[xorstr("world")][xorstr("radar")][xorstr("background")].get_to(settings::visuals::radar::background);
-        visuals[xorstr("world")][xorstr("radar")][xorstr("lines")].get_to(settings::visuals::radar::lines);
-        visuals[xorstr("world")][xorstr("radar")][xorstr("enable")].get_to(settings::visuals::radar::enable);
-        visuals[xorstr("world")][xorstr("radar")][xorstr("distance")].get_to(settings::visuals::radar::distance);
-        visuals[xorstr("world")][xorstr("radar")][xorstr("friends")].get_to(settings::visuals::radar::friends);
-        visuals[xorstr("world")][xorstr("radar")][xorstr("players")].get_to(settings::visuals::radar::players);
-        visuals[xorstr("world")][xorstr("radar")][xorstr("position")][xorstr("x")].get_to(settings::visuals::radar::position.x);
-        visuals[xorstr("world")][xorstr("radar")][xorstr("position")][xorstr("y")].get_to(settings::visuals::radar::position.y);
-        visuals[xorstr("world")][xorstr("radar")][xorstr("zoom")].get_to(settings::visuals::radar::zoom);
-        visuals[xorstr("world")][xorstr("radar")][xorstr("colors")][xorstr("background")].get_to(settings::visuals::radar::colors::background);
-        visuals[xorstr("world")][xorstr("radar")][xorstr("colors")][xorstr("Friends")].get_to(settings::visuals::radar::colors::Friends);
-        visuals[xorstr("world")][xorstr("radar")][xorstr("colors")][xorstr("Players")].get_to(settings::visuals::radar::colors::Players);
-        visuals[xorstr("world")][xorstr("radar")][xorstr("colors")][xorstr("Line")].get_to(settings::visuals::radar::colors::Line);
-
         nlohmann::json& miscellaneous = json[xorstr("settings")][xorstr("miscellaneous")];
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("enable")].get_to(settings::miscellaneous::globals::third_person::enable);
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("hotkey")][xorstr("key")].get_to(settings::miscellaneous::globals::third_person::hotkey.key);
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("hotkey")][xorstr("type")].get_to(settings::miscellaneous::globals::third_person::hotkey.type);
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("distance")].get_to(settings::miscellaneous::globals::third_person::distance);
+
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("enable")].get_to(settings::miscellaneous::globals::freecam::enable);
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("hotkey")][xorstr("key")].get_to(settings::miscellaneous::globals::freecam::hotkey.key);
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("hotkey")][xorstr("type")].get_to(settings::miscellaneous::globals::freecam::hotkey.type);
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("speed")].get_to(settings::miscellaneous::globals::freecam::speed);
+
+        miscellaneous[xorstr("globals")][xorstr("headdefend")][xorstr("enable")].get_to(settings::miscellaneous::globals::headdefend::enable);
+
+        miscellaneous[xorstr("movement")][xorstr("fastwalk")].get_to(settings::miscellaneous::movement::fastwalk);
+        miscellaneous[xorstr("movement")][xorstr("fastwalk_offset")].get_to(settings::miscellaneous::movement::fastwalk_offset);
 
         miscellaneous[xorstr("movement")][xorstr("bhop")].get_to(settings::miscellaneous::movement::bhop);
         miscellaneous[xorstr("movement")][xorstr("air_strafe")].get_to(settings::miscellaneous::movement::air_strafe);
@@ -224,10 +241,34 @@ void config_manager::save(std::string name)
         menu[xorstr("colors")][xorstr("frame_hovered_bg")] = settings::menu::colors::frame_hovered_bg;
         menu[xorstr("colors")][xorstr("frame_active_bg")] = settings::menu::colors::frame_active_bg;
 
+        nlohmann::json& triggerbot = json[xorstr("settings")][xorstr("triggerbot")];
+        triggerbot[xorstr("enable")] = settings::TrigerBot::enable;
+        triggerbot[xorstr("hotkey")][xorstr("key")] = settings::TrigerBot::hotkey.key;
+        triggerbot[xorstr("hotkey")][xorstr("type")] = settings::TrigerBot::hotkey.type;
+        triggerbot[xorstr("maxdistance")] = settings::TrigerBot::maxdistance;
+
+        nlohmann::json& knifebot = json[xorstr("settings")][xorstr("knifebot")];
+        knifebot[xorstr("globals")][xorstr("enable")] = settings::knifebot::globals::enable;
+        knifebot[xorstr("globals")][xorstr("hotkey")][xorstr("key")] = settings::knifebot::globals::hotkey.key;
+        knifebot[xorstr("globals")][xorstr("hotkey")][xorstr("type")] = settings::knifebot::globals::hotkey.type;
+        knifebot[xorstr("globlas")][xorstr("silent")] = settings::knifebot::globals::silent;
+        knifebot[xorstr("globlas")][xorstr("automatic_fire")] = settings::knifebot::globals::automatic_fire;
+        knifebot[xorstr("globlas")][xorstr("fov")] = settings::knifebot::globals::fov;
+        knifebot[xorstr("globlas")][xorstr("hitbox")] = settings::knifebot::globals::hitbox;
+        knifebot[xorstr("globlas")][xorstr("priority")] = settings::knifebot::globals::priority;
+        knifebot[xorstr("globlas")][xorstr("maxdistance")] = settings::knifebot::globals::maxdistance;
+
+        knifebot[xorstr("accuracy")][xorstr("smoth")] = settings::knifebot::accuracy::smooth;
+        knifebot[xorstr("visuals")][xorstr("fov")] = settings::knifebot::visuals::fov;
+        knifebot[xorstr("visuals")][xorstr("snapline")] = settings::knifebot::visuals::snaplines;
+        knifebot[xorstr("visuals")][xorstr("colors")][xorstr("fov")] = settings::knifebot::visuals::colors::fov;
+        knifebot[xorstr("visuals")][xorstr("colors")][xorstr("spaplines")] = settings::knifebot::visuals::colors::snaplines;
+
         nlohmann::json& aimbot = json[xorstr("settings")][xorstr("aimbot")];
         aimbot[xorstr("globals")][xorstr("enable")] = settings::aimbot::globals::enable;
         aimbot[xorstr("globals")][xorstr("hotkey")][xorstr("key")] = settings::aimbot::globals::hotkey.key;
         aimbot[xorstr("globals")][xorstr("hotkey")][xorstr("type")] = settings::aimbot::globals::hotkey.type;
+        aimbot[xorstr("globals")][xorstr("enable")] = settings::aimbot::globals::enable;
         aimbot[xorstr("globals")][xorstr("silent")] = settings::aimbot::globals::silent;
         aimbot[xorstr("globals")][xorstr("automatic_fire")] = settings::aimbot::globals::automatic_fire;
         aimbot[xorstr("globals")][xorstr("penetrate_walls")] = settings::aimbot::globals::penetrate_walls;
@@ -240,6 +281,8 @@ void config_manager::save(std::string name)
         aimbot[xorstr("accuracy")][xorstr("disable_visual_recoil")] = settings::aimbot::accuracy::disable_visual_recoil;
         aimbot[xorstr("accuracy")][xorstr("backtrack")] = settings::aimbot::accuracy::backtrack;
         aimbot[xorstr("accuracy")][xorstr("smooth")] = settings::aimbot::accuracy::smooth;
+
+        aimbot[xorstr("accuracy")][xorstr("friend_list")] = {};
 
         for (const auto& [key, value] : settings::aimbot::accuracy::friend_list.items())
             if (value.get<bool>())
@@ -255,47 +298,43 @@ void config_manager::save(std::string name)
         aimbot[xorstr("visuals")][xorstr("colors")][xorstr("snaplines")] = settings::aimbot::visuals::colors::snaplines;
         aimbot[xorstr("visuals")][xorstr("colors")][xorstr("backtrack")] = settings::aimbot::visuals::colors::backtrack;
 
-        nlohmann::json& knifebot = json[xorstr("settings")][xorstr("knifebot")];
-        knifebot[xorstr("globals")][xorstr("enable")] = settings::knifebot::globals::enable;
-        knifebot[xorstr("globals")][xorstr("hotkey")][xorstr("key")] = settings::knifebot::globals::hotkey.key;
-        knifebot[xorstr("globals")][xorstr("hotkey")][xorstr("type")] = settings::knifebot::globals::hotkey.type;
-        knifebot[xorstr("globals")][xorstr("silent")] = settings::knifebot::globals::silent;
-        knifebot[xorstr("globals")][xorstr("automatic_fire")] = settings::knifebot::globals::automatic_fire;
-        knifebot[xorstr("globals")][xorstr("fov")] = settings::knifebot::globals::fov;
-        knifebot[xorstr("globals")][xorstr("hitbox")] = settings::knifebot::globals::hitbox;
-        knifebot[xorstr("globals")][xorstr("priority")] = settings::knifebot::globals::priority;
-
-        knifebot[xorstr("visuals")][xorstr("colors")][xorstr("fov")] = settings::knifebot::visuals::colors::fov;
-        knifebot[xorstr("visuals")][xorstr("colors")][xorstr("snaplines")] = settings::knifebot::visuals::colors::snaplines;
-
-        nlohmann::json& triggerbot = json[xorstr("settings")][xorstr("triggerbot")];
-        triggerbot[xorstr("enable")] = settings::TrigerBot::enable;
-        triggerbot[xorstr("maxdist")] = settings::TrigerBot::maxdistance;
-        triggerbot[xorstr("enable")][xorstr("type")] = settings::TrigerBot::hotkey.type;
-        triggerbot[xorstr("enable")][xorstr("key")] = settings::TrigerBot::hotkey.key;
-
         nlohmann::json& antihit = json[xorstr("settings")][xorstr("antihit")];
         antihit[xorstr("fake_lags")][xorstr("enable")] = settings::antihit::fake_lags::enable;
         antihit[xorstr("fake_lags")][xorstr("count")] = settings::antihit::fake_lags::count;
         antihit[xorstr("fake_lags")][xorstr("method")] = settings::antihit::fake_lags::method;
-        antihit[xorstr("fake_lags")][xorstr("lagpeak")] = settings::antihit::fake_lags::lagpeak;
-        antihit[xorstr("fake_lags")][xorstr("hotkey")][xorstr("key")] = settings::antihit::fake_lags::hotkey.key;
-        antihit[xorstr("fake_lags")][xorstr("hotkey")][xorstr("type")] = settings::antihit::fake_lags::hotkey.type;
 
         antihit[xorstr("fake_angles")][xorstr("enable")] = settings::antihit::fake_angles::enable;
         antihit[xorstr("fake_angles")][xorstr("hotkey")][xorstr("key")] = settings::antihit::fake_angles::hotkey.key;
         antihit[xorstr("fake_angles")][xorstr("hotkey")][xorstr("type")] = settings::antihit::fake_angles::hotkey.type;
         antihit[xorstr("fake_angles")][xorstr("yaw")] = settings::antihit::fake_angles::yaw;
+        antihit[xorstr("fake_angles")][xorstr("spinspeed")] = settings::antihit::fake_angles::spinspeed;
         antihit[xorstr("fake_angles")][xorstr("pitch")] = settings::antihit::fake_angles::pitch;
         antihit[xorstr("fake_angles")][xorstr("at_target")] = settings::antihit::fake_angles::at_target;
         antihit[xorstr("fake_angles")][xorstr("invert_yaw")] = settings::antihit::fake_angles::invert_yaw;
         antihit[xorstr("fake_angles")][xorstr("fake_duck")] = settings::antihit::fake_angles::fake_duck;
-        antihit[xorstr("fake_angles")][xorstr("spinspeed")]= settings::antihit::fake_angles::spinspeed;
 
         antihit[xorstr("visuals")][xorstr("fake_model")][xorstr("enable")] = settings::antihit::visuals::fake_model::enable;
         antihit[xorstr("visuals")][xorstr("fake_model")][xorstr("material_type")] = settings::antihit::visuals::fake_model::material_type;
 
         antihit[xorstr("visuals")][xorstr("colors")][xorstr("fake_model")] = settings::antihit::visuals::colors::fake_model;
+
+        nlohmann::json& radar = json[xorstr("settings")][xorstr("visuals")][xorstr("radar")];
+        radar[xorstr("enable")] = settings::visuals::radar::enable;
+        radar[xorstr("background")] = settings::visuals::radar::background;
+        radar[xorstr("position")][xorstr("x")] = settings::visuals::radar::position.x;
+        radar[xorstr("position")][xorstr("y")] = settings::visuals::radar::position.y;
+        radar[xorstr("size")][xorstr("x")] = settings::visuals::radar::size.x;
+        radar[xorstr("size")][xorstr("y")] = settings::visuals::radar::size.y;
+        radar[xorstr("distance")] = settings::visuals::radar::distance;
+        radar[xorstr("players")] = settings::visuals::radar::players;
+        radar[xorstr("friend")] = settings::visuals::radar::friends;
+        radar[xorstr("lines")] = settings::visuals::radar::lines;
+        radar[xorstr("zoom")] = settings::visuals::radar::zoom;
+        radar[xorstr("colors")][xorstr("background")] = settings::visuals::radar::colors::background;
+        radar[xorstr("colors")][xorstr("Players")] = settings::visuals::radar::colors::Players;
+        radar[xorstr("colors")][xorstr("Friends")] = settings::visuals::radar::colors::Friends;
+        radar[xorstr("colors")][xorstr("Line")] = settings::visuals::radar::colors::Line;
+
 
         nlohmann::json& visuals = json[xorstr("settings")][xorstr("visuals")];
         visuals[xorstr("esp")][xorstr("players")][xorstr("enable")] = settings::visuals::esp::players::enable;
@@ -303,22 +342,22 @@ void config_manager::save(std::string name)
         visuals[xorstr("esp")][xorstr("players")][xorstr("box")] = settings::visuals::esp::players::box;
         visuals[xorstr("esp")][xorstr("players")][xorstr("boxtype")] = settings::visuals::esp::players::boxtype;
         visuals[xorstr("esp")][xorstr("players")][xorstr("edgesize")] = settings::visuals::esp::players::edgesize;
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("enable")] = settings::visuals::esp::players::health::enable;
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("back")] = settings::visuals::esp::players::health::back;
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("outline")] = settings::visuals::esp::players::health::outline;
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("text")] = settings::visuals::esp::players::health::text;
+
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("backward")] = settings::visuals::esp::players::health::colors::backward;
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("forward")] = settings::visuals::esp::players::health::colors::forward;
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("text")] = settings::visuals::esp::players::health::colors::text;
+        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("outline")] = settings::visuals::esp::players::health::colors::outline;
+
         visuals[xorstr("esp")][xorstr("players")][xorstr("name")] = settings::visuals::esp::players::name;
         visuals[xorstr("esp")][xorstr("players")][xorstr("rp_team")] = settings::visuals::esp::players::rp_team;
         visuals[xorstr("esp")][xorstr("players")][xorstr("user_group")] = settings::visuals::esp::players::user_group;
         visuals[xorstr("esp")][xorstr("players")][xorstr("weapon_name")] = settings::visuals::esp::players::weapon_name;
         visuals[xorstr("esp")][xorstr("players")][xorstr("distance")] = settings::visuals::esp::players::distance;
         visuals[xorstr("esp")][xorstr("players")][xorstr("render_distance")] = settings::visuals::esp::players::render_distance;
-
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("enable")] = settings::visuals::esp::players::health::enable;
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("back")] = settings::visuals::esp::players::health::back;
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("outline")] = settings::visuals::esp::players::health::outline;
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("text")] = settings::visuals::esp::players::health::text;
-
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("forward")] = settings::visuals::esp::players::health::colors::forward;
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("backward")] = settings::visuals::esp::players::health::colors::backward;
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("outline")] = settings::visuals::esp::players::health::colors::outline;
-        visuals[xorstr("esp")][xorstr("players")][xorstr("health")][xorstr("colors")][xorstr("text")] = settings::visuals::esp::players::health::colors::text;
 
         visuals[xorstr("esp")][xorstr("players")][xorstr("colors")][xorstr("box")] = settings::visuals::esp::players::colors::box;
         visuals[xorstr("esp")][xorstr("players")][xorstr("colors")][xorstr("name")] = settings::visuals::esp::players::colors::name;
@@ -373,25 +412,24 @@ void config_manager::save(std::string name)
         visuals[xorstr("world")][xorstr("model_fov_changer")][xorstr("enable")] = settings::visuals::world::model_fov_changer::enable;
         visuals[xorstr("world")][xorstr("model_fov_changer")][xorstr("value")] = settings::visuals::world::model_fov_changer::value;
 
-        visuals[xorstr("world")][xorstr("radar")][xorstr("background")] = settings::visuals::radar::background;
-        visuals[xorstr("world")][xorstr("radar")][xorstr("lines")] = settings::visuals::radar::lines;
-        visuals[xorstr("world")][xorstr("radar")][xorstr("enable")] = settings::visuals::radar::enable;
-        visuals[xorstr("world")][xorstr("radar")][xorstr("distance")] = settings::visuals::radar::distance;
-        visuals[xorstr("world")][xorstr("radar")][xorstr("friends")] = settings::visuals::radar::friends;
-        visuals[xorstr("world")][xorstr("radar")][xorstr("players")] = settings::visuals::radar::players;
-        visuals[xorstr("world")][xorstr("radar")][xorstr("position")][xorstr("x")] = settings::visuals::radar::position.x;
-        visuals[xorstr("world")][xorstr("radar")][xorstr("position")][xorstr("y")] = settings::visuals::radar::position.y;
-        visuals[xorstr("world")][xorstr("radar")][xorstr("zoom")] = settings::visuals::radar::zoom;
-        visuals[xorstr("world")][xorstr("radar")][xorstr("colors")][xorstr("background")] = settings::visuals::radar::colors::background;
-        visuals[xorstr("world")][xorstr("radar")][xorstr("colors")][xorstr("Friends")] = settings::visuals::radar::colors::Friends;
-        visuals[xorstr("world")][xorstr("radar")][xorstr("colors")][xorstr("Players")] = settings::visuals::radar::colors::Players;
-        visuals[xorstr("world")][xorstr("radar")][xorstr("colors")][xorstr("Line")] = settings::visuals::radar::colors::Line;
-
         nlohmann::json& miscellaneous = json[xorstr("settings")][xorstr("miscellaneous")];
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("enable")] = settings::miscellaneous::globals::third_person::enable;
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("hotkey")][xorstr("key")] = settings::miscellaneous::globals::third_person::hotkey.key;
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("hotkey")][xorstr("type")] = settings::miscellaneous::globals::third_person::hotkey.type;
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("distance")] = settings::miscellaneous::globals::third_person::distance;
+
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("enable")] = settings::miscellaneous::globals::freecam::enable;
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("hotkey")][xorstr("key")] = settings::miscellaneous::globals::freecam::hotkey.key;
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("hotkey")][xorstr("type")] = settings::miscellaneous::globals::freecam::hotkey.type;
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("speed")] = settings::miscellaneous::globals::freecam::speed;
+
+        miscellaneous[xorstr("globals")][xorstr("headdefend")][xorstr("enable")] = settings::miscellaneous::globals::headdefend::enable;
+
+        miscellaneous[xorstr("movement")][xorstr("fastwalk")] = settings::miscellaneous::movement::fastwalk;
+        miscellaneous[xorstr("movement")][xorstr("fastwalk_offset")] = settings::miscellaneous::movement::fastwalk_offset;
+
+        miscellaneous[xorstr("movement")][xorstr("bhop")] = settings::miscellaneous::movement::bhop;
+        miscellaneous[xorstr("movement")][xorstr("air_strafe")] = settings::miscellaneous::movement::air_strafe;
 
         miscellaneous[xorstr("movement")][xorstr("bhop")] = settings::miscellaneous::movement::bhop;
         miscellaneous[xorstr("movement")][xorstr("air_strafe")] = settings::miscellaneous::movement::air_strafe;
@@ -414,6 +452,6 @@ void config_manager::save(std::string name)
     }
     catch (const std::exception& e)
     {
-        
+
     }
 }

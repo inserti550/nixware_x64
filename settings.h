@@ -71,13 +71,11 @@ namespace settings
         {
             inline bool fov = false;
             inline bool snaplines = false;
-            inline bool attackdist = false;
 
             namespace colors
             {
                 inline float fov[4] = { 1.f, 1.f, 1.f, 1.f };
                 inline float snaplines[4] = { 1.f, 1.f, 1.f, 1.f };
-                inline float attackdist[4] = { 1.f, 1.f, 1.f, 1.f };
             }
         }
     }

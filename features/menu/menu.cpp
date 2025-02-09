@@ -22,7 +22,7 @@ void menu::render()
     PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(720, 355));
 
     SetNextWindowPos(ImVec2(io.DisplaySize.x / 2.f, io.DisplaySize.y / 2.f), ImGuiCond_Once, ImVec2(0.5f, 0.5f));
-    SetNextWindowSize(ImVec2(720, 355), ImGuiCond_Once);
+    SetNextWindowSize(ImVec2(720, 425), ImGuiCond_Once);
 
     if (!Begin(xorstr("Nixware"), NULL, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoTitleBar))
         return;
@@ -31,7 +31,7 @@ void menu::render()
 
     if (BeginTabItem(xorstr("Aimbot")))
     {
-        ImVec2 child_size = ImVec2((GetColumnWidth() - (style.ItemSpacing.x * 2)) / 3, GetWindowHeight() - (GetCursorPosY() + style.ItemInnerSpacing.y * 2));
+        ImVec2 child_size = ImVec2((GetColumnWidth() - (style.ItemSpacing.x * 2)) / 3, (GetWindowHeight() - 5) - (GetCursorPosY() + style.ItemInnerSpacing.y * 2));
 
         BeginChild(xorstr("Globals"), child_size);
         {
@@ -59,13 +59,10 @@ void menu::render()
             static std::string selected_key = "";
             ImVec2 button_size = ImVec2((column_width / 2) - style.ItemInnerSpacing.x, 35.f);
             PushItemWidth(column_width - 10.f);
-            if (globals::playerupdate)
+            if (globals::playerupdate && interfaces::engine->is_in_game())
             {
                 for (int ia = 0; ia <= interfaces::entity_list->get_highest_entity_index(); ia++)
                 {
-                    if (!interfaces::engine->is_in_game())
-                        return;
-
                     c_base_entity* entity = interfaces::entity_list->get_entity(ia);
                     if (!entity)
                         continue;
@@ -147,19 +144,19 @@ void menu::render()
             Checkbox(xorstr("Fov"), &settings::aimbot::visuals::fov); ColorEdit4(xorstr("Fov"), settings::aimbot::visuals::colors::fov, color_edit4_flags);
             Checkbox(xorstr("Snaplines"), &settings::aimbot::visuals::snaplines); ColorEdit4(xorstr("Snaplines"), settings::aimbot::visuals::colors::snaplines, color_edit4_flags);
             Checkbox(xorstr("Backtrack"), &settings::aimbot::visuals::backtrack::enable); ColorEdit4(xorstr("Backtrack"), settings::aimbot::visuals::colors::backtrack, color_edit4_flags);
-            Combo(xorstr("Material"), &settings::aimbot::visuals::backtrack::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" "Water\0"));
+            Combo(xorstr("Material"), &settings::aimbot::visuals::backtrack::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0"));
         }
         EndChild();
 
         BeginChild(xorstr("KnifeBot"), child_size);
         {
-            Checkbox(xorstr("Enable#2"), &settings::knifebot::globals::enable); custom::hotkey(xorstr("knifebot Hotkey"), &settings::knifebot::globals::hotkey);
-            Checkbox(xorstr("Silent#2"), &settings::knifebot::globals::silent);
-            Checkbox(xorstr("Automatic fire#2"), &settings::knifebot::globals::automatic_fire);
-            SliderFloat(xorstr("Fov#2"), &settings::knifebot::globals::fov, 0.f, 180.f, xorstr("%.1f"), ImGuiSliderFlags_NoInput);
-            Combo(xorstr("Hitbox#2"), &settings::knifebot::globals::hitbox, xorstr("Head\0" "Chest\0" "Stomach\0" "Hitscan\0"));
-            Combo(xorstr("Priority#2"), &settings::knifebot::globals::priority, xorstr("Fov\0" "Distance\0" "Health\0"));
-            SliderInt(xorstr("Max distance#2"), &settings::knifebot::globals::maxdistance, 0, 450);
+            Checkbox(xorstr("Enable##2"), &settings::knifebot::globals::enable); custom::hotkey(xorstr("knifebot Hotkey"), &settings::knifebot::globals::hotkey);
+            Checkbox(xorstr("Silent##2"), &settings::knifebot::globals::silent);
+            Checkbox(xorstr("Automatic fire##2"), &settings::knifebot::globals::automatic_fire);
+            SliderFloat(xorstr("Fov##2"), &settings::knifebot::globals::fov, 0.f, 180.f, xorstr("%.1f"), ImGuiSliderFlags_NoInput);
+            Combo(xorstr("Hitbox##2"), &settings::knifebot::globals::hitbox, xorstr("Head\0" "Chest\0" "Stomach\0" "Hitscan\0"));
+            Combo(xorstr("Priority##2"), &settings::knifebot::globals::priority, xorstr("Fov\0" "Distance\0" "Health\0"));
+            SliderInt(xorstr("Max distance##2"), &settings::knifebot::globals::maxdistance, 0, 450);
             Checkbox(xorstr("Draw fov##2"), &settings::knifebot::visuals::fov); ColorEdit4(xorstr("KnifeBot Fov"), settings::knifebot::visuals::colors::fov, color_edit4_flags);
             Checkbox(xorstr("Draw snaplines##2"), &settings::knifebot::visuals::snaplines); ColorEdit4(xorstr("KnifeBot Snaplines"), settings::knifebot::visuals::colors::snaplines, color_edit4_flags);
         }
@@ -209,7 +206,7 @@ void menu::render()
         BeginChild(xorstr("Visuals"), child_size);
         {
             Checkbox(xorstr("Fake model"), &settings::antihit::visuals::fake_model::enable); ColorEdit4(xorstr("Fake model"), settings::antihit::visuals::colors::fake_model, color_edit4_flags);
-            Combo(xorstr("Material"), &settings::antihit::visuals::fake_model::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" "Water\0"));
+            Combo(xorstr("Material"), &settings::antihit::visuals::fake_model::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0"));
         }
         EndChild();
 
@@ -292,7 +289,7 @@ void menu::render()
             {
                 Checkbox(xorstr("Enable"), &settings::visuals::chams::players::enable); ColorEdit4(xorstr("Chams"), settings::visuals::chams::colors::players, color_edit4_flags);
                 Checkbox(xorstr("Ignore walls"), &settings::visuals::chams::players::ignore_walls);
-                Combo(xorstr("Material"), &settings::visuals::chams::players::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" "Water\0" ));
+                Combo(xorstr("Material"), &settings::visuals::chams::players::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0"));
 
                 Checkbox(xorstr("Draw original model"), &settings::visuals::chams::players::draw_original_model);
 
@@ -302,7 +299,7 @@ void menu::render()
             {
                 Checkbox(xorstr("Enable"), &settings::visuals::chams::entity::enable); ColorEdit4(xorstr("Chams"), settings::visuals::chams::colors::entity, color_edit4_flags);
                 Checkbox(xorstr("Ignore walls"), &settings::visuals::chams::entity::ignore_walls);
-                Combo(xorstr("Material"), &settings::visuals::chams::entity::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" "Water\0" ));
+                Combo(xorstr("Material"), &settings::visuals::chams::entity::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0"));
 
                 Checkbox(xorstr("Draw original model"), &settings::visuals::chams::entity::draw_original_model);
 
@@ -325,7 +322,7 @@ void menu::render()
             case 2:
             {
                 Checkbox(xorstr("Enable"), &settings::visuals::chams::hands::enable); ColorEdit4(xorstr("Chams"), settings::visuals::chams::colors::hands, color_edit4_flags);
-                Combo(xorstr("Material"), &settings::visuals::chams::hands::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0" "Water\0" ));
+                Combo(xorstr("Material"), &settings::visuals::chams::hands::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "selfillum\0"));
 
                 Checkbox(xorstr("Draw original model"), &settings::visuals::chams::hands::draw_original_model);
 
@@ -491,7 +488,7 @@ void menu::render()
             static int selected_item = -1;
             static std::string selected_config_name;
 
-            static char new_config_namse[256] = "";
+            static char new_config_name[256] = "";
 
             std::vector<std::string> file_list = utilities::get_files_from_folder(xorstr("C:/nixware/configs/"), "", xorstr(".nixware"));
 
@@ -523,10 +520,10 @@ void menu::render()
                 config_manager::save(selected_config_name);
 
             SetNextItemWidth(column_width);
-            InputText(xorstr("New config name"), new_config_namse, IM_ARRAYSIZE(new_config_namse));
+            InputText(xorstr("New config name"), new_config_name, IM_ARRAYSIZE(new_config_name));
 
             if (Button(xorstr("Create and save"), ImVec2(column_width, 35.f)))
-                config_manager::save(new_config_namse);
+                config_manager::save(new_config_name);
 
             if (Button(xorstr("Unload cheat"), ImVec2(column_width, 35.f)))
                 globals::unload = true;

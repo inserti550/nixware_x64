@@ -1,15 +1,8 @@
 # Nixware
 
-> [!WARNING]
-> ### Nixware IS NO LONGER SUPPORTED
-> #### Always updated, more functional, our cheat is only for $2: [Ignite](https://ignitecheat.xyz/)
-
 This is a cheat for [Garry's Mod](https://store.steampowered.com/app/4000/Garrys_Mod/) x64
 
 The cheat almost completely repeats the old nixware menu, which is why it has such a name
-
-### Communication
-- [Discord Server](https://discord.gg/FdezFJxMxd)
 
 # Features
 - Aimbot (Silent, Automatic fire, Penetrate walls (SWB, CW2), Hitbox, Priority, Smooth)

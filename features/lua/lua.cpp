@@ -9,7 +9,6 @@ void lua::executor()
 	c_lua_interface* lua = interfaces::lua_shared->get_interface(lua_type_client);
 	if (!lua)
 		return;
-
 	std::ifstream file(l.second);
 	if (!file.is_open())
 		return;
@@ -17,8 +16,8 @@ void lua::executor()
 	std::stringstream buffer;
 	buffer << file.rdbuf();
 	file.close();
-
-	const char* data = buffer.str().c_str();
+	std::string code = buffer.str();
+	const char* data = code.c_str();
 	lua->run_string("", "", data);
 
 	globals::waiting_to_be_executed.store(std::make_pair(false, nullptr));

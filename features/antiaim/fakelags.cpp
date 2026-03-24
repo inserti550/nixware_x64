@@ -2,6 +2,12 @@
 
 bool fakelags::run(c_user_cmd* cmd)
 {
+	/*
+	std::cout << "[fakelags::run][TIME] " << interfaces::global_vars->absoluteframetime << " | " << interfaces::global_vars->curtime << " | " << interfaces::global_vars->framecount << std::endl;
+	std::cout << "[fakelags::run][TIME] " << interfaces::global_vars->frametime << " | " << interfaces::global_vars->interpolation_amount << " | " << interfaces::global_vars->interval_per_tick << std::endl;
+	std::cout << "[fakelags::run][TIME] " << interfaces::global_vars->max_clients << " | " << interfaces::global_vars->network_protocol << " | " << interfaces::global_vars->network_protocol << std::endl;
+	std::cout << "[fakelags::run][TIME] " << interfaces::global_vars->realtime << " | " << interfaces::global_vars->remote_client << " | " << interfaces::global_vars->sim_ticks_this_frame << " | " << interfaces::global_vars->tick_count << std::endl;
+	*/
 	c_base_entity* local_player = interfaces::entity_list->get_entity(interfaces::engine->get_local_player());
 	if (!local_player || !local_player->is_alive())
 		return true;

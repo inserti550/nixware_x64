@@ -1,28 +1,28 @@
-#pragma once
+	#pragma once
 
-enum override_type_t
-{
-	override_normal = 0,
-	override_build_shadows,
-	override_depth_write,
-	override_ssao_depth_write,
-};
-
-class c_model_render
-{
-public:
-	void forced_material_override(i_material* material, override_type_t override_type = override_normal)
+	enum override_type_t
 	{
-		return memory::call_v_function<void(__thiscall*)(void*, i_material*, override_type_t)>(this, 1)(this, material, override_type);
-	}
+		override_normal = 0,
+		override_build_shadows,
+		override_depth_write,
+		override_ssao_depth_write,
+	};
 
-	void setup_lighting(const c_vector& center)
+	class c_model_render
 	{
-		return memory::call_v_function<void(__thiscall*)(void*, const c_vector&)>(this, 21)(this, center);
-	}
+	public:
+		void forced_material_override(i_material* material, override_type_t override_type = override_normal, int material_index = -1)
+		{
+			return memory::call_v_function<void(__thiscall*)(void*, i_material*, override_type_t, int)>(this, 1)(this, material, override_type, material_index);
+		}
 
-	void suppress_engine_lighting(bool suppress)
-	{
-		return memory::call_v_function<void(__thiscall*)(void*, bool)>(this, 23)(this, suppress);
-	}
-};
+		void setup_lighting(const c_vector& center)
+		{
+			return memory::call_v_function<void(__thiscall*)(void*, const c_vector&)>(this, 21)(this, center);
+		}
+
+		void suppress_engine_lighting(bool suppress)
+		{
+			return memory::call_v_function<void(__thiscall*)(void*, bool)>(this, 23)(this, suppress);
+		}
+	};

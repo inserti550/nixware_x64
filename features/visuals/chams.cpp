@@ -47,11 +47,14 @@ void chams::push_material_override(float color[4], int material_type)
     if (!textured || !metal || !wireframe || !flat)
         return;
 
+    float c_color[3] = { color[0], color[1], color[2] };
+    float c_alpha = color[3];
+
     interfaces::model_render->suppress_engine_lighting(true);
     interfaces::model_render->setup_lighting(c_vector());
 
-    interfaces::render_view->set_color_modulation(color);
-    interfaces::render_view->set_blend(color[3]);
+    interfaces::render_view->set_color_modulation(c_color);
+    interfaces::render_view->set_blend(c_alpha);
 
     i_material* material = nullptr;
     switch (material_type)
@@ -72,7 +75,10 @@ void chams::push_material_override(float color[4], int material_type)
         break;
     }
 
-    interfaces::model_render->forced_material_override(material);
+    if (material) {
+        interfaces::model_render->forced_material_override(material);
+    }
+    else std::cout << xorstr("Material is null") << std::endl;
 }
 
 void chams::pop_material_override()

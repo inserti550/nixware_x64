@@ -86,6 +86,8 @@ void interfaces::initialize()
 	if (!global_vars)
 		throw;
 
+	std::cout << xorstr("[DEBUG] GlobalVars Address: 0x") << std::hex << (uintptr_t)interfaces::global_vars << std::dec << std::endl;
+
 	client_state = (c_client_state*)memory::relative_to_absolute(memory::get_virtual((PVOID**)engine, 84), 0x3, 0x7);
 	if (!client_state)
 		throw;

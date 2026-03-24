@@ -6,7 +6,7 @@ namespace key_values
     {
         using key_values_fn = void* (__fastcall*)(unsigned int);
 
-        static key_values_fn key_values = (key_values_fn)memory::relative_to_absolute((uintptr_t)memory::pattern_scanner(xorstr("client.dll"), xorstr("E8 ? ? ? ? 4C 63 F7")), 1, 6);
+        static key_values_fn key_values = (key_values_fn)memory::pattern_scanner(xorstr("client.dll"), xorstr("40 53 48 83 EC 20 48 8B D9 ? ? ? ? ? ? 8B D3 48 8B C8 4C 8B 00 48 83 C4 20 5B"));
         if (!key_values)
             throw;
 
@@ -17,7 +17,7 @@ namespace key_values
     {
         using init_fn = void* (__fastcall*)(void*, const char*);
 
-        static init_fn initialize = (init_fn)memory::relative_to_absolute((uintptr_t)memory::pattern_scanner(xorstr("client.dll"), xorstr("E8 ? ? ? ? 48 89 45 1F")), 1, 6);
+        static init_fn initialize = (init_fn)memory::pattern_scanner(xorstr("client.dll"), xorstr("48 89 5C 24 10 57 48 83 EC 20 81 21 00 00 00 FF 33 C0 89 41 20 48 8B"));
         if (!initialize)
             throw;
 
@@ -28,7 +28,7 @@ namespace key_values
     {
         using load_from_buffer_fn = bool(__fastcall*)(void*, char const*, const char*, void*, const char*, void*);
 
-        static load_from_buffer_fn load_from_buffer = (load_from_buffer_fn)memory::relative_to_absolute((uintptr_t)memory::pattern_scanner(xorstr("client.dll"), xorstr("E8 ? ? ? ? 0F B6 D8 FF 15 ? ? ? ?")), 1, 6);
+        static load_from_buffer_fn load_from_buffer = (load_from_buffer_fn)memory::relative_to_absolute((uintptr_t)memory::pattern_scanner(xorstr("client.dll"), xorstr("E8 ? ? ? ? 0F B6 D8 FF 15 ? ? ? ?")), 1, 5);
         if (!load_from_buffer)
             throw;
 

@@ -36,22 +36,22 @@ public:
 
 	int get_health()
 	{
-		return memory::call_v_function<int(__thiscall*)(void*)>(this, 108)(this);
+		return memory::call_v_function<int(__thiscall*)(void*)>(this, 109)(this);
 	}
 
 	bool is_alive()
 	{
-		return memory::call_v_function<bool(__thiscall*)(void*)>(this, 129)(this);
+		return memory::call_v_function<bool(__thiscall*)(void*)>(this, 130)(this);
 	}
 
 	bool is_player()
 	{
-		return memory::call_v_function<bool(__thiscall*)(void*)>(this, 130)(this);
+		return memory::call_v_function<bool(__thiscall*)(void*)>(this, 131)(this);
 	}
 
 	q_angle& eye_angles()
 	{
-		return memory::call_v_function<q_angle & (__thiscall*)(void*)>(this, 140)(this);
+		return memory::call_v_function<q_angle & (__thiscall*)(void*)>(this, 141)(this);
 	}
 
 	bool is_weapon()
@@ -66,7 +66,7 @@ public:
 
 	bool push_entity()
 	{
-		return memory::call_v_function<bool(__thiscall*)(void*)>(this, 172)(this);
+		return memory::call_v_function<bool(__thiscall*)(void*)>(this, 173)(this);
 	}
 
 	uintptr_t get_owner_entity()
@@ -76,12 +76,12 @@ public:
 
 	uintptr_t get_hands()
 	{
-		return ((uintptr_t)this + 0x38d8);  //DT_GMOD_Player, Prop: m_Hands
+		return ((uintptr_t)this + 0x3924);  //DT_GMOD_Player, Prop: m_Hands
 	}
 
 	uintptr_t get_view_model()
 	{
-		return ((uintptr_t)this + 0x2da0); //DT_GMOD_Player, Prop: m_hViewModel[0]
+		return ((uintptr_t)this + 0x2dd8); //DT_GMOD_Player, Prop: m_hViewModel[0]
 	}
 
 	bool is_dormant()
@@ -111,7 +111,7 @@ public:
 
 	int get_tick_base()
 	{
-		return *(int*)((uintptr_t)this + 0x2d58); //DT_BasePlayer, Prop: m_nTickBase
+		return *(int*)((uintptr_t)this + 0x2d90); //DT_BasePlayer, Prop: m_nTickBase
 	}
 
 	int hitbox_set()
@@ -126,13 +126,13 @@ public:
 
 	q_angle& get_punch_angle()
 	{
-		return *(q_angle*)((uintptr_t)this + 0x2a08); //DT_GMOD_Player, Prop: m_vecPunchAngle,
+		return *(q_angle*)((uintptr_t)this + 0x2a20); //DT_GMOD_Player, Prop: m_vecPunchAngle,
 	}
 
 	//https://s10.gifyu.com/images/Sr48V.png
 	c_hl2mp_player_anim_state* get_anim_state()
 	{
-		return *(c_hl2mp_player_anim_state**)((uintptr_t)this + 0x3620);
+		return *(c_hl2mp_player_anim_state**)((uintptr_t)this + 0x3668);
 	}
 
 	c_hl2mp_player_anim_state* create_anim_state()
@@ -200,7 +200,7 @@ public:
 	{
 		using set_abs_origin_fn = void(__fastcall*)(void*, c_vector&);
 
-		static set_abs_origin_fn set_abs_origin = (set_abs_origin_fn)memory::relative_to_absolute((uintptr_t)memory::pattern_scanner(xorstr("client.dll"), xorstr("E8 ? ? ? ? F3 41 0F 11 BF ? ? ? ?")), 1, 6);
+		static set_abs_origin_fn set_abs_origin = (set_abs_origin_fn)memory::relative_to_absolute((uintptr_t)memory::pattern_scanner(xorstr("client.dll"), xorstr("E8 ? ? ? ? 48 8D 57 70 48 8B CB E8 ? ? ? ?")), 13, 17);
 
 		if (!set_abs_origin)
 			throw;

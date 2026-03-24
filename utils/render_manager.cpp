@@ -29,6 +29,8 @@ void render_manager::setup_imgui(IDirect3DDevice9* device)
 
 void render_manager::shutdown()
 {
+	if (!GetCurrentContext())
+		return;
 	ImGui_ImplDX9_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	DestroyContext();

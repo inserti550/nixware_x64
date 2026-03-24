@@ -50,7 +50,9 @@ void __fastcall hooks::handles::draw_model_execute(c_model_render* model_render,
 			if (history::get_latest_record(info.entity_index, record))
 			{
 				chams::push_material_override(settings::aimbot::visuals::colors::backtrack, settings::aimbot::visuals::backtrack::material_type);
+
 				hooks::handles::originals::draw_model_execute(model_render, state, info, record.bone_to_world.get());
+
 				chams::pop_material_override();
 			}
 		}

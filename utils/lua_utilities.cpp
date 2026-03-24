@@ -137,7 +137,9 @@ int lua_utilities::get_job_without_disguise(c_base_entity* entity)
 {
 	c_lua_interface* lua = interfaces::lua_shared->get_interface(lua_type_client);
 	if (!lua)
+	{
 		return -1;
+	}
 
 	lua->push_special(lua_special_glob);
 	lua->get_field(-1, xorstr("rp"));

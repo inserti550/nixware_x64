@@ -183,7 +183,14 @@ void aimbot::run(c_user_cmd* cmd)
 
 	if (!settings::aimbot::globals::hotkey.check())
 		return;
+	/*
+	std::cout << "[aimbot::run] next_primary_attack=" << weapon->next_primary_attack() << " curtime=" << interfaces::global_vars->curtime << std::endl;
 
+	std::cout << "[aimbot::run][TIME] " << interfaces::global_vars->absoluteframetime << " | " << interfaces::global_vars->curtime << " | " << interfaces::global_vars->framecount << std::endl;
+	std::cout << "[aimbot::run][TIME] " << interfaces::global_vars->frametime << " | " << interfaces::global_vars->interpolation_amount << " | " << interfaces::global_vars->interval_per_tick << std::endl;
+	std::cout << "[aimbot::run][TIME] " << interfaces::global_vars->max_clients << " | " << interfaces::global_vars->network_protocol << " | " << interfaces::global_vars->network_protocol << std::endl;
+	std::cout << "[aimbot::run][TIME] " << interfaces::global_vars->realtime << " | " << interfaces::global_vars->remote_client << " | " << interfaces::global_vars->sim_ticks_this_frame << " | " << interfaces::global_vars->tick_count << std::endl;
+	*/
 	if (weapon->next_primary_attack() > interfaces::global_vars->curtime)
 		return;
 

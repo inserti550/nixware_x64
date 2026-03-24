@@ -294,13 +294,15 @@ void menu::render()
 
             if (selected_item != -1 && selected_item < file_list.size())
             {
-                std::string path = xorstr("C:/nixware/lua/") + file_list[selected_item] + xorstr(".lua");
+                static std::string path;
+                path = xorstr("C:/nixware/lua/") + file_list[selected_item] + xorstr(".lua");
 
                 LabelText(file_list[selected_item].c_str());
                 LabelText("Last update:", utilities::get_last_modified_time(path).c_str());
-
                 if (Button(xorstr("Load script"), ImVec2(column_width - 10.f, 35.f)))
+                {
                     globals::waiting_to_be_executed.store(std::make_pair(true, path.c_str()));
+                }
             }
         }
         EndChild();
@@ -324,7 +326,11 @@ void menu::render()
 
         BeginChild(xorstr("Info"), child_size);
         {
-            LabelText(xorstr("Last update:"), __DATE__);
+        #ifdef _DEBUG
+                    LabelText(xorstr("Last update:"), __DATE__, xorstr(" debug build"));
+        #else
+                    LabelText(xorstr("Last update:"), __DATE__);
+        #endif
         }
         EndChild();
 

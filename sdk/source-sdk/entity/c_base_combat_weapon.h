@@ -15,17 +15,17 @@ public:
 
 	c_vector& get_bullet_spread()
 	{
-		return memory::call_v_function<c_vector & (__thiscall*)(void*)>(this, 325)(this);
+		return memory::call_v_function<c_vector & (__thiscall*)(void*)>(this, 321)(this);
 	}
 
 	const char* get_name()
 	{
-		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 366)(this);
+		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 362)(this);
 	}
 
 	const char* get_print_name()
 	{
-		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 367)(this);
+		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 363)(this);
 	}
 
 	int primary_ammo()

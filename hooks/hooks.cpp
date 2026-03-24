@@ -63,7 +63,7 @@ void hooks::initialize()
     if (!min_hook.create_hook((LPVOID)memory::pattern_scanner(xorstr("client.dll"), xorstr("48 89 5C 24 ? 57 48 83 EC 50 48 8B B9 ? ? ? ? 48 8B D9 0F 29 74 24 ? 0F 28 F2 0F 29")), &handles::multiplayer_anim_state_update, (LPVOID*)&handles::originals::multiplayer_anim_state_update))
         throw;
 
-    if (!min_hook.create_hook((LPVOID)memory::pattern_scanner(xorstr("lua_shared.dll"), xorstr("40 55 53 56 57 41 54 41 56 41 57 48 8D AC 24 ? ? ? ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 49 8B F1")), &handles::run_string_ex, (LPVOID*)&handles::originals::run_string_ex))
+    if (!min_hook.create_hook((LPVOID)memory::pattern_scanner(xorstr("lua_shared.dll"), xorstr("40 55 53 56 57 41 54 41 56 41 57 48 8D AC 24 50 ? ? ? 48 81 EC B0 01")), &handles::run_string_ex, (LPVOID*)&handles::originals::run_string_ex))
         throw;
 
     if (!min_hook.create_hook((LPVOID)memory::pattern_scanner(xorstr("engine.dll"), xorstr("48 89 5C 24 ? 48 89 6C 24 ? 48 89 7C 24 ? 41 56 48 83 EC 20 48 8B D9 45 0F B6 F1")), &handles::send_net_msg, (LPVOID*)&handles::originals::send_net_msg))

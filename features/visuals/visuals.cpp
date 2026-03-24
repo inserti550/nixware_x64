@@ -21,12 +21,13 @@ void visuals::render()
 
 	c_vector origin = local_player->get_abs_origin();
 
+	//std::cout << "origin x: " << origin.x << " y: " << origin.y << " z: " << origin.z << std::endl;
+
 	for (size_t i = 0; i <= interfaces::entity_list->get_highest_entity_index(); i++)
 	{
 		c_base_entity* entity = interfaces::entity_list->get_entity(i);
 		if (!entity)
 			continue;
-
 		if (entity->is_player())
 		{
 			if (!settings::visuals::esp::players::enable)
@@ -47,12 +48,11 @@ void visuals::render()
 
 			float offset = 0;
 			float distance = origin.distance_to(entity->get_abs_origin());
-
 			float alpha = std::clamp((settings::visuals::esp::players::render_distance - distance) / 100.f, 0.f, 1.f);
 			if (alpha <= 0.0f)
 				continue;
 
-			PushStyleVar(ImGuiStyleVar_Alpha, alpha);
+			//PushStyleVar(ImGuiStyleVar_Alpha, 1); not work, create error 
 
 			if (settings::visuals::esp::players::box)
 				render_manager::box(box, settings::visuals::esp::players::colors::box, 1.f);
@@ -64,6 +64,7 @@ void visuals::render()
 			}
 
 			c_base_combat_weapon* weapon = entity->get_active_weapon();
+
 			if (weapon)
 			{
 				if (settings::visuals::esp::players::weapon_name)
@@ -79,7 +80,7 @@ void visuals::render()
 			if (settings::visuals::esp::players::name)
 				render_manager::render_text(box, lua_utilities::get_name(entity), settings::visuals::esp::players::colors::name, offset);
 
-			PopStyleVar();
+			//PopStyleVar();
 		}
 		else if (settings::visuals::esp::entity::enable)
 		{
@@ -104,7 +105,7 @@ void visuals::render()
 			if (alpha <= 0.0f)
 				continue;
 
-			PushStyleVar(ImGuiStyleVar_Alpha, alpha);
+			//PushStyleVar(ImGuiStyleVar_Alpha, alpha);
 
 			if (settings::visuals::esp::entity::box)
 				render_manager::box(box, settings::visuals::esp::entity::colors::box, 1.f);
@@ -118,7 +119,7 @@ void visuals::render()
 			if (settings::visuals::esp::entity::name)
 				render_manager::render_text(box, name.c_str(), settings::visuals::esp::entity::colors::name, offset);
 
-			PopStyleVar();
+			//PopStyleVar();
 		}
 	}
 

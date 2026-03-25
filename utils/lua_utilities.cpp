@@ -174,18 +174,20 @@ int lua_utilities::get_job_without_disguise(c_base_entity* entity)
 const char* lua_utilities::get_team_name(c_base_entity* entity)
 {
 	c_lua_interface* lua = interfaces::lua_shared->get_interface(lua_type_client);
-	if (!lua)
+	if (!lua) {
 		return "";
-
+	}
 	int team = get_job_without_disguise(entity);
+	interfaces::engine->client_cmd_unrestricted("" + team);
 	if (team != -1)
+	{
 		return get_rp_jobs_list(team);
-
+	}
 	lua->push_special(lua_special_glob);
-
 	lua->get_field(-1, xorstr("team"));
 	if (!lua->is_type(-1, object_type_t::table))
 	{
+		interfaces::engine->client_cmd_unrestricted("pop 2 1");
 		lua->pop(2);
 		return "";
 	}
@@ -201,8 +203,8 @@ const char* lua_utilities::get_team_name(c_base_entity* entity)
 	lua->call(1, 1);
 
 	const char* value = lua->get_string(-1);
-	lua->pop(3);
 
+	lua->pop(3);
 	return value;
 }
 

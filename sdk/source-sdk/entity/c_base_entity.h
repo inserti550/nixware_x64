@@ -31,7 +31,7 @@ public:
 
 	int get_team_number()
 	{
-		return memory::call_v_function<int(__thiscall*)(void*)>(this, 77)(this);
+		return memory::call_v_function<int(__thiscall*)(void*)>(this, 78)(this);
 	}
 
 	int get_health()

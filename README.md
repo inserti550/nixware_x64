@@ -1,5 +1,11 @@
 # Nixware
 
+![License](https://img.shields.io/github/license/inserti550/nixware_x64)
+![Last Commit](https://img.shields.io/github/last-commit/inserti550/nixware_x64)
+
+![Latest Release](https://img.shields.io/github/v/release/inserti550/nixware_x64)
+![Downloads](https://img.shields.io/github/downloads/inserti550/nixware_x64/total)
+
 This is a cheat for [Garry's Mod](https://store.steampowered.com/app/4000/Garrys_Mod/) x64
 
 The cheat almost completely repeats the old nixware menu, which is why it has such a name

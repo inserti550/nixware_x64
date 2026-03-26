@@ -241,6 +241,7 @@ namespace settings
         {
             inline bool bhop = false;
             inline bool air_strafe = false;
+            inline bool climbfly = false;
         }
     }
 

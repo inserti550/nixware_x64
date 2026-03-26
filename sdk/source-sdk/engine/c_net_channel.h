@@ -100,7 +100,7 @@ struct bf_read
 	char     pad[2];
 };
 
-class c_clc_move
+class c_clc_move : public i_net_message
 {
 public:
 	void* vtable;

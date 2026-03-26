@@ -482,5 +482,8 @@
     <ClInclude Include="sdk\source-sdk\tier1\key_values.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="hooks\handles\engine_client\cl_move.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

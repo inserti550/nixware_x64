@@ -11,7 +11,6 @@ void __fastcall hooks::handles::create_move(c_hl_client* client, int sequence_nu
 	movement::run(cmd);
 
 	c_user_cmd old_cmd = *cmd;
-
 	engine_prediction::start(cmd);
 	aimbot::run(cmd);
 	engine_prediction::end(cmd);

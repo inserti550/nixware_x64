@@ -22,6 +22,8 @@
 
 void hooks::initialize()
 {
+    fakelags::init();
+
     if (!min_hook.create_hook((LPVOID)memory::get_virtual((PVOID**)interfaces::panel, 41), &handles::paint_traverse, (LPVOID*)&handles::originals::paint_traverse))
         throw;
 
@@ -71,7 +73,7 @@ void hooks::initialize()
         throw;
 
     if (!min_hook.create_hook((LPVOID)memory::pattern_scanner(xorstr("engine.dll"), xorstr("40 55 53 48 8D AC 24 38 F0 FF FF B8 C8 10 00 00 ? ? ? ? ? 48 2B E0 0F")), &handles::cl_move, (LPVOID*)&handles::originals::cl_move))
-        throw;
+       throw;
 
     if (!min_hook.enable_hook())
         throw;

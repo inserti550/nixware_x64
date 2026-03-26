@@ -54,6 +54,14 @@ void menu::render()
             Checkbox(xorstr("Disable visual recoil"), &settings::aimbot::accuracy::disable_visual_recoil);
             SliderFloat(xorstr("Backtrack"), &settings::aimbot::accuracy::backtrack, 0.f, 1.f, xorstr("%.3f ms"), ImGuiSliderFlags_NoInput);
             SliderFloat(xorstr("Smooth"), &settings::aimbot::accuracy::smooth, 0.f, 20.f, xorstr("%.1f"), ImGuiSliderFlags_NoInput);
+
+            Checkbox(xorstr("RapidFire"), &settings::aimbot::rapidfire::enable); custom::hotkey(xorstr("RapidFire Hotkey"), &settings::aimbot::rapidfire::hotkey);
+
+            if (settings::aimbot::rapidfire::enable)
+            {
+                SliderInt(xorstr("RapidFire Ticks"), &settings::aimbot::rapidfire::ticks, 1, 23, xorstr("%d"));
+                Checkbox(xorstr("Auto Fire"), &settings::aimbot::rapidfire::auto_fire);
+            }
         }
         EndChild();
 

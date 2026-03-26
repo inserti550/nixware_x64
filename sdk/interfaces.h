@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#undef min
 #include <cstdint>
 #include <deque>
 #include <filesystem>
@@ -92,6 +93,7 @@
 #include "../utils/config_manager.h"
 #include "../settings.h"
 
+
 namespace interfaces
 {
 	void initialize();
@@ -120,4 +122,6 @@ namespace interfaces
 	inline c_uniform_random_stream* random_stream;
 	inline c_client_mode_shared*	client_mode_shared;
 	inline HWND						window;
+	typedef void(__fastcall* write_user_cmd_t)(bf_write*, c_user_cmd*, c_user_cmd*);
+	inline write_user_cmd_t write_user_cmd = nullptr;
 }

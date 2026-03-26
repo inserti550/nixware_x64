@@ -256,6 +256,7 @@
     <ClInclude Include="features\visuals\obs_bypass.h" />
     <ClInclude Include="features\visuals\visuals.h" />
     <ClInclude Include="hooks\handles\client_mode_shared\override_view.h" />
+    <ClInclude Include="hooks\handles\engine_client\cl_move.h" />
     <ClInclude Include="hooks\handles\engine_client\set_view_angles.h" />
     <ClInclude Include="hooks\handles\hl_client\create_move.h" />
     <ClInclude Include="hooks\handles\hl_client\frame_stage_notify.h" />

@@ -86,7 +86,7 @@ void interfaces::initialize()
 	if (!global_vars)
 		throw;
 
-	std::cout << xorstr("[DEBUG] GlobalVars Address: 0x") << std::hex << (uintptr_t)interfaces::global_vars << std::dec << std::endl;
+	//std::cout << xorstr("[DEBUG] GlobalVars Address: 0x") << std::hex << (uintptr_t)interfaces::global_vars << std::dec << std::endl;
 
 	client_state = (c_client_state*)memory::relative_to_absolute(memory::get_virtual((PVOID**)engine, 84), 0x3, 0x7);
 	if (!client_state)
@@ -98,5 +98,9 @@ void interfaces::initialize()
 
 	window = FindWindowW(xorstr(L"Valve001"), NULL);
 	if (!window)
+		throw;
+
+	write_user_cmd = (write_user_cmd_t)memory::pattern_scanner(xorstr("client.dll"),xorstr("40 53 48 83 EC 40 4C 63 49 10 48 8B D9 41 8B 00 8B 49 0C FF"));
+	if (!write_user_cmd)
 		throw;
 }

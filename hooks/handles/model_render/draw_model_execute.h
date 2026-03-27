@@ -32,7 +32,7 @@ void __fastcall hooks::handles::draw_model_execute(c_model_render* model_render,
 				hooks::handles::originals::draw_model_execute(model_render, state, info, matrix);
 			}
 
-			chams::push_material_override(settings::antihit::visuals::colors::fake_model, settings::antihit::visuals::fake_model::material_type);
+			chams::push_material_override(settings::antihit::visuals::colors::fake_model, settings::antihit::visuals::fake_model::material_type, settings::antihit::visuals::fake_model::factor);
 
 			if (settings::antihit::visuals::fake_model::enable && animfix::created_fake_matrix)
 				hooks::handles::originals::draw_model_execute(model_render, state, info, animfix::fake_matrix);
@@ -49,7 +49,7 @@ void __fastcall hooks::handles::draw_model_execute(c_model_render* model_render,
 			lag_record record;
 			if (history::get_latest_record(info.entity_index, record))
 			{
-				chams::push_material_override(settings::aimbot::visuals::colors::backtrack, settings::aimbot::visuals::backtrack::material_type);
+				chams::push_material_override(settings::aimbot::visuals::colors::backtrack, settings::aimbot::visuals::backtrack::material_type, settings::aimbot::visuals::backtrack::factor);
 
 				hooks::handles::originals::draw_model_execute(model_render, state, info, record.bone_to_world.get());
 
@@ -64,7 +64,7 @@ void __fastcall hooks::handles::draw_model_execute(c_model_render* model_render,
 			if (settings::visuals::chams::players::draw_original_model)
 				hooks::handles::originals::draw_model_execute(model_render, state, info, bone_to_world);
 
-			chams::push_material_override(settings::visuals::chams::colors::players, settings::visuals::chams::players::material_type);
+			chams::push_material_override(settings::visuals::chams::colors::players, settings::visuals::chams::players::material_type, settings::visuals::chams::players::factor);
 			hooks::handles::originals::draw_model_execute(model_render, state, info, bone_to_world);
 			chams::pop_material_override();
 
@@ -80,7 +80,7 @@ void __fastcall hooks::handles::draw_model_execute(c_model_render* model_render,
 			if (settings::visuals::chams::hands::draw_original_model)
 				hooks::handles::originals::draw_model_execute(model_render, state, info, bone_to_world);
 
-			chams::push_material_override(settings::visuals::chams::colors::hands, settings::visuals::chams::hands::material_type);
+			chams::push_material_override(settings::visuals::chams::colors::hands, settings::visuals::chams::hands::material_type, settings::visuals::chams::hands::factor);
 			hooks::handles::originals::draw_model_execute(model_render, state, info, bone_to_world);
 			chams::pop_material_override();
 
@@ -96,7 +96,7 @@ void __fastcall hooks::handles::draw_model_execute(c_model_render* model_render,
 			if (!name.empty() && settings::visuals::chams::entity::list.contains(name) && settings::visuals::chams::entity::list[name].get<bool>())
 			{
 				chams::push_ignore_z(settings::visuals::chams::entity::ignore_walls);
-				chams::push_material_override(settings::visuals::chams::colors::entity, settings::visuals::chams::entity::material_type);
+				chams::push_material_override(settings::visuals::chams::colors::entity, settings::visuals::chams::entity::material_type, settings::visuals::chams::entity::factor);
 
 				if (settings::visuals::chams::entity::draw_original_model)
 					hooks::handles::originals::draw_model_execute(model_render, state, info, bone_to_world);

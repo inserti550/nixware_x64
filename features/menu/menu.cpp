@@ -64,7 +64,9 @@ void menu::render()
             Checkbox(xorstr("Fov"), &settings::aimbot::visuals::fov); ColorEdit4(xorstr("Fov"), settings::aimbot::visuals::colors::fov, color_edit4_flags);
             Checkbox(xorstr("Snaplines"), &settings::aimbot::visuals::snaplines); ColorEdit4(xorstr("Snaplines"), settings::aimbot::visuals::colors::snaplines, color_edit4_flags);
             Checkbox(xorstr("Backtrack"), &settings::aimbot::visuals::backtrack::enable); ColorEdit4(xorstr("Backtrack"), settings::aimbot::visuals::colors::backtrack, color_edit4_flags);
-            Combo(xorstr("Material"), &settings::aimbot::visuals::backtrack::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0"));
+            Combo(xorstr("Material"), &settings::aimbot::visuals::backtrack::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "Animater Wireframe\0"));
+            if(settings::aimbot::visuals::backtrack::material_type == 4)
+                SliderInt(xorstr("Factor"), &settings::aimbot::visuals::backtrack::factor, 1, 500, xorstr("%d"), ImGuiSliderFlags_NoInput);
         }
         EndChild();
 
@@ -101,7 +103,9 @@ void menu::render()
         BeginChild(xorstr("Visuals"), child_size);
         {
             Checkbox(xorstr("Fake model"), &settings::antihit::visuals::fake_model::enable); ColorEdit4(xorstr("Fake model"), settings::antihit::visuals::colors::fake_model, color_edit4_flags);
-            Combo(xorstr("Material"), &settings::antihit::visuals::fake_model::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0"));
+            Combo(xorstr("Material"), &settings::antihit::visuals::fake_model::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "Animater Wireframe\0"));
+            if (settings::antihit::visuals::fake_model::material_type == 4)
+                SliderInt(xorstr("Factor"), &settings::antihit::visuals::fake_model::factor, 1, 500, xorstr("%d"), ImGuiSliderFlags_NoInput);
         }
         EndChild();
 
@@ -174,8 +178,9 @@ void menu::render()
             {
                 Checkbox(xorstr("Enable"), &settings::visuals::chams::players::enable); ColorEdit4(xorstr("Chams"), settings::visuals::chams::colors::players, color_edit4_flags);
                 Checkbox(xorstr("Ignore walls"), &settings::visuals::chams::players::ignore_walls);
-                Combo(xorstr("Material"), &settings::visuals::chams::players::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0"));
-
+                Combo(xorstr("Material"), &settings::visuals::chams::players::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "Animater Wireframe\0"));
+                if (settings::visuals::chams::players::material_type == 4)
+                    SliderInt(xorstr("Factor"), &settings::visuals::chams::players::factor, 1, 500, xorstr("%d"), ImGuiSliderFlags_NoInput);
                 Checkbox(xorstr("Draw original model"), &settings::visuals::chams::players::draw_original_model);
 
                 break;
@@ -184,8 +189,9 @@ void menu::render()
             {
                 Checkbox(xorstr("Enable"), &settings::visuals::chams::entity::enable); ColorEdit4(xorstr("Chams"), settings::visuals::chams::colors::entity, color_edit4_flags);
                 Checkbox(xorstr("Ignore walls"), &settings::visuals::chams::entity::ignore_walls);
-                Combo(xorstr("Material"), &settings::visuals::chams::entity::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0"));
-
+                Combo(xorstr("Material"), &settings::visuals::chams::entity::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "Animater Wireframe\0"));
+                if (settings::visuals::chams::entity::material_type == 4)
+                    SliderInt(xorstr("Factor"), &settings::visuals::chams::entity::factor, 1, 500, xorstr("%d"), ImGuiSliderFlags_NoInput);
                 Checkbox(xorstr("Draw original model"), &settings::visuals::chams::entity::draw_original_model);
 
                 if (BeginCombo(xorstr("List"), xorstr("...")))
@@ -207,8 +213,9 @@ void menu::render()
             case 2:
             {
                 Checkbox(xorstr("Enable"), &settings::visuals::chams::hands::enable); ColorEdit4(xorstr("Chams"), settings::visuals::chams::colors::hands, color_edit4_flags);
-                Combo(xorstr("Material"), &settings::visuals::chams::hands::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0"));
-
+                Combo(xorstr("Material"), &settings::visuals::chams::hands::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "Animater Wireframe\0"));
+                if (settings::visuals::chams::hands::material_type == 4)
+                    SliderInt(xorstr("Factor"), &settings::visuals::chams::hands::factor, 1, 500, xorstr("%d"), ImGuiSliderFlags_NoInput);
                 Checkbox(xorstr("Draw original model"), &settings::visuals::chams::hands::draw_original_model);
 
                 break;

@@ -37,23 +37,33 @@ i_material* chams::create_material(const char* name, bool flat, bool wireframe, 
     return created_material;
 }
 
-void chams::push_material_override(float color[4], int material_type)
+void chams::push_material_override(float color[4], int material_type, int factor = 100)
 {
     static i_material* textured = chams::create_material(xorstr("textured_material"), false, false, false);
     static i_material* metal = chams::create_material(xorstr("metal_material"), false, false, true);
     static i_material* wireframe = chams::create_material(xorstr("wireframe_material"), false, true, false);
     static i_material* flat = chams::create_material(xorstr("flat_material"), true, false, false);
-
-    if (!textured || !metal || !wireframe || !flat)
+    static i_material* anim_wireframe = interfaces::material_system->find_material(xorstr("models/effects/comball_tape"), xorstr("Model textures"));
+    if (!textured || !metal || !wireframe || !flat || !anim_wireframe)
         return;
 
+    anim_wireframe->set_material_var_flag(material_var_wireframe, true);
+    int initmat = false;
+    if (!initmat) {
+        anim_wireframe->increment_reference_count(); initmat = true;
+    }
     float c_color[3] = { color[0], color[1], color[2] };
     float c_alpha = color[3];
 
     interfaces::model_render->suppress_engine_lighting(true);
     interfaces::model_render->setup_lighting(c_vector());
-
-    interfaces::render_view->set_color_modulation(c_color);
+    if (material_type == 4) {
+        float modulated_color[3] = { c_color[0] * factor, c_color[1] * factor, c_color[2] * factor };
+        interfaces::render_view->set_color_modulation(modulated_color);
+    }
+    else {
+        interfaces::render_view->set_color_modulation(c_color);
+    }
     interfaces::render_view->set_blend(c_alpha);
 
     i_material* material = nullptr;
@@ -72,6 +82,9 @@ void chams::push_material_override(float color[4], int material_type)
         material = flat;
         break;
     case 4:
+        material = anim_wireframe;
+        break;
+    case 5:
         break;
     }
 

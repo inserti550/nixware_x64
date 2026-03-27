@@ -53,7 +53,7 @@ void config_manager::load(std::string name)
 
         aimbot[xorstr("visuals")][xorstr("backtrack")][xorstr("enable")].get_to(settings::aimbot::visuals::backtrack::enable);
         aimbot[xorstr("visuals")][xorstr("backtrack")][xorstr("material_type")].get_to(settings::aimbot::visuals::backtrack::material_type);
-
+        aimbot[xorstr("visuals")][xorstr("backtrack")][xorstr("factor")].get_to(settings::aimbot::visuals::backtrack::factor);
         aimbot[xorstr("visuals")][xorstr("colors")][xorstr("fov")].get_to(settings::aimbot::visuals::colors::fov);
         aimbot[xorstr("visuals")][xorstr("colors")][xorstr("snaplines")].get_to(settings::aimbot::visuals::colors::snaplines);
         aimbot[xorstr("visuals")][xorstr("colors")][xorstr("backtrack")].get_to(settings::aimbot::visuals::colors::backtrack);
@@ -74,7 +74,7 @@ void config_manager::load(std::string name)
 
         antihit[xorstr("visuals")][xorstr("fake_model")][xorstr("enable")].get_to(settings::antihit::visuals::fake_model::enable);
         antihit[xorstr("visuals")][xorstr("fake_model")][xorstr("material_type")].get_to(settings::antihit::visuals::fake_model::material_type);
-
+        antihit[xorstr("visuals")][xorstr("fake_model")][xorstr("factor")].get_to(settings::antihit::visuals::fake_model::factor);
         antihit[xorstr("visuals")][xorstr("colors")][xorstr("fake_model")].get_to(settings::antihit::visuals::colors::fake_model);
 
         nlohmann::json& visuals = json[xorstr("settings")][xorstr("visuals")];
@@ -111,17 +111,20 @@ void config_manager::load(std::string name)
         visuals[xorstr("chams")][xorstr("players")][xorstr("enable")].get_to(settings::visuals::chams::players::enable);
         visuals[xorstr("chams")][xorstr("players")][xorstr("ignore_walls")].get_to(settings::visuals::chams::players::ignore_walls);
         visuals[xorstr("chams")][xorstr("players")][xorstr("material_type")].get_to(settings::visuals::chams::players::material_type);
+        visuals[xorstr("chams")][xorstr("players")][xorstr("factor")].get_to(settings::visuals::chams::players::factor);
         visuals[xorstr("chams")][xorstr("players")][xorstr("draw_original_model")].get_to(settings::visuals::chams::players::draw_original_model);
 
         visuals[xorstr("chams")][xorstr("entity")][xorstr("enable")].get_to(settings::visuals::chams::entity::enable);
         visuals[xorstr("chams")][xorstr("entity")][xorstr("ignore_walls")].get_to(settings::visuals::chams::entity::ignore_walls);
         visuals[xorstr("chams")][xorstr("entity")][xorstr("material_type")].get_to(settings::visuals::chams::entity::material_type);
+        visuals[xorstr("chams")][xorstr("entity")][xorstr("factor")].get_to(settings::visuals::chams::entity::factor);
         visuals[xorstr("chams")][xorstr("entity")][xorstr("draw_original_model")].get_to(settings::visuals::chams::entity::draw_original_model);
 
         visuals[xorstr("chams")][xorstr("entity")][xorstr("list")].get_to(settings::visuals::chams::entity::list);
 
         visuals[xorstr("chams")][xorstr("hands")][xorstr("enable")].get_to(settings::visuals::chams::hands::enable);
         visuals[xorstr("chams")][xorstr("hands")][xorstr("material_type")].get_to(settings::visuals::chams::hands::material_type);
+        visuals[xorstr("chams")][xorstr("hands")][xorstr("factor")].get_to(settings::visuals::chams::hands::factor);
         visuals[xorstr("chams")][xorstr("hands")][xorstr("draw_original_model")].get_to(settings::visuals::chams::hands::draw_original_model);
 
         visuals[xorstr("chams")][xorstr("colors")][xorstr("players")].get_to(settings::visuals::chams::colors::players);
@@ -197,6 +200,7 @@ void config_manager::save(std::string name)
 
         aimbot[xorstr("visuals")][xorstr("backtrack")][xorstr("enable")] = settings::aimbot::visuals::backtrack::enable;
         aimbot[xorstr("visuals")][xorstr("backtrack")][xorstr("material_type")] = settings::aimbot::visuals::backtrack::material_type;
+        aimbot[xorstr("visuals")][xorstr("backtrack")][xorstr("factor")] = settings::aimbot::visuals::backtrack::factor;
 
         aimbot[xorstr("visuals")][xorstr("colors")][xorstr("fov")] = settings::aimbot::visuals::colors::fov;
         aimbot[xorstr("visuals")][xorstr("colors")][xorstr("snaplines")] = settings::aimbot::visuals::colors::snaplines;
@@ -218,6 +222,7 @@ void config_manager::save(std::string name)
 
         antihit[xorstr("visuals")][xorstr("fake_model")][xorstr("enable")] = settings::antihit::visuals::fake_model::enable;
         antihit[xorstr("visuals")][xorstr("fake_model")][xorstr("material_type")] = settings::antihit::visuals::fake_model::material_type;
+        antihit[xorstr("visuals")][xorstr("fake_model")][xorstr("factor")] = settings::antihit::visuals::fake_model::factor;
 
         antihit[xorstr("visuals")][xorstr("colors")][xorstr("fake_model")] = settings::antihit::visuals::colors::fake_model;
 
@@ -260,11 +265,13 @@ void config_manager::save(std::string name)
         visuals[xorstr("chams")][xorstr("players")][xorstr("ignore_walls")] = settings::visuals::chams::players::ignore_walls;
         visuals[xorstr("chams")][xorstr("players")][xorstr("material_type")] = settings::visuals::chams::players::material_type;
         visuals[xorstr("chams")][xorstr("players")][xorstr("draw_original_model")] = settings::visuals::chams::players::draw_original_model;
+        visuals[xorstr("chams")][xorstr("players")][xorstr("factor")] = settings::visuals::chams::players::factor;
 
         visuals[xorstr("chams")][xorstr("entity")][xorstr("enable")] = settings::visuals::chams::entity::enable;
         visuals[xorstr("chams")][xorstr("entity")][xorstr("ignore_walls")] = settings::visuals::chams::entity::ignore_walls;
         visuals[xorstr("chams")][xorstr("entity")][xorstr("material_type")] = settings::visuals::chams::entity::material_type;
         visuals[xorstr("chams")][xorstr("entity")][xorstr("draw_original_model")] = settings::visuals::chams::entity::draw_original_model;
+        visuals[xorstr("chams")][xorstr("entity")][xorstr("factor")] = settings::visuals::chams::entity::factor;
 
         visuals[xorstr("chams")][xorstr("entity")][xorstr("list")] = {};
 
@@ -275,6 +282,7 @@ void config_manager::save(std::string name)
         visuals[xorstr("chams")][xorstr("hands")][xorstr("enable")] = settings::visuals::chams::hands::enable;
         visuals[xorstr("chams")][xorstr("hands")][xorstr("material_type")] = settings::visuals::chams::hands::material_type;
         visuals[xorstr("chams")][xorstr("hands")][xorstr("draw_original_model")] = settings::visuals::chams::hands::draw_original_model;
+        visuals[xorstr("chams")][xorstr("hands")][xorstr("factor")] = settings::visuals::chams::hands::factor;
 
         visuals[xorstr("chams")][xorstr("colors")][xorstr("players")] = settings::visuals::chams::colors::players;
         visuals[xorstr("chams")][xorstr("colors")][xorstr("entity")] = settings::visuals::chams::colors::entity;

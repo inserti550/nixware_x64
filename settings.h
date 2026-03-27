@@ -78,6 +78,7 @@ namespace settings
             {
                 inline bool enable = false;
                 inline int material_type = 0;
+                inline int factor = 100;
             }
 
             namespace colors
@@ -115,6 +116,7 @@ namespace settings
             {
                 inline bool enable = false;
                 inline int material_type = 0;
+                inline int factor = 100;
             }
 
             namespace colors
@@ -178,8 +180,9 @@ namespace settings
                 inline bool enable = false;
                 inline bool ignore_walls = false;
                 inline int material_type = 0;
-
+                inline int factor = 100;
                 inline bool draw_original_model = false;
+                
             }
 
             namespace entity
@@ -187,7 +190,7 @@ namespace settings
                 inline bool enable = false;
                 inline bool ignore_walls = false;
                 inline int material_type = 0;
-
+                inline int factor = 100;
                 inline bool draw_original_model = false;
 
                 inline nlohmann::json list;
@@ -197,7 +200,7 @@ namespace settings
             {
                 inline bool enable = false;
                 inline int material_type = 0;
-
+                inline int factor = 100;
                 inline bool draw_original_model = false;
             }
 

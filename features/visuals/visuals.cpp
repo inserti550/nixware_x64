@@ -80,13 +80,6 @@ void visuals::render()
 			if (settings::visuals::esp::players::name)
 				render_manager::render_text(box, lua_utilities::get_name(entity), settings::visuals::esp::players::colors::name, offset);
 
-			if (settings::visuals::esp::players::health)
-			{
-				render_manager::filled_rect(ImVec2(box.left, box.bottom), ImVec2(box.left - 3, box.top), settings::visuals::esp::players::colors::health::health_color1, 0);
-				render_manager::filled_rect(ImVec2(box.left - 1, box.bottom), ImVec2(box.left - 2, box.top), settings::visuals::esp::players::colors::health::health_color2, 0);
-				render_manager::filled_rect(ImVec2(box.left - 1, box.bottom), ImVec2(box.left - 2, box.top/2), settings::visuals::esp::players::colors::health::health_color3, 0);
-			}
-
 			//PopStyleVar();
 		}
 		else if (settings::visuals::esp::entity::enable)

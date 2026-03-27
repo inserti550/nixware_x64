@@ -7,6 +7,7 @@
 #include "../settings.h"
 
 #include "../features/menu/menu.h"
+#include "../features/hud/hud.h"
 #include "../features/visuals/visuals.h"
 #include "../features/visuals/obs_bypass.h"
 #include "../features/visuals/chams.h"

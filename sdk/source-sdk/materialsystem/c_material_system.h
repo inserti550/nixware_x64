@@ -174,4 +174,9 @@ public:
     {
         return memory::call_v_function<i_texture * (__thiscall*)(void*, const char*, int, int, render_target_size_mode_t, image_format_t, material_render_target_depth_t, unsigned int, unsigned int)>(this, 89)(this, rt_name, w, h, render_target_size_mode, image_format, MaterialRenderTargetDepth, texture_flags, render_target_flags);
     }
+
+    bool* is_game_started()
+    {
+        return (bool*)((uintptr_t)this + 0x2002A98);
+    }
 };

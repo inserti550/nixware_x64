@@ -52,19 +52,17 @@ void chams::push_material_override(float color[4], int material_type, int factor
     if (!initmat) {
         anim_wireframe->increment_reference_count(); initmat = true;
     }
-    float c_color[3] = { color[0], color[1], color[2] };
-    float c_alpha = color[3];
 
     interfaces::model_render->suppress_engine_lighting(true);
     interfaces::model_render->setup_lighting(c_vector());
     if (material_type == 4) {
-        float modulated_color[3] = { c_color[0] * factor, c_color[1] * factor, c_color[2] * factor };
-        interfaces::render_view->set_color_modulation(modulated_color);
-    }
-    else {
+        float c_color[3] = { color[0] * factor, color[1] * factor, color[2] * factor };
         interfaces::render_view->set_color_modulation(c_color);
     }
-    interfaces::render_view->set_blend(c_alpha);
+    else {
+        interfaces::render_view->set_color_modulation(color);
+    }
+    interfaces::render_view->set_blend(color[3]);
 
     i_material* material = nullptr;
     switch (material_type)

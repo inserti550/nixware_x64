@@ -28,4 +28,8 @@ namespace math
 	float normalize_yaw(float yaw);
 	float normalize_pitch(float pitch);
 	q_angle calc_angle(const c_vector& from, const c_vector& to);
+
+	c_vector side_vector(q_angle angle);
+	c_vector to_vector(q_angle angle);
+	c_vector up_vector(q_angle angle);
 }

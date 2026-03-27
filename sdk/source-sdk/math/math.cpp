@@ -119,3 +119,18 @@ q_angle math::calc_angle(const c_vector& from, const c_vector& to)
 
 	return out;
 }
+
+c_vector math::side_vector(q_angle angle)
+{
+	return c_vector(std::cos(math::deg2rad(angle.y + 90.f)), std::sin(math::deg2rad(angle.y + 90.f)), 0.f);
+}
+
+c_vector math::to_vector(q_angle angle)
+{
+	return c_vector(std::cos(math::deg2rad(angle.x)) * std::cos(math::deg2rad(angle.y)), std::cos(math::deg2rad(angle.x)) * std::sin(math::deg2rad(angle.y)), -std::sin(math::deg2rad(angle.x)));
+}
+
+c_vector math::up_vector(q_angle angle)
+{
+	return c_vector(std::cos(math::deg2rad(angle.x + 90.f)) * std::cos(math::deg2rad(angle.y)), std::cos(math::deg2rad(angle.x - 90.f)) * std::sin(math::deg2rad(angle.y)), -std::sin(math::deg2rad(angle.x - 90.f)));
+}

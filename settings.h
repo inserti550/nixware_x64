@@ -17,6 +17,9 @@ namespace globals
 
     inline void* menu_panel = nullptr;
     inline std::atomic<std::pair<bool, const char*>> waiting_to_be_executed;
+
+    inline c_user_cmd last_cmd;
+    inline c_user_cmd last_real_cmd;
 }
 
 namespace settings
@@ -237,6 +240,13 @@ namespace settings
                 inline bool enable = false;
                 inline hotkey_t hotkey;
                 inline int distance = 100;
+            }
+            namespace freecam
+            {
+                inline bool enable = false;
+                inline hotkey_t hotkey;
+                inline int speed = 25;
+                inline bool saveposition = false;
             }
         }
 

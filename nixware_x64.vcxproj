@@ -198,6 +198,7 @@
     <ClCompile Include="features\antiaim\fakelags.cpp" />
     <ClCompile Include="features\aimbot\penetrate_walls.cpp" />
     <ClCompile Include="features\aimbot\predict_spread.cpp" />
+    <ClCompile Include="features\hud\hud.cpp" />
     <ClCompile Include="features\lua\lua.cpp" />
     <ClCompile Include="features\menu\menu.cpp" />
     <ClCompile Include="features\miscellaneous\miscellaneous.cpp" />
@@ -248,6 +249,7 @@
     <ClInclude Include="features\antiaim\fakelags.h" />
     <ClInclude Include="features\aimbot\penetrate_walls.h" />
     <ClInclude Include="features\aimbot\predict_spread.h" />
+    <ClInclude Include="features\hud\hud.h" />
     <ClInclude Include="features\lua\lua.h" />
     <ClInclude Include="features\menu\menu.h" />
     <ClInclude Include="features\miscellaneous\miscellaneous.h" />

@@ -141,6 +141,9 @@
     <ClCompile Include="features\visuals\obs_bypass.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="features\hud\hud.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dependencies\imgui\imconfig.h">
@@ -483,6 +486,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="hooks\handles\engine_client\cl_move.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="features\hud\hud.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

@@ -71,22 +71,22 @@ public:
 
 	uintptr_t get_owner_entity()
 	{
-		return ((uintptr_t)this + 0x734); //DT_GMOD_Player, Prop: m_hOwnerEntity
+		return ((uintptr_t)this + 0x70C); //DT_GMOD_Player, Prop: m_hOwnerEntity
 	}
 
 	uintptr_t get_hands()
 	{
-		return ((uintptr_t)this + 0x3924);  //DT_GMOD_Player, Prop: m_Hands
+		return ((uintptr_t)this + 0x3840);  //DT_GMOD_Player, Prop: m_Hands
 	}
 
 	uintptr_t get_view_model()
 	{
-		return ((uintptr_t)this + 0x2dd8); //DT_GMOD_Player, Prop: m_hViewModel[0]
+		return ((uintptr_t)this + 0x2D18); //DT_GMOD_Player, Prop: m_hViewModel[0]
 	}
 
 	bool is_dormant()
 	{
-		return *(bool*)((uintptr_t)this + 0x1FA);
+		return *(bool*)((uintptr_t)this + 0x0DA);
 	}
 
 	int get_move_type()
@@ -96,12 +96,12 @@ public:
 
 	int get_flags()
 	{
-		return *(int*)((uintptr_t)this + 0x440); //DT_GMOD_Player, Prop: m_fFlags
+		return *(int*)((uintptr_t)this + 0x418); //DT_GMOD_Player, Prop: m_fFlags
 	}
 
 	c_vector get_velocity()
 	{
-		return *(c_vector*)((uintptr_t)this + 0x148); //DT_GMOD_Player, Prop: m_vecVelocity
+		return *(c_vector*)((uintptr_t)this + 0x138); //DT_GMOD_Player, Prop: m_vecVelocity
 	}
 
 	float get_simulation_time()
@@ -111,28 +111,28 @@ public:
 
 	int get_tick_base()
 	{
-		return *(int*)((uintptr_t)this + 0x2d90); //DT_BasePlayer, Prop: m_nTickBase
+		return *(int*)((uintptr_t)this + 0x2CD4); //DT_BasePlayer, Prop: m_nTickBase
 	}
 
 	int hitbox_set()
 	{
-		return *(int*)((uintptr_t)this + 0x16D8); //DT_GMOD_Player 0x16d8
+		return *(int*)((uintptr_t)this + 0x16A8); //DT_GMOD_Player 0x16d8
 	}
 
 	bool& client_side_animation()
 	{
-		return *(bool*)((uintptr_t)this + 0x19d8); //DT_GMOD_Player, Prop: m_bClientSideAnimation, Offset: 0x19d8
+		return *(bool*)((uintptr_t)this + 0x19B9); //DT_GMOD_Player, Prop: m_bClientSideAnimation, Offset: 0x19d8
 	}
 
 	q_angle& get_punch_angle()
 	{
-		return *(q_angle*)((uintptr_t)this + 0x2a20); //DT_GMOD_Player, Prop: m_vecPunchAngle,
+		return *(q_angle*)((uintptr_t)this + 0x2998); //DT_GMOD_Player, Prop: m_vecPunchAngle,
 	}
 
 	//https://s10.gifyu.com/images/Sr48V.png
 	c_hl2mp_player_anim_state* get_anim_state()
 	{
-		return *(c_hl2mp_player_anim_state**)((uintptr_t)this + 0x3668);
+		return *(c_hl2mp_player_anim_state**)((uintptr_t)this + 0x3590); // 3668 mb 0x3590
 	}
 
 	c_hl2mp_player_anim_state* create_anim_state()

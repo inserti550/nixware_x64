@@ -248,6 +248,7 @@ namespace settings
                 inline int speed = 25;
                 inline bool saveposition = false;
             }
+            inline bool fullbright = false;
         }
 
         namespace movement

@@ -15,27 +15,27 @@ public:
 
 	c_vector& get_bullet_spread()
 	{
-		return memory::call_v_function<c_vector & (__thiscall*)(void*)>(this, 321)(this);
+		return memory::call_v_function<c_vector & (__thiscall*)(void*)>(this, 319)(this);
 	}
 
 	const char* get_name()
 	{
-		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 362)(this);
+		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 360)(this);
 	}
 
 	const char* get_print_name()
 	{
-		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 363)(this);
+		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 361)(this);
 	}
 
 	int primary_ammo()
 	{
-		return *(int*)((uintptr_t)this + 0x1C50); /*m_iClip1*/
+		return *(int*)((uintptr_t)this + 0x1BE0); /*m_iClip1*/
 	}
 
 	float next_primary_attack()
 	{
-		return *(float*)((uintptr_t)this + 0x1C04); /*m_flNextPrimaryAttack*/
+		return *(float*)((uintptr_t)this + 0x1B9C); /*m_flNextPrimaryAttack*/
 	}
 
 	bool is_holding_tool()

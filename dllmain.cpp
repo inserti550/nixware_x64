@@ -20,7 +20,6 @@ DWORD WINAPI dll_entry(LPVOID thread_parameter)
 #ifdef _DEBUG
     utilities::attach_console();
 #endif
-
     interfaces::initialize();
     hooks::initialize();
 

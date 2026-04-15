@@ -249,7 +249,8 @@ void menu::render()
             SliderInt(xorstr("ThirdPerson Distance"), &settings::miscellaneous::globals::third_person::distance, 10, 200);
             Checkbox(xorstr("FreeCam"), &settings::miscellaneous::globals::freecam::enable); custom::hotkey(xorstr("FreeCam Hotkey"), &settings::miscellaneous::globals::freecam::hotkey);
             SliderInt(xorstr("FreeCam speed"), &settings::miscellaneous::globals::freecam::speed, 1, 250);
-            Checkbox(xorstr("Save FreeCam position"), &settings::miscellaneous::globals::freecam::saveposition);
+            if (settings::miscellaneous::globals::freecam::enable) Checkbox(xorstr("Save FreeCam position"), &settings::miscellaneous::globals::freecam::saveposition);
+            Checkbox(xorstr("Fullbright"), &settings::miscellaneous::globals::fullbright);
         }
         EndChild();
 

@@ -8,5 +8,10 @@ namespace miscellaneous
 	static bool freecam_state = false;
 	void run();
 	void third_person(c_view_setup& view);
-	void freecam(c_view_setup& view);
+	namespace freecam
+	{
+		void freecam(c_view_setup& view);
+		void block(c_user_cmd* cmd);
+	}
+	void fullbright();
 }

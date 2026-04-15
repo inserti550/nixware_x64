@@ -6,14 +6,14 @@ void predict_spread::run(c_user_cmd* cmd)
 		return;
 
 	c_base_entity* local_player = interfaces::entity_list->get_entity(interfaces::engine->get_local_player());
-	if (!local_player || !local_player->is_alive())
+	if (!local_player  || !local_player->is_alive())
 		return;
 
 	c_base_combat_weapon* weapon = local_player->get_active_weapon();
 	if (!weapon || !weapon->can_fire())
 		return;
 
-	if (cmd->is_typing || cmd->is_world_clicking)
+	if (cmd->is_typing || cmd->context_menu)
 		return;
 
 	if (!(cmd->buttons & IN_ATTACK))

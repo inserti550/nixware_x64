@@ -43,7 +43,7 @@ void miscellaneous::third_person(c_view_setup& view)
 	view.origin = trace.end;
 }
 
-void miscellaneous::freecam(c_view_setup& view)
+void miscellaneous::freecam::freecam(c_view_setup& view)
 {
 	c_base_entity* local_player = interfaces::entity_list->get_entity(interfaces::engine->get_local_player());
 	bool is_enabled = settings::miscellaneous::globals::freecam::enable &&
@@ -59,7 +59,7 @@ void miscellaneous::freecam(c_view_setup& view)
 	interfaces::input->camera_in_third_person = true;
 
 	if (!miscellaneous::freecam_state) {
-		if (!settings::miscellaneous::globals::freecam::saveposition || miscellaneous::cam_pos == c_vector(0,0,0)) {
+		if (!settings::miscellaneous::globals::freecam::saveposition || miscellaneous::cam_pos == c_vector(0, 0, 0)) {
 			miscellaneous::cam_pos = view.origin;
 		}
 
@@ -82,4 +82,30 @@ void miscellaneous::freecam(c_view_setup& view)
 	if (globals::last_cmd.buttons & IN_DUCK)      miscellaneous::cam_pos.z -= speed;
 
 	view.origin = miscellaneous::cam_pos;
+}
+
+void miscellaneous::freecam::block(c_user_cmd* cmd)
+{
+	if (!(settings::miscellaneous::globals::freecam::enable && settings::miscellaneous::globals::freecam::hotkey.check())) {
+		cmd->view_angles = globals::last_cmd.view_angles;
+		globals::last_real_cmd = *cmd;
+	}
+	else {
+		cmd->buttons &= ~(IN_ATTACK | IN_ATTACK2 | IN_FORWARD | IN_BACK | IN_MOVELEFT | IN_MOVERIGHT | IN_JUMP | IN_DUCK);
+		cmd->forward_move = 0.f;
+		cmd->side_move = 0.f;
+		cmd->up_move = 0.f;
+
+		cmd->view_angles = globals::last_real_cmd.view_angles;
+	}
+}
+
+void miscellaneous::fullbright()
+{
+	c_con_var* mat_fullbright = interfaces::cvar->find_var(xorstr("mat_fullbright"));
+
+	if (mat_fullbright->get_int() == settings::miscellaneous::globals::fullbright ? 1 : 0)
+		return;
+
+	mat_fullbright->set_value(settings::miscellaneous::globals::fullbright ? 1 : 0);
 }

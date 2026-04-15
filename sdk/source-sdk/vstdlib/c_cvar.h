@@ -26,6 +26,18 @@ public:
 	{
 		return atoi(string_value);
 	}
+	void set_value(const char* value)
+	{
+		memory::call_v_function<void(__fastcall*)(void*, const char*)>(this, 14)(this, value);
+	}
+	void set_value(float value)
+	{
+		memory::call_v_function<void(__fastcall*)(void*, float)>(this, 15)(this, value);
+	}
+	void set_value(int value)
+	{
+		memory::call_v_function<void(__fastcall*)(void*, int)>(this, 16)(this, value);
+	}
 };
 
 class c_cvar

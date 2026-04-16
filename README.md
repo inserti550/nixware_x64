@@ -22,6 +22,8 @@ The cheat almost completely repeats the old nixware menu, which is why it has su
 - Custom loading screen (Disabled)
 - [AnimFix](https://www.unknowncheats.me/forum/garry-s-mod/502883-animfix-fake-chams.html)
 - 1 second backtrack without fakeping ([cl_interp abuse](https://www.unknowncheats.me/forum/garry-s-mod/414371-cl_interp-abuse-1-backtrack-fakeping.html)) (not 100% accuracy)
+- Fullbright
+- Freecam
 - Multicore support 
 
 # Showcase
@@ -56,15 +58,17 @@ The cheat almost completely repeats the old nixware menu, which is why it has su
 
 # Credits
 #### Maintainers / Devs
-- [pa1n](https://github.com/pa1n-dev)
+- [pa1n](https://github.com/pa1n-dev) (legacy)
+- [inserti550](https://github.com/inserti550)
 
 #### Testers
-- [pavetr](https://github.com/pavetr1337)
-- [theshezzee](https://github.com/THEshezzee) (partial)
+- [pavetr](https://github.com/pavetr1337) (legacy)
+- [theshezzee](https://github.com/THEshezzee) (legacy)
 
-#### Special thanks to these cheats
+#### Special thanks
 - [GMod-SDK](https://github.com/Gaztoof/GMod-SDK/)
 - [lemi_gmod_revolution](https://github.com/LemiProject/lemi_gmod_revolution/)
+- [Eokaaa](https://www.unknowncheats.me/forum/members/6417910.html)
 
 ### Software used
 - [ImGui](https://github.com/ocornut/imgui)

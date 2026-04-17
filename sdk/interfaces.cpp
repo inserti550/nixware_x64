@@ -101,4 +101,8 @@ void interfaces::initialize()
 	write_user_cmd = (write_user_cmd_t)memory::pattern_scanner(xorstr("client.dll"),xorstr("40 53 48 83 EC 40 4C 63 49 10 48 8B D9 41 8B 00 8B 49 0C FF"));
 	if (!write_user_cmd)
 		throw;
+
+	game_event_manager = memory::capture_interface<c_game_event_manager>(xorstr("engine.dll"), xorstr("GAMEEVENTSMANAGER002"));
+	if (!game_event_manager)
+		throw;
 }

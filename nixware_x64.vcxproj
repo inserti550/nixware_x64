@@ -283,6 +283,9 @@
     <ClInclude Include="sdk\source-sdk\anim_state\c_hl2mp_player_anim_state.h" />
     <ClInclude Include="sdk\source-sdk\anim_state\c_multiplayer_anim_state.h" />
     <ClInclude Include="sdk\source-sdk\c_studio_hdr.h" />
+    <ClInclude Include="sdk\source-sdk\engine\c_game_event_manager.h" />
+    <ClInclude Include="sdk\source-sdk\engine\i_game_event.h" />
+    <ClInclude Include="sdk\source-sdk\engine\i_game_event_listener2.h" />
     <ClInclude Include="sdk\source-sdk\entity\i_client_networkable.h" />
     <ClInclude Include="sdk\source-sdk\i_prediction.h" />
     <ClInclude Include="hooks\handles\lua_interface\run_string_ex.h" />

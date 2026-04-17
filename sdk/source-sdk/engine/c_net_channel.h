@@ -18,8 +18,7 @@ public:
 class NET_SetConVar : public i_net_message
 {
 public:
-	char pad[24];
-
+	char pad[120];
 	NET_SetConVar(const char* name, const char* value)
 	{
 		using NET_SetConVar_t = NET_SetConVar* (__fastcall*)(void*, const char*, const char*);
@@ -67,7 +66,6 @@ public:
 	}
 };
 
-#pragma once
 struct bf_write
 {
 	uint8_t* m_pData;

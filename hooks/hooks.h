@@ -74,6 +74,96 @@ namespace hooks
 			inline void(__fastcall* cl_move)(float, bool) = nullptr;
 		}
 	}
+    class death_event : public i_game_event_listener2
+    {
+    public:
+        void fire_game_event(i_game_event* event) override
+        {
+            if (!event) return;
+
+            const int local = interfaces::engine->get_local_player();
+            const int target = event->get_int("entindex_killed");
+            const int attacker = event->get_int("entindex_attacker");
+
+            player_info_t target_info, attacker_info;
+            interfaces::engine->get_player_info(target, &target_info);
+            interfaces::engine->get_player_info(attacker, &attacker_info);
+
+            const std::string target_name = target_info.name;
+            const std::string attacker_name = attacker_info.name;
+
+            if (attacker == local)
+            {
+                std::cout << "you kill him\n";
+
+                globals::kill_log.push_back(
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::u_kill) + attacker_name +
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::other) + " killed " +
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::k_death) + target_name
+                );
+            }
+            else if (target == local)
+            {
+                globals::kill_log.push_back(
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::k_kill) + attacker_name +
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::other) + " killed " +
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::u_death) + target_name
+                );
+            }
+            else return;
+
+            while (globals::kill_log.size() > 50)
+                globals::kill_log.pop_front();
+        }
+    };
+
+    class damage_event : public i_game_event_listener2
+    {
+    public:
+        void fire_game_event(i_game_event* event) override
+        {
+            if (!event) return;
+
+            const int local = interfaces::engine->get_local_player();
+            const int target = interfaces::engine->get_player_for_user_id(event->get_int("userid"));
+            const int attacker = interfaces::engine->get_player_for_user_id(event->get_int("attacker"));
+
+            if (attacker != local && target != local) return;
+			if (event->get_int("health") <= 0) return;
+            player_info_t target_info, attacker_info;
+            interfaces::engine->get_player_info(target, &target_info);
+            interfaces::engine->get_player_info(attacker, &attacker_info);
+
+            const std::string target_name = target_info.name;
+            const std::string attacker_name = attacker_info.name;
+
+            if (attacker == local)
+            {
+                globals::kill_log.push_back(
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::u_damage) + attacker_name +
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::other) + " hit " +
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::k_damage) + target_name +
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::other) + " (" +
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::u_damage) + std::to_string(event->get_int("health")) + "hp" +
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::other) + ")"
+                );
+            }
+            else if (target == local)
+            {
+                globals::kill_log.push_back(
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::k_damage) + attacker_name +
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::other) + " hit " +
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::u_damage) + target_name +
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::other) + " (" +
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::k_damage) + std::to_string(event->get_int("health")) + "hp" +
+                    utilities::ctag(settings::miscellaneous::globals::logs::colors::other) + ")"
+                );
+            }
+
+            while (globals::kill_log.size() > 50)
+                globals::kill_log.pop_front();
+        }
+    };
 }
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM w_param, LPARAM l_param);

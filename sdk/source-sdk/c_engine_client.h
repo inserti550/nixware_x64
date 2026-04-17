@@ -26,6 +26,11 @@ public:
 		return memory::call_v_function<bool(__thiscall*)(void*, int, player_info_t*)>(this, 8)(this, index, info);
 	}
 
+	int get_player_for_user_id(int user_id)
+	{
+		return memory::call_v_function<int(__thiscall*)(void*, int)>(this, 9)(this, user_id);
+	}
+
 	int get_local_player()
 	{
 		return memory::call_v_function<int(__thiscall*)(void*)>(this, 12)(this);

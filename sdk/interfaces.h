@@ -53,6 +53,9 @@
 #include "source-sdk/tier1/c_utl_vector.h"
 #include "source-sdk/tier1/key_values.h"
 #include "source-sdk/engine/c_collideable.h"
+#include "source-sdk/engine/i_game_event.h"
+#include "source-sdk/engine/i_game_event_listener2.h"
+#include "source-sdk/engine/c_game_event_manager.h"
 #include "source-sdk/engine/c_render.h"
 #include "source-sdk/anim_state/c_multiplayer_anim_state.h"
 #include "source-sdk/anim_state/c_hl2mp_player_anim_state.h"
@@ -121,6 +124,7 @@ namespace interfaces
 	inline c_client_state*			client_state;
 	inline c_uniform_random_stream* random_stream;
 	inline c_client_mode_shared*	client_mode_shared;
+	inline c_game_event_manager*	game_event_manager;
 	inline HWND						window;
 	typedef void(__fastcall* write_user_cmd_t)(bf_write*, c_user_cmd*, c_user_cmd*);
 	inline write_user_cmd_t write_user_cmd = nullptr;

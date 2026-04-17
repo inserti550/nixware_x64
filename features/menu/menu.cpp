@@ -251,6 +251,22 @@ void menu::render()
             SliderInt(xorstr("FreeCam speed"), &settings::miscellaneous::globals::freecam::speed, 1, 250);
             if (settings::miscellaneous::globals::freecam::enable) Checkbox(xorstr("Save FreeCam position"), &settings::miscellaneous::globals::freecam::saveposition);
             Checkbox(xorstr("Fullbright"), &settings::miscellaneous::globals::fullbright);
+            Checkbox(xorstr("Logs"), &settings::miscellaneous::globals::logs::enable);
+            if (settings::miscellaneous::globals::logs::enable)
+            {
+                SliderInt(xorstr("Lines"), &settings::miscellaneous::globals::logs::lines, 1, 50);
+                Checkbox(xorstr("Color settings"), &settings::miscellaneous::globals::logs::colors::open);
+                if (settings::miscellaneous::globals::logs::colors::open)
+                {
+                    LabelText(xorstr("You kill him")); ColorEdit4(xorstr("ukh##1"), settings::miscellaneous::globals::logs::colors::u_kill, color_edit4_flags);
+                    LabelText(xorstr("You damaged him")); ColorEdit4(xorstr("udh##1"), settings::miscellaneous::globals::logs::colors::u_damage, color_edit4_flags);
+                    LabelText(xorstr("You death")); ColorEdit4(xorstr("ud##1"), settings::miscellaneous::globals::logs::colors::u_death, color_edit4_flags);
+                    LabelText(xorstr("He kill you")); ColorEdit4(xorstr("hku##1"), settings::miscellaneous::globals::logs::colors::k_kill, color_edit4_flags);
+                    LabelText(xorstr("He damaged you")); ColorEdit4(xorstr("hdu##1"), settings::miscellaneous::globals::logs::colors::k_damage, color_edit4_flags);
+                    LabelText(xorstr("He death")); ColorEdit4(xorstr("hd##1"), settings::miscellaneous::globals::logs::colors::k_death, color_edit4_flags);
+                    LabelText(xorstr("Other")); ColorEdit4(xorstr("other##1"), settings::miscellaneous::globals::logs::colors::other, color_edit4_flags);
+                }
+            }
         }
         EndChild();
 

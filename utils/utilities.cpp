@@ -238,3 +238,8 @@ void utilities::update_entity_list(nlohmann::json& list)
 		list.emplace(name, false);
 	}
 }
+
+std::string utilities::ctag(const float c[4])
+{
+	return std::format("{{color:{:.2f},{:.2f},{:.2f},{:.2f}}}", c[0], c[1], c[2], c[3]);
+}

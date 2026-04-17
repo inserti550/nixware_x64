@@ -79,10 +79,19 @@ void hooks::initialize()
         throw;
 
     handles::originals::wndproc = (WNDPROC)SetWindowLongPtrW(interfaces::window, GWLP_WNDPROC, (LONG_PTR)handles::wndproc);
+
+    globals::deathEvent = new hooks::death_event();
+    globals::damageEvent = new hooks::damage_event();
+
+    interfaces::game_event_manager->add_listener((i_game_event_listener2*)globals::deathEvent, "entity_killed", false);
+    interfaces::game_event_manager->add_listener((i_game_event_listener2*)globals::damageEvent, "player_hurt", false);
 }
 
 void hooks::shutdown()
 {
+    interfaces::game_event_manager->remove_listener(globals::deathEvent);
+    interfaces::game_event_manager->remove_listener(globals::damageEvent);
+
     min_hook.remove_all_hooks();
 
     SetWindowLongPtrW(interfaces::window, GWLP_WNDPROC, (LONG_PTR)handles::originals::wndproc);

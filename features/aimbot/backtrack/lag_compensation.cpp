@@ -14,6 +14,7 @@ void lag_compensation::write_user_cmd_delta_to_buffer_callback()
 
 	{
 		NET_SetConVar net_interpolate(xorstr("cl_interpolate"), interpolate == 0 ? "0" : "1");
+		std::cout << &net_interpolate << std::endl;
 		net_channel->send_net_msg(net_interpolate, true);
 	}
 

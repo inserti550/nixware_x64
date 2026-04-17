@@ -91,7 +91,7 @@ public:
 
 	int get_move_type()
 	{
-		return *(int*)((uintptr_t)this + 0x1F4);
+		return *(int*)((uintptr_t)this + 0x1D4);
 	}
 
 	int get_flags()

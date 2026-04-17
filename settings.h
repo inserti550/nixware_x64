@@ -20,6 +20,11 @@ namespace globals
 
     inline c_user_cmd last_cmd;
     inline c_user_cmd last_real_cmd;
+
+	inline i_game_event_listener2* damageEvent;
+	inline i_game_event_listener2* deathEvent;
+
+    inline std::deque<std::string> kill_log;
 }
 
 namespace settings
@@ -248,6 +253,22 @@ namespace settings
                 inline int speed = 25;
                 inline bool saveposition = false;
             }
+            namespace logs
+            {
+                inline bool enable = false;
+                inline int lines = 10;
+                namespace colors
+                {
+                    inline bool open = false;
+                    inline float u_death[4] = { 1.f, 1.f, 1.f, 1.f };
+                    inline float u_kill[4] = { 1.f, 1.f, 1.f, 1.f };
+				    inline float k_death[4] = { 1.f, 1.f, 1.f, 1.f };
+					inline float k_kill[4] = { 1.f, 1.f, 1.f, 1.f };
+					inline float u_damage[4] = { 1.f, 1.f, 1.f, 1.f };
+					inline float k_damage[4] = { 1.f, 1.f, 1.f, 1.f };
+					inline float other[4] = { 1.f, 1.f, 1.f, 1.f };
+                }
+            }
             inline bool fullbright = false;
         }
 
@@ -255,7 +276,7 @@ namespace settings
         {
             inline bool bhop = false;
             inline bool air_strafe = false;
-            inline bool climbfly = false;
+
         }
     }
 

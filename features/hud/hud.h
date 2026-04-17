@@ -3,5 +3,6 @@
 
 namespace hud
 {
-	void render();
+    void render_log();
+    void render();
 }

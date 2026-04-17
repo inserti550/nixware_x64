@@ -20,12 +20,12 @@ public:
 
 	const char* get_name()
 	{
-		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 358)(this);
+		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 360)(this);
 	}
 
 	const char* get_print_name()
 	{
-		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 359)(this);
+		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 361)(this);
 	}
 
 	int primary_ammo()

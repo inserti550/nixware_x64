@@ -5,12 +5,12 @@ class c_base_combat_weapon
 public:
 	bool uses_lua()
 	{
-		return memory::call_v_function<bool(__thiscall*)(void*)>(this, 170)(this);
+		return memory::call_v_function<bool(__thiscall*)(void*)>(this, 171)(this);
 	}
 
 	bool push_entity()
 	{
-		return memory::call_v_function<bool(__thiscall*)(void*)>(this, 172)(this);
+		return memory::call_v_function<bool(__thiscall*)(void*)>(this, 173)(this);
 	}
 
 	c_vector& get_bullet_spread()
@@ -20,12 +20,12 @@ public:
 
 	const char* get_name()
 	{
-		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 360)(this);
+		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 358)(this);
 	}
 
 	const char* get_print_name()
 	{
-		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 361)(this);
+		return memory::call_v_function<const char* (__thiscall*)(void*)>(this, 359)(this);
 	}
 
 	int primary_ammo()

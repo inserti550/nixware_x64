@@ -178,7 +178,7 @@ void menu::render()
             {
                 Checkbox(xorstr("Enable"), &settings::visuals::chams::players::enable); ColorEdit4(xorstr("Chams"), settings::visuals::chams::colors::players, color_edit4_flags);
                 Checkbox(xorstr("Ignore walls"), &settings::visuals::chams::players::ignore_walls);
-                Combo(xorstr("Material"), &settings::visuals::chams::players::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "Animater Wireframe\0"));
+                Combo(xorstr("Material"), &settings::visuals::chams::players::material_type, xorstr("Normal\0" "Metal\0" "Wireframe\0" "Flat\0" "Animater Wireframe\0" "Glow\0"));
                 if (settings::visuals::chams::players::material_type == 4)
                     SliderInt(xorstr("Factor"), &settings::visuals::chams::players::factor, 1, 100, xorstr("%d"), ImGuiSliderFlags_NoInput);
                 Checkbox(xorstr("Draw original model"), &settings::visuals::chams::players::draw_original_model);

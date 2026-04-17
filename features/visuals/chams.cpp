@@ -50,7 +50,8 @@ void chams::push_material_override(float color[4], int material_type, int factor
     anim_wireframe->set_material_var_flag(material_var_wireframe, true);
     int initmat = false;
     if (!initmat) {
-        anim_wireframe->increment_reference_count(); initmat = true;
+        anim_wireframe->increment_reference_count();
+        initmat = true;
     }
 
     interfaces::model_render->suppress_engine_lighting(true);

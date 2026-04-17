@@ -142,6 +142,19 @@ void config_manager::load(std::string name)
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("hotkey")][xorstr("type")].get_to(settings::miscellaneous::globals::third_person::hotkey.type);
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("distance")].get_to(settings::miscellaneous::globals::third_person::distance);
 
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("enable")].get_to(settings::miscellaneous::globals::logs::enable);
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("lines")].get_to(settings::miscellaneous::globals::logs::lines);
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("open")].get_to(settings::miscellaneous::globals::logs::colors::open);
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("u_death")].get_to(settings::miscellaneous::globals::logs::colors::u_death);
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("u_kill")].get_to(settings::miscellaneous::globals::logs::colors::u_kill);
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("k_death")].get_to(settings::miscellaneous::globals::logs::colors::k_death);
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("k_kill")].get_to(settings::miscellaneous::globals::logs::colors::k_kill);
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("u_damage")].get_to(settings::miscellaneous::globals::logs::colors::u_damage);
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("k_damage")].get_to(settings::miscellaneous::globals::logs::colors::k_damage);
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("other")].get_to(settings::miscellaneous::globals::logs::colors::other);
+
+        miscellaneous[xorstr("globals")][xorstr("fullbright")].get_to(settings::miscellaneous::globals::fullbright);
+
         miscellaneous[xorstr("movement")][xorstr("bhop")].get_to(settings::miscellaneous::movement::bhop);
         miscellaneous[xorstr("movement")][xorstr("air_strafe")].get_to(settings::miscellaneous::movement::air_strafe);
 
@@ -298,6 +311,19 @@ void config_manager::save(std::string name)
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("hotkey")][xorstr("key")] = settings::miscellaneous::globals::third_person::hotkey.key;
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("hotkey")][xorstr("type")] = settings::miscellaneous::globals::third_person::hotkey.type;
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("distance")] = settings::miscellaneous::globals::third_person::distance;
+
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("enable")] = settings::miscellaneous::globals::logs::enable;
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("lines")] = settings::miscellaneous::globals::logs::lines;
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("open")] = settings::miscellaneous::globals::logs::colors::open;
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("u_death")] = settings::miscellaneous::globals::logs::colors::u_death;
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("u_kill")] = settings::miscellaneous::globals::logs::colors::u_kill;
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("k_death")] = settings::miscellaneous::globals::logs::colors::k_death;
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("k_kill")] = settings::miscellaneous::globals::logs::colors::k_kill;
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("u_damage")] = settings::miscellaneous::globals::logs::colors::u_damage;
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("k_damage")] = settings::miscellaneous::globals::logs::colors::k_damage;
+        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("other")] = settings::miscellaneous::globals::logs::colors::other;
+
+        miscellaneous[xorstr("globals")][xorstr("fullbright")] = settings::miscellaneous::globals::fullbright;
 
         miscellaneous[xorstr("movement")][xorstr("bhop")] = settings::miscellaneous::movement::bhop;
         miscellaneous[xorstr("movement")][xorstr("air_strafe")] = settings::miscellaneous::movement::air_strafe;

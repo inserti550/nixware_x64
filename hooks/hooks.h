@@ -129,11 +129,12 @@ namespace hooks
             const int attacker = interfaces::engine->get_player_for_user_id(event->get_int("attacker"));
 
             if (attacker != local && target != local) return;
-			if (event->get_int("health") <= 0) return;
+
             player_info_t target_info, attacker_info;
             interfaces::engine->get_player_info(target, &target_info);
             interfaces::engine->get_player_info(attacker, &attacker_info);
 
+            if (event->get_int("health") <= 0 && !interfaces::entity_list->get_entity(attacker)->is_player()) return;
             const std::string target_name = target_info.name;
             const std::string attacker_name = attacker_info.name;
 

@@ -68,5 +68,6 @@ static void hud::render_log()
 
 void hud::render()
 {
-    render_log();
+	if (settings::miscellaneous::globals::logs::enable)
+        render_log();
 }

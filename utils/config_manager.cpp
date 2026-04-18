@@ -34,7 +34,6 @@ void config_manager::load(std::string name)
         aimbot[xorstr("globals")][xorstr("enable")].get_to(settings::aimbot::globals::enable);
         aimbot[xorstr("globals")][xorstr("hotkey")][xorstr("key")].get_to(settings::aimbot::globals::hotkey.key);
         aimbot[xorstr("globals")][xorstr("hotkey")][xorstr("type")].get_to(settings::aimbot::globals::hotkey.type);
-        aimbot[xorstr("globals")][xorstr("enable")].get_to(settings::aimbot::globals::enable);
         aimbot[xorstr("globals")][xorstr("silent")].get_to(settings::aimbot::globals::silent);
         aimbot[xorstr("globals")][xorstr("automatic_fire")].get_to(settings::aimbot::globals::automatic_fire);
         aimbot[xorstr("globals")][xorstr("penetrate_walls")].get_to(settings::aimbot::globals::penetrate_walls);
@@ -194,7 +193,6 @@ void config_manager::save(std::string name)
         aimbot[xorstr("globals")][xorstr("enable")] = settings::aimbot::globals::enable;
         aimbot[xorstr("globals")][xorstr("hotkey")][xorstr("key")] = settings::aimbot::globals::hotkey.key;
         aimbot[xorstr("globals")][xorstr("hotkey")][xorstr("type")] = settings::aimbot::globals::hotkey.type;
-        aimbot[xorstr("globals")][xorstr("enable")] = settings::aimbot::globals::enable;
         aimbot[xorstr("globals")][xorstr("silent")] = settings::aimbot::globals::silent;
         aimbot[xorstr("globals")][xorstr("automatic_fire")] = settings::aimbot::globals::automatic_fire;
         aimbot[xorstr("globals")][xorstr("penetrate_walls")] = settings::aimbot::globals::penetrate_walls;

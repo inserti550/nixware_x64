@@ -9,6 +9,83 @@ bool penetrate_walls::is_visible(c_base_entity* local_player, c_base_entity* ent
 	return (trace.entity == entity || trace.fraction >= 0.98f);
 }
 
+bool penetrate_walls::m9k(c_base_entity* local_player, c_base_combat_weapon* weapon, c_base_entity* entity, c_vector eye_pos, c_vector shoot_pos)
+{
+	m9k_info info;
+	if (!lua_utilities::build_m9k_info(weapon, info))
+		return false;
+
+	if (!info.penetration)
+		return false;
+
+	float damage = info.damage;
+	int bounces = 0;
+
+	c_vector current_start = eye_pos;
+	c_vector current_end = shoot_pos;
+
+	while (damage > 1) {
+		trace_t trace;
+		trace_t trace2;
+		trace_t trace3;
+
+		utilities::trace_line(current_start, current_end, MASK_SHOT, local_player, &trace);
+
+		if (trace.fraction >= 1.0f || trace.fraction <= 0.0f)
+			return false;
+
+		surface_data_t* surface_data = interfaces::physics_surface_props->get_surface_data(trace.surface.props);
+
+		if (surface_data->material == MAT_METAL && info.ricochet && info.ammo != "SniperPenetratedRound")
+			return false;
+
+		if (bounces > info.max_ricochet)
+			return false;
+
+		c_vector dir = (current_end - current_start).normalized() * info.max_penetration;
+		if (surface_data->material == MAT_GLASS || surface_data->material == MAT_PLASTIC || surface_data->material == MAT_WOOD || surface_data->material == MAT_FLESH || surface_data->material == MAT_ALIENFLESH)
+			dir = (current_end - current_start).normalized() * (info.max_penetration * 2);
+
+		c_vector hit_pos = current_start + (current_end - current_start) * trace.fraction;
+
+		c_vector start2 = hit_pos + dir;
+		c_vector end2 = hit_pos;
+		utilities::trace_line(start2, end2, MASK_SHOT, local_player, &trace2);
+
+		if (trace2.start_solid || trace2.fraction >= 1.f)
+			return false;
+
+		hit_pos = start2 + (end2 - start2) * trace2.fraction;
+
+		c_vector start3 = hit_pos;
+		c_vector end3 = shoot_pos;
+
+		utilities::trace_line(start3, end3, MASK_SHOT, local_player, &trace3);
+
+		if (trace3.entity == entity)
+			return true;
+
+		float dmg_mult = 0.5f;
+		if (info.ammo == "SniperPenetratedRound")
+			dmg_mult = 1.f;
+		else if (surface_data->material == MAT_CONCRETE || surface_data->material == MAT_METAL)
+			dmg_mult = 0.3f;
+		else if (surface_data->material == MAT_WOOD || surface_data->material == MAT_PLASTIC || surface_data->material == MAT_GLASS)
+			dmg_mult = 0.8f;
+		else if (surface_data->material == MAT_FLESH || surface_data->material == MAT_ALIENFLESH)
+			dmg_mult = 0.9f;
+
+		damage *= dmg_mult;
+
+		current_start = hit_pos;
+
+		if (interfaces::physics_surface_props->get_surface_data(trace3.surface.props)->material == MAT_GLASS)
+			bounces -= 1;
+	}
+
+	return false;
+}
+
 bool penetrate_walls::swb(c_base_entity* local_player, c_base_combat_weapon* weapon, c_base_entity* entity, c_vector eye_pos, c_vector shoot_pos)
 {
 	auto get_penetration_material_interaction = [](unsigned short material)
@@ -103,6 +180,8 @@ bool penetrate_walls::can_hit(c_base_entity* local_player, c_base_entity* entity
 
 		if (strstr(weapon_base, xorstr("swb_")) || strstr(weapon_base, xorstr("cw_")))
 			return swb(local_player, weapon, entity, eye_pos, shoot_pos);
+		if (strstr(weapon_base, xorstr("bobs_")))
+			return m9k(local_player, weapon, entity, eye_pos, shoot_pos);
 	}
 
 	return false;

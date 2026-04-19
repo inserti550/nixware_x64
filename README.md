@@ -24,7 +24,8 @@ The cheat almost completely repeats the old nixware menu, which is why it has su
 - 1 second backtrack without fakeping ([cl_interp abuse](https://www.unknowncheats.me/forum/garry-s-mod/414371-cl_interp-abuse-1-backtrack-fakeping.html)) (not 100% accuracy)
 - Fullbright
 - Freecam
-- Multicore support 
+- Multicore support
+- [lua api](https://github.com/inserti550/nixware_x64/wiki)
 
 # Showcase
 [Menu showcase](https://pa1n-dev.github.io/nixware/showcase/)

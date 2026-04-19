@@ -1,9 +1,63 @@
+namespace lua::type
+{
+    enum
+    {
+        None = -1,
+        Nil = 0,
+        Bool = 1,
+        LightUserData = 2,
+        Number = 3,
+        String = 4,
+        Table = 5,
+        Function = 6,
+        UserData = 7,
+        Thread = 8,
+        Entity = 9,
+        Vector = 10,
+        Angle = 11,
+        PhysObj = 12,
+        Save = 13,
+        Restore = 14,
+        DamageInfo = 15,
+        EffectData = 16,
+        MoveData = 17,
+        RecipientFilter = 18,
+        UserCmd = 19,
+        ScriptedVehicle = 20,
+        Material = 21,
+        Panel = 22,
+        Particle = 23,
+        ParticleEmitter = 24,
+        Texture = 25,
+        UserMsg = 26,
+        ConVar = 27,
+        IMesh = 28,
+        Matrix = 29,
+        Sound = 30,
+        PixelVisHandle = 31,
+        DLight = 32,
+        Video = 33,
+        File = 34,
+        Locomotion = 35,
+        Path = 36,
+        NavArea = 37,
+        SoundHandle = 38,
+        NavLadder = 39,
+        ParticleSystem = 40,
+        ProjectedTexture = 41,
+        PhysCollide = 42,
+        SurfaceInfo = 43,
+
+        Type_Count = 44,
+    };
+}
+
 class c_lua_interface;
 
 struct lua_state_t
 {
     char                pad_0000[120];
-    c_lua_interface*    lua_lnterface;
+    c_lua_interface*    lua_interface;
 };
 
 typedef int(__cdecl* c_lua_function)(lua_state_t*);
@@ -41,6 +95,16 @@ public:
         return memory::call_v_function<void(__thiscall*)(void*, int, const char*)>(this, 5)(this, stack_pos, string_name);
     }
 
+    void create_table()
+    {
+        return memory::call_v_function<void(__thiscall*)(void*)>(this, 6)(this);
+    }
+
+    void set_table(int stack_pos)
+    {
+        return memory::call_v_function<void(__thiscall*)(void*, int)>(this, 7)(this, stack_pos);
+    }
+
     void call(int args, int results)
     {
         return memory::call_v_function<void(__thiscall*)(void*, int, int)>(this, 10)(this, args, results);
@@ -49,6 +113,11 @@ public:
     int next(int stack_pos)
     {
         return memory::call_v_function<int(__thiscall*)(void*, int)>(this, 16)(this, stack_pos);
+    }
+
+    void check_type(int stack_pos, int type)
+    {
+        return memory::call_v_function<void(__thiscall*)(void*, int, int)>(this, 19)(this, stack_pos, type);
     }
 
     const char* get_string(int stack_pos = -1, unsigned int* out_length = nullptr)
@@ -155,4 +224,28 @@ public:
     {
         return memory::call_v_function<void(__thiscall*)(c_lua_interface*, char const*, char const*, char const*, bool, bool)>(this, 92)(this, filename, path, string_to_run, run, show_errors);
     }
+    void set_state(lua_state_t* state)
+    {
+        return memory::call_v_function<void(__thiscall*)(void*, lua_state_t*)>(this, 50)(this, state);
+    }
+    lua_state_t* get_state()
+    {
+		return memory::call_v_function<lua_state_t*(__thiscall*)(void*)>(this, 55)(this);
+    }
 };
+
+#ifdef _WIN32
+#define GMOD_DLL_EXPORT extern "C" __declspec( dllexport )
+#else
+#define GMOD_DLL_EXPORT extern "C" __attribute__((visibility("default")))
+#endif
+
+#define LUA_FUNCTION( FUNC )                            \
+            int FUNC##__Imp( c_lua_interface *lua );   \
+            int FUNC( lua_state_t* L )                            \
+            {                                                   \
+                c_lua_interface *lua = L->lua_interface;     \
+                lua->set_state(L);                               \
+                return FUNC##__Imp( lua );                      \
+            }                                                   \
+            int FUNC##__Imp( [[maybe_unused]] c_lua_interface *lua )

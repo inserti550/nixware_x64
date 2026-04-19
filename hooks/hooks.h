@@ -23,6 +23,7 @@
 #include "../features/miscellaneous/miscellaneous.h"
 #include "../features/miscellaneous/movement.h"
 #include "../features/lua/lua.h"
+#include "../utils/lua_api.h"
 
 namespace hooks
 {
@@ -50,6 +51,8 @@ namespace hooks
 		int __fastcall		run_string_ex(c_lua_interface* lua, const char* filename, const char* path, const char* string_to_run, bool run, bool show_errors, bool dont_push_errors, bool no_returns);
 		void __fastcall		set_view_angles(c_engine_client* engine, q_angle& angle);
 		void __fastcall		cl_move(float accumulated_extra_samples, bool final_tick);
+        void __fastcall     level_init(void* ecx, const char* map_name);
+
 
 		namespace originals
 		{
@@ -72,6 +75,7 @@ namespace hooks
 			inline int(__thiscall* run_string_ex)(c_lua_interface*, const char*, const char*, const char*, bool, bool, bool, bool);
 			inline void(__thiscall* set_view_angles)(c_engine_client*, q_angle&);
 			inline void(__fastcall* cl_move)(float, bool) = nullptr;
+            inline void(__fastcall* level_init)(void*, const char*);
 		}
 	}
     class death_event : public i_game_event_listener2

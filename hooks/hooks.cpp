@@ -19,6 +19,7 @@
 #include "handles/lua_interface/run_string_ex.h"
 #include "handles/engine_client/set_view_angles.h"
 #include "handles/engine_client/cl_move.h"
+#include "handles/hl_client/level_init.h"
 
 void hooks::initialize()
 {
@@ -74,6 +75,9 @@ void hooks::initialize()
 
     if (!min_hook.create_hook((LPVOID)memory::pattern_scanner(xorstr("engine.dll"), xorstr("40 55 53 48 8D AC 24 38 F0 FF FF B8 C8 10 00 00 ? ? ? ? ? 48 2B E0 0F")), &handles::cl_move, (LPVOID*)&handles::originals::cl_move))
        throw;
+
+    if (!min_hook.create_hook((LPVOID)memory::pattern_scanner(xorstr("client.dll"), xorstr("48 89 5C 24 08 57 48 83 EC 60 48 8B D9 48 8B FA 48 8D 0D D9 29 74 00 ? ? ? ? ? 48 8B 4B 18")), &handles::level_init, (LPVOID*)&handles::originals::level_init))
+        throw;
 
     if (!min_hook.enable_hook())
         throw;

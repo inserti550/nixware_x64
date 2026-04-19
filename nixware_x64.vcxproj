@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -214,6 +214,7 @@
     <ClCompile Include="sdk\source-sdk\math\radian_euler.cpp" />
     <ClCompile Include="sdk\source-sdk\math\vector.cpp" />
     <ClCompile Include="utils\config_manager.cpp" />
+    <ClCompile Include="utils\lua_api.cpp" />
     <ClCompile Include="utils\lua_utilities.cpp" />
     <ClCompile Include="utils\hotkey.cpp" />
     <ClCompile Include="utils\render_manager.cpp" />
@@ -262,6 +263,7 @@
     <ClInclude Include="hooks\handles\engine_client\set_view_angles.h" />
     <ClInclude Include="hooks\handles\hl_client\create_move.h" />
     <ClInclude Include="hooks\handles\hl_client\frame_stage_notify.h" />
+    <ClInclude Include="hooks\handles\hl_client\level_init.h" />
     <ClInclude Include="hooks\handles\hl_client\write_user_cmd_delta_to_buffer.h" />
     <ClInclude Include="hooks\handles\html_panel\load_url.h" />
     <ClInclude Include="hooks\handles\html_panel\paint.h" />
@@ -335,6 +337,7 @@
     <ClInclude Include="settings.h" />
     <ClInclude Include="utils\config_manager.h" />
     <ClInclude Include="utils\hotkey.h" />
+    <ClInclude Include="utils\lua_api.h" />
     <ClInclude Include="utils\lua_utilities.h" />
     <ClInclude Include="utils\render_manager.h" />
     <ClInclude Include="utils\utilities.h" />

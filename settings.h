@@ -25,6 +25,8 @@ namespace globals
 	inline i_game_event_listener2* deathEvent;
 
     inline std::deque<std::string> kill_log;
+
+	inline bool lua_initialized = false;
 }
 
 namespace settings

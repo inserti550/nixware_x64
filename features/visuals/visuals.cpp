@@ -21,8 +21,6 @@ void visuals::render()
 
 	c_vector origin = local_player->get_abs_origin();
 
-	//std::cout << "origin x: " << origin.x << " y: " << origin.y << " z: " << origin.z << std::endl;
-
 	for (size_t i = 0; i <= interfaces::entity_list->get_highest_entity_index(); i++)
 	{
 		c_base_entity* entity = interfaces::entity_list->get_entity(i);

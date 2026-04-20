@@ -178,8 +178,6 @@ void aimbot::run(c_user_cmd* cmd)
 	if (settings::menu::opened)
 		return;
 
-	std::cout << cmd->context_menu << std::endl;
-
 	if (cmd->is_typing || cmd->context_menu)
 		return;
 

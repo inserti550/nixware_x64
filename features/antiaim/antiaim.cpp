@@ -3,12 +3,6 @@
 
 void antiaim::run(c_user_cmd* cmd, bool send_packet)
 {
-    /*
-    std::cout << "[antiaim::run][TIME] " << interfaces::global_vars->absoluteframetime << " | " << interfaces::global_vars->curtime << " | " << interfaces::global_vars->framecount << std::endl;
-    std::cout << "[antiaim::run][TIME] " << interfaces::global_vars->frametime << " | " << interfaces::global_vars->interpolation_amount << " | " << interfaces::global_vars->interval_per_tick << std::endl;
-    std::cout << "[antiaim::run][TIME] " << interfaces::global_vars->max_clients << " | " << interfaces::global_vars->network_protocol << " | " << interfaces::global_vars->network_protocol << std::endl;
-    std::cout << "[antiaim::run][TIME] " << interfaces::global_vars->realtime << " | " << interfaces::global_vars->remote_client << " | " << interfaces::global_vars->sim_ticks_this_frame << " | " << interfaces::global_vars->tick_count << std::endl;
-    */
     if (!settings::antihit::fake_angles::enable)
         return;
 

@@ -20,6 +20,7 @@ namespace globals
 
     inline c_user_cmd last_cmd;
     inline c_user_cmd last_real_cmd;
+    inline c_user_cmd* cmd_ref;
 
 	inline i_game_event_listener2* damageEvent;
 	inline i_game_event_listener2* deathEvent;

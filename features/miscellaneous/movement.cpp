@@ -13,6 +13,7 @@ void movement::run(c_user_cmd* cmd)
     {
         if (cmd->buttons & IN_JUMP && !(local_player->get_flags() & FL_ONGROUND))
             cmd->buttons &= ~IN_JUMP;
+
     }
 
 	//https://github.com/CSGOLeaks/Legendware-V3/blob/de63ad96fe233f81c5952c327469239de223f08c/cheats/misc/airstrafe.cpp#L40

@@ -51,9 +51,14 @@ public:
 		return memory::call_v_function<bool(__thiscall*)(void*)>(this, 26)(this);
 	}
 
+	bool is_drawing_loading_image()
+	{
+		return memory::call_v_function<bool(__thiscall*)(void*)>(this, 29)(this);
+	}
+
 	bool is_connected()
 	{
-		return memory::call_v_function<bool(__thiscall*)(void*)>(this, 27)(this);
+		return memory::call_v_function<bool(__thiscall*)(void*)>(this, 28)(this);
 	}
 
 	float get_screen_aspect_ratio()

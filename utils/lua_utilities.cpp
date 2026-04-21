@@ -178,7 +178,6 @@ const char* lua_utilities::get_team_name(c_base_entity* entity)
 		return "";
 	}
 	int team = get_job_without_disguise(entity);
-	interfaces::engine->client_cmd_unrestricted("" + team);
 	if (team != -1)
 	{
 		return get_rp_jobs_list(team);
@@ -187,7 +186,6 @@ const char* lua_utilities::get_team_name(c_base_entity* entity)
 	lua->get_field(-1, xorstr("team"));
 	if (!lua->is_type(-1, object_type_t::table))
 	{
-		interfaces::engine->client_cmd_unrestricted("pop 2 1");
 		lua->pop(2);
 		return "";
 	}

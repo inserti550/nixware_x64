@@ -89,6 +89,7 @@
 #include "source-sdk/c_engine_client.h"
 #include "source-sdk/c_client_state.h"
 #include "source-sdk/i_prediction.h"
+#include "source-sdk/vgui/mat_system_surface.h"
 
 #include "../utils/utilities.h"
 #include "../utils/lua_utilities.h"
@@ -128,4 +129,5 @@ namespace interfaces
 	inline HWND						window;
 	typedef void(__fastcall* write_user_cmd_t)(bf_write*, c_user_cmd*, c_user_cmd*);
 	inline write_user_cmd_t write_user_cmd = nullptr;
+	inline mat_system_surface*		mat_system;
 }

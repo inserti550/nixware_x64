@@ -78,6 +78,17 @@ namespace hooks
             inline void(__fastcall* level_init)(void*, const char*);
 		}
 	}
+
+    static const char* sound[] = {
+        "physics/metal/metal_solid_impact_bullet2.wav",
+        "buttons/button14.wav",
+		"hl1/fvox/beep.wav",
+		"death_bell.wav",
+        "hl1/fvox/bell.wav",
+        "hl1/fvox/blip.wav",
+        "resource/warning.wav"
+    };
+
     class death_event : public i_game_event_listener2
     {
     public:
@@ -98,7 +109,10 @@ namespace hooks
 
             if (attacker == local)
             {
-                std::cout << "you kill him\n";
+                if (settings::miscellaneous::globals::indicators::killsound::enable)
+                {
+                    interfaces::mat_system->play_sound(sound[settings::miscellaneous::globals::indicators::killsound::selected]);
+                }
 
                 globals::kill_log.push_back(
                     utilities::ctag(settings::miscellaneous::globals::logs::colors::u_kill) + attacker_name +
@@ -133,7 +147,6 @@ namespace hooks
             const int attacker = interfaces::engine->get_player_for_user_id(event->get_int("attacker"));
 
             if (attacker != local && target != local) return;
-            if (event->get_int("health") <= 0) return;
 
             player_info_t target_info, attacker_info;
             interfaces::engine->get_player_info(target, &target_info);
@@ -144,6 +157,16 @@ namespace hooks
 
             if (attacker == local)
             {
+
+                settings::miscellaneous::globals::indicators::hitmarker::last_hit_marker = (float)ImGui::GetTime();
+
+                if (event->get_int("health") <= 0) return;
+
+                if (settings::miscellaneous::globals::indicators::hitsound::enable)
+                {
+                    interfaces::mat_system->play_sound(sound[settings::miscellaneous::globals::indicators::hitsound::selected]);
+                }
+
                 globals::kill_log.push_back(
                     utilities::ctag(settings::miscellaneous::globals::logs::colors::u_damage) + attacker_name +
                     utilities::ctag(settings::miscellaneous::globals::logs::colors::other) + " hit " +

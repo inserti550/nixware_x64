@@ -154,6 +154,16 @@ void config_manager::load(std::string name)
 
         miscellaneous[xorstr("globals")][xorstr("fullbright")].get_to(settings::miscellaneous::globals::fullbright);
 
+        miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitmarker")][xorstr("enable")].get_to(settings::miscellaneous::globals::indicators::hitmarker::enable);
+        miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitmarker")][xorstr("size")].get_to(settings::miscellaneous::globals::indicators::hitmarker::size);
+        miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitmarker")][xorstr("color")].get_to(settings::miscellaneous::globals::indicators::hitmarker::color);
+
+        miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitsound")][xorstr("enable")].get_to(settings::miscellaneous::globals::indicators::hitsound::enable);
+        miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitsound")][xorstr("selected")].get_to(settings::miscellaneous::globals::indicators::hitsound::selected);
+
+        miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("killsound")][xorstr("enable")].get_to(settings::miscellaneous::globals::indicators::killsound::enable);
+        miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("killsound")][xorstr("selected")].get_to(settings::miscellaneous::globals::indicators::killsound::selected);
+
         miscellaneous[xorstr("movement")][xorstr("bhop")].get_to(settings::miscellaneous::movement::bhop);
         miscellaneous[xorstr("movement")][xorstr("air_strafe")].get_to(settings::miscellaneous::movement::air_strafe);
 
@@ -322,6 +332,16 @@ void config_manager::save(std::string name)
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("other")] = settings::miscellaneous::globals::logs::colors::other;
 
         miscellaneous[xorstr("globals")][xorstr("fullbright")] = settings::miscellaneous::globals::fullbright;
+
+        miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitmarker")][xorstr("enable")] = settings::miscellaneous::globals::indicators::hitmarker::enable;
+        miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitmarker")][xorstr("size")] = settings::miscellaneous::globals::indicators::hitmarker::size;
+        miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitmarker")][xorstr("color")] = settings::miscellaneous::globals::indicators::hitmarker::color;
+
+        miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitsound")][xorstr("enable")] = settings::miscellaneous::globals::indicators::hitsound::enable;
+        miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitsound")][xorstr("selected")] = settings::miscellaneous::globals::indicators::hitsound::selected;
+
+        miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("killsound")][xorstr("enable")] = settings::miscellaneous::globals::indicators::killsound::enable;
+        miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("killsound")][xorstr("selected")] = settings::miscellaneous::globals::indicators::killsound::selected;
 
         miscellaneous[xorstr("movement")][xorstr("bhop")] = settings::miscellaneous::movement::bhop;
         miscellaneous[xorstr("movement")][xorstr("air_strafe")] = settings::miscellaneous::movement::air_strafe;

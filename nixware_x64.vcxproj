@@ -294,6 +294,7 @@
     <ClInclude Include="sdk\source-sdk\materialsystem\i_material.h" />
     <ClInclude Include="sdk\source-sdk\shared\i_move_helper.h" />
     <ClInclude Include="sdk\source-sdk\tier1\key_values.h" />
+    <ClInclude Include="sdk\source-sdk\vgui\mat_system_surface.h" />
     <ClInclude Include="sdk\source-sdk\vphysics\i_physics_surface_props.h" />
     <ClInclude Include="sdk\source-sdk\vstdlib\c_cvar.h" />
     <ClInclude Include="sdk\source-sdk\vstdlib\c_uniform_random_stream.h" />

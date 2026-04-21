@@ -509,5 +509,8 @@
     <ClInclude Include="hooks\handles\hl_client\level_init.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="sdk\source-sdk\vgui\mat_system_surface.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

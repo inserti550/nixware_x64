@@ -22,4 +22,6 @@ namespace utilities
 	bool get_entity_box(c_base_entity* entity, box_t& box);
 	void update_entity_list(nlohmann::json& list);
 	std::string ctag(const float c[4]);
+	std::string get_killsay();
+	std::string replace_placeholders(const std::string& str, const std::string& killer, const std::string& target);
 }

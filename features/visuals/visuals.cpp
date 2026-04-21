@@ -20,6 +20,30 @@ void visuals::render()
 	render_manager::draw_list->PushClipRectFullScreen();
 
 	c_vector origin = local_player->get_abs_origin();
+	
+	if (settings::miscellaneous::globals::indicators::hitmarker::enable)
+	{
+		float elapsed = (float)ImGui::GetTime() - settings::miscellaneous::globals::indicators::hitmarker::last_hit_marker;
+		if (elapsed < 0.5f)
+		{
+			float alpha = 1.0f - (elapsed / 0.5f);
+
+			float col[4] = {
+				settings::miscellaneous::globals::indicators::hitmarker::color[0],
+				settings::miscellaneous::globals::indicators::hitmarker::color[1],
+				settings::miscellaneous::globals::indicators::hitmarker::color[2],
+				settings::miscellaneous::globals::indicators::hitmarker::color[3] * alpha
+			};
+
+			float cx = io.DisplaySize.x / 2.f;
+			float cy = io.DisplaySize.y / 2.f;
+
+			render_manager::line(ImVec2(cx - 2.f, cy - 2.f), ImVec2(cx - settings::miscellaneous::globals::indicators::hitmarker::size, cy - settings::miscellaneous::globals::indicators::hitmarker::size), col, 1);
+			render_manager::line(ImVec2(cx + 2.f, cy - 2.f), ImVec2(cx + settings::miscellaneous::globals::indicators::hitmarker::size, cy - settings::miscellaneous::globals::indicators::hitmarker::size), col, 1);
+			render_manager::line(ImVec2(cx - 2.f, cy + 2.f), ImVec2(cx - settings::miscellaneous::globals::indicators::hitmarker::size, cy + settings::miscellaneous::globals::indicators::hitmarker::size), col, 1);
+			render_manager::line(ImVec2(cx + 2.f, cy + 2.f), ImVec2(cx + settings::miscellaneous::globals::indicators::hitmarker::size, cy + settings::miscellaneous::globals::indicators::hitmarker::size), col, 1);
+		}
+	}
 
 	for (size_t i = 0; i <= interfaces::entity_list->get_highest_entity_index(); i++)
 	{

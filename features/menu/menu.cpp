@@ -251,6 +251,22 @@ void menu::render()
             SliderInt(xorstr("FreeCam speed"), &settings::miscellaneous::globals::freecam::speed, 1, 250);
             if (settings::miscellaneous::globals::freecam::enable) Checkbox(xorstr("Save FreeCam position"), &settings::miscellaneous::globals::freecam::saveposition);
             Checkbox(xorstr("Fullbright"), &settings::miscellaneous::globals::fullbright);
+
+            Checkbox(xorstr("HitMarker"), &settings::miscellaneous::globals::indicators::hitmarker::enable); ColorEdit4(xorstr("hitmarker color"), settings::miscellaneous::globals::indicators::hitmarker::color, color_edit4_flags);
+            if (settings::miscellaneous::globals::indicators::hitmarker::enable)
+            {
+                SliderFloat(xorstr("Hitmarker Size"), &settings::miscellaneous::globals::indicators::hitmarker::size, 1.f, 50.f, xorstr("%.1f"), ImGuiSliderFlags_NoInput);
+            }
+            Checkbox(xorstr("Hit Sound"), &settings::miscellaneous::globals::indicators::hitsound::enable);
+            if (settings::miscellaneous::globals::indicators::hitsound::enable)
+            {
+                Combo(xorstr("Hit Sound##sel"), &settings::miscellaneous::globals::indicators::hitsound::selected, xorstr("Metal Impact\0" "Button Click\0" "Beep\0" "Death bell\0" "Bell\0" "Blip\0" "Warning\0"));
+            }
+            Checkbox(xorstr("Kill Sound"), &settings::miscellaneous::globals::indicators::killsound::enable);
+            if (settings::miscellaneous::globals::indicators::killsound::enable)
+            {
+                Combo(xorstr("kill sound##sel"), &settings::miscellaneous::globals::indicators::killsound::selected, xorstr("Metal Impact\0" "Button Click\0" "Beep\0" "Death bell\0" "Bell\0" "Blip\0" "Warning\0"));
+            }
             Checkbox(xorstr("Logs"), &settings::miscellaneous::globals::logs::enable);
             if (settings::miscellaneous::globals::logs::enable)
             {

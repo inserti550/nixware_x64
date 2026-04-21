@@ -272,6 +272,26 @@ namespace settings
 					inline float other[4] = { 1.f, 1.f, 1.f, 1.f };
                 }
             }
+            namespace indicators
+            {
+                namespace hitmarker
+                {
+                    inline bool enable = false;
+                    inline float size = 10.f;
+                    inline float color[4] = { 1.f, 1.f, 1.f, 1.f };
+                    inline float last_hit_marker = -999.f;
+                }
+                namespace hitsound
+                {
+                    inline bool enable = false;
+					inline int selected = 0;
+                }
+                namespace killsound
+                {
+                    inline bool enable = false;
+                    inline int selected = 0;
+                }
+            }
             inline bool fullbright = false;
         }
 

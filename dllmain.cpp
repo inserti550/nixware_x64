@@ -23,6 +23,15 @@ DWORD WINAPI dll_entry(LPVOID thread_parameter)
     interfaces::initialize();
     hooks::initialize();
 
+    std::filesystem::path kill_say_path = xorstr("C:/nixware/kill_say.txt");
+
+    if (!std::filesystem::exists(kill_say_path))
+    {
+        std::ofstream file(kill_say_path);
+        file << "gg";
+        file.close();
+    }
+
     while (!globals::unload)
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
 

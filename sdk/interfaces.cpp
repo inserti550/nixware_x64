@@ -105,4 +105,8 @@ void interfaces::initialize()
 	game_event_manager = memory::capture_interface<c_game_event_manager>(xorstr("engine.dll"), xorstr("GAMEEVENTSMANAGER002"));
 	if (!game_event_manager)
 		throw;
+
+	mat_system = memory::capture_interface<mat_system_surface>(xorstr("vguimatsurface.dll"), xorstr("VGUI_Surface030"));
+	if (!material_system)
+		throw;
 }

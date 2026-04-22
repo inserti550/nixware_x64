@@ -83,7 +83,6 @@ namespace hooks
         "physics/metal/metal_solid_impact_bullet2.wav",
         "buttons/button14.wav",
 		"hl1/fvox/beep.wav",
-		"death_bell.wav",
         "hl1/fvox/bell.wav",
         "hl1/fvox/blip.wav",
         "resource/warning.wav"

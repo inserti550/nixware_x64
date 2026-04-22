@@ -141,6 +141,12 @@ void config_manager::load(std::string name)
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("hotkey")][xorstr("type")].get_to(settings::miscellaneous::globals::third_person::hotkey.type);
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("distance")].get_to(settings::miscellaneous::globals::third_person::distance);
 
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("enable")].get_to(settings::miscellaneous::globals::freecam::enable);
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("hotkey")][xorstr("key")].get_to(settings::miscellaneous::globals::freecam::hotkey.key);
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("hotkey")][xorstr("type")].get_to(settings::miscellaneous::globals::freecam::hotkey.type);
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("speed")].get_to(settings::miscellaneous::globals::freecam::speed);
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("saveposition")].get_to(settings::miscellaneous::globals::freecam::saveposition);
+
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("enable")].get_to(settings::miscellaneous::globals::logs::enable);
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("lines")].get_to(settings::miscellaneous::globals::logs::lines);
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("open")].get_to(settings::miscellaneous::globals::logs::colors::open);
@@ -319,6 +325,12 @@ void config_manager::save(std::string name)
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("hotkey")][xorstr("key")] = settings::miscellaneous::globals::third_person::hotkey.key;
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("hotkey")][xorstr("type")] = settings::miscellaneous::globals::third_person::hotkey.type;
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("distance")] = settings::miscellaneous::globals::third_person::distance;
+
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("enable")] = settings::miscellaneous::globals::freecam::enable;
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("hotkey")][xorstr("key")] = settings::miscellaneous::globals::freecam::hotkey.key;
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("hotkey")][xorstr("type")] = settings::miscellaneous::globals::freecam::hotkey.type;
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("speed")] = settings::miscellaneous::globals::freecam::speed;
+        miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("saveposition")] = settings::miscellaneous::globals::freecam::saveposition;
 
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("enable")] = settings::miscellaneous::globals::logs::enable;
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("lines")] = settings::miscellaneous::globals::logs::lines;

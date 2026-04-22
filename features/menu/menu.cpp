@@ -260,12 +260,12 @@ void menu::render()
             Checkbox(xorstr("Hit Sound"), &settings::miscellaneous::globals::indicators::hitsound::enable);
             if (settings::miscellaneous::globals::indicators::hitsound::enable)
             {
-                Combo(xorstr("Hit Sound##sel"), &settings::miscellaneous::globals::indicators::hitsound::selected, xorstr("Metal Impact\0" "Button Click\0" "Beep\0" "Death bell\0" "Bell\0" "Blip\0" "Warning\0"));
+                Combo(xorstr("Hit Sound##sel"), &settings::miscellaneous::globals::indicators::hitsound::selected, xorstr("Metal Impact\0" "Button Click\0" "Beep\0" "Bell\0" "Blip\0" "Warning\0"));
             }
             Checkbox(xorstr("Kill Sound"), &settings::miscellaneous::globals::indicators::killsound::enable);
             if (settings::miscellaneous::globals::indicators::killsound::enable)
             {
-                Combo(xorstr("kill sound##sel"), &settings::miscellaneous::globals::indicators::killsound::selected, xorstr("Metal Impact\0" "Button Click\0" "Beep\0" "Death bell\0" "Bell\0" "Blip\0" "Warning\0"));
+                Combo(xorstr("kill sound##sel"), &settings::miscellaneous::globals::indicators::killsound::selected, xorstr("Metal Impact\0" "Button Click\0" "Beep\0" "Bell\0" "Blip\0" "Warning\0"));
             }
             Checkbox(xorstr("Logs"), &settings::miscellaneous::globals::logs::enable);
             if (settings::miscellaneous::globals::logs::enable)

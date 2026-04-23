@@ -23,6 +23,8 @@ DWORD WINAPI dll_entry(LPVOID thread_parameter)
     interfaces::initialize();
     hooks::initialize();
 
+    config_manager::load_friends();
+
     while (!globals::unload)
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
 

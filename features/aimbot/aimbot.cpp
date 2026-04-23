@@ -103,6 +103,13 @@ target_info aimbot::find_best_target(c_user_cmd* cmd, c_base_entity* local_playe
 		if (!entity || !entity->is_player() || !entity->is_alive() || entity == local_player)
 			continue;
 
+		player_info_t info;
+		if (!interfaces::engine->get_player_info(i, &info))
+			continue;
+
+		if (settings::aimbot::accuracy::friend_list.contains(info.guid) && settings::aimbot::accuracy::friend_list[info.guid]["selected"].get<bool>())
+			continue;
+
 		float simulation_time = entity->get_simulation_time();
 		int distance = origin.distance_to(entity->get_abs_origin());
 		int health = entity->get_health();
@@ -166,7 +173,7 @@ void aimbot::run(c_user_cmd* cmd)
 	c_base_entity* local_player = interfaces::entity_list->get_entity(interfaces::engine->get_local_player());
 	if (!local_player || !local_player->is_alive())
 		return;
-
+	
 	c_base_combat_weapon* weapon = local_player->get_active_weapon();
 	if (!weapon || !weapon->can_fire() || weapon->is_holding_tool())
 		return;

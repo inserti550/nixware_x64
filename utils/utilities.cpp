@@ -242,4 +242,45 @@ void utilities::update_entity_list(nlohmann::json& list)
 std::string utilities::ctag(const float c[4])
 {
 	return std::format("{{color:{:.2f},{:.2f},{:.2f},{:.2f}}}", c[0], c[1], c[2], c[3]);
+}	
+
+void utilities::update_friend_list()
+{
+	if (!interfaces::engine->is_in_game())
+		return;
+
+	int local_index = interfaces::engine->get_local_player();
+
+	nlohmann::json kept;
+	for (auto& item : settings::aimbot::accuracy::friend_list.items())
+	{
+		if (item.value()["selected"].get<bool>())
+			kept[item.key()] = item.value();
+	}
+	settings::aimbot::accuracy::friend_list = kept;
+
+	for (int i = 1; i <= interfaces::entity_list->get_highest_entity_index(); i++)
+	{
+		c_base_entity* entity = interfaces::entity_list->get_entity(i);
+		if (!entity || !entity->is_player() || i == local_index)
+			continue;
+
+		player_info_t info;
+		if (!interfaces::engine->get_player_info(i, &info))
+			continue;
+
+		if (info.is_fake_player)
+			continue;
+
+		if (settings::aimbot::accuracy::friend_list.contains(info.guid))
+		{
+			settings::aimbot::accuracy::friend_list[info.guid]["name"] = info.name;
+			continue;
+		}
+
+		settings::aimbot::accuracy::friend_list[info.guid] = {
+			{ "name", info.name },
+			{ "selected", false }
+		};
+	}
 }

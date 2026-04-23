@@ -3,6 +3,11 @@
 #include "../sdk/interfaces.h"
 #include "../settings.h"
 
+struct friend_t {
+	std::string guid;
+	std::string name;
+};
+
 namespace utilities
 {
 	bool game_is_full_loaded();
@@ -22,6 +27,5 @@ namespace utilities
 	bool get_entity_box(c_base_entity* entity, box_t& box);
 	void update_entity_list(nlohmann::json& list);
 	std::string ctag(const float c[4]);
-	std::string get_killsay();
-	std::string replace_placeholders(const std::string& str, const std::string& killer, const std::string& target);
+	void update_friend_list();
 }

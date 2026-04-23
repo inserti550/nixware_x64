@@ -2,10 +2,11 @@ void __fastcall hooks::handles::create_move(c_hl_client* client, int sequence_nu
 {
 	originals::create_move(client, sequence_number, input_sample_frametime, active);
 
-	if (globals::lua_initialized == false) {
+	if (globals::lua_initialized == false && settings::miscellaneous::globals::luaapi) {
 		lua_api::initialize();
 		globals::lua_initialized = true;
 	}
+
 	c_user_cmd* cmd = interfaces::input->get_user_cmd(sequence_number);
 	globals::last_cmd = *cmd;
 	globals::cmd_ref = cmd;

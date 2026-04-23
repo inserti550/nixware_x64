@@ -34,6 +34,7 @@ void config_manager::load(std::string name)
         aimbot[xorstr("globals")][xorstr("enable")].get_to(settings::aimbot::globals::enable);
         aimbot[xorstr("globals")][xorstr("hotkey")][xorstr("key")].get_to(settings::aimbot::globals::hotkey.key);
         aimbot[xorstr("globals")][xorstr("hotkey")][xorstr("type")].get_to(settings::aimbot::globals::hotkey.type);
+        aimbot[xorstr("globals")][xorstr("enable")].get_to(settings::aimbot::globals::enable);
         aimbot[xorstr("globals")][xorstr("silent")].get_to(settings::aimbot::globals::silent);
         aimbot[xorstr("globals")][xorstr("automatic_fire")].get_to(settings::aimbot::globals::automatic_fire);
         aimbot[xorstr("globals")][xorstr("penetrate_walls")].get_to(settings::aimbot::globals::penetrate_walls);
@@ -141,6 +142,9 @@ void config_manager::load(std::string name)
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("hotkey")][xorstr("type")].get_to(settings::miscellaneous::globals::third_person::hotkey.type);
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("distance")].get_to(settings::miscellaneous::globals::third_person::distance);
 
+        miscellaneous[xorstr("movement")][xorstr("bhop")].get_to(settings::miscellaneous::movement::bhop);
+        miscellaneous[xorstr("movement")][xorstr("air_strafe")].get_to(settings::miscellaneous::movement::air_strafe);
+
         miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("enable")].get_to(settings::miscellaneous::globals::freecam::enable);
         miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("hotkey")][xorstr("key")].get_to(settings::miscellaneous::globals::freecam::hotkey.key);
         miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("hotkey")][xorstr("type")].get_to(settings::miscellaneous::globals::freecam::hotkey.type);
@@ -149,7 +153,6 @@ void config_manager::load(std::string name)
 
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("enable")].get_to(settings::miscellaneous::globals::logs::enable);
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("lines")].get_to(settings::miscellaneous::globals::logs::lines);
-        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("open")].get_to(settings::miscellaneous::globals::logs::colors::open);
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("u_death")].get_to(settings::miscellaneous::globals::logs::colors::u_death);
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("u_kill")].get_to(settings::miscellaneous::globals::logs::colors::u_kill);
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("k_death")].get_to(settings::miscellaneous::globals::logs::colors::k_death);
@@ -158,20 +161,16 @@ void config_manager::load(std::string name)
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("k_damage")].get_to(settings::miscellaneous::globals::logs::colors::k_damage);
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("other")].get_to(settings::miscellaneous::globals::logs::colors::other);
 
-        miscellaneous[xorstr("globals")][xorstr("fullbright")].get_to(settings::miscellaneous::globals::fullbright);
-
         miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitmarker")][xorstr("enable")].get_to(settings::miscellaneous::globals::indicators::hitmarker::enable);
         miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitmarker")][xorstr("size")].get_to(settings::miscellaneous::globals::indicators::hitmarker::size);
         miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitmarker")][xorstr("color")].get_to(settings::miscellaneous::globals::indicators::hitmarker::color);
-
         miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitsound")][xorstr("enable")].get_to(settings::miscellaneous::globals::indicators::hitsound::enable);
         miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitsound")][xorstr("selected")].get_to(settings::miscellaneous::globals::indicators::hitsound::selected);
-
         miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("killsound")][xorstr("enable")].get_to(settings::miscellaneous::globals::indicators::killsound::enable);
         miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("killsound")][xorstr("selected")].get_to(settings::miscellaneous::globals::indicators::killsound::selected);
 
-        miscellaneous[xorstr("movement")][xorstr("bhop")].get_to(settings::miscellaneous::movement::bhop);
-        miscellaneous[xorstr("movement")][xorstr("air_strafe")].get_to(settings::miscellaneous::movement::air_strafe);
+        miscellaneous[xorstr("globals")][xorstr("fullbright")].get_to(settings::miscellaneous::globals::fullbright);
+        miscellaneous[xorstr("globals")][xorstr("luaapi")].get_to(settings::miscellaneous::globals::luaapi);
 
         nlohmann::json& lua = json[xorstr("settings")][xorstr("lua")];
         lua[xorstr("miscellaneous")][xorstr("dumper")].get_to(settings::lua::miscellaneous::dumper);
@@ -209,6 +208,7 @@ void config_manager::save(std::string name)
         aimbot[xorstr("globals")][xorstr("enable")] = settings::aimbot::globals::enable;
         aimbot[xorstr("globals")][xorstr("hotkey")][xorstr("key")] = settings::aimbot::globals::hotkey.key;
         aimbot[xorstr("globals")][xorstr("hotkey")][xorstr("type")] = settings::aimbot::globals::hotkey.type;
+        aimbot[xorstr("globals")][xorstr("enable")] = settings::aimbot::globals::enable;
         aimbot[xorstr("globals")][xorstr("silent")] = settings::aimbot::globals::silent;
         aimbot[xorstr("globals")][xorstr("automatic_fire")] = settings::aimbot::globals::automatic_fire;
         aimbot[xorstr("globals")][xorstr("penetrate_walls")] = settings::aimbot::globals::penetrate_walls;
@@ -326,6 +326,9 @@ void config_manager::save(std::string name)
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("hotkey")][xorstr("type")] = settings::miscellaneous::globals::third_person::hotkey.type;
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("distance")] = settings::miscellaneous::globals::third_person::distance;
 
+        miscellaneous[xorstr("movement")][xorstr("bhop")] = settings::miscellaneous::movement::bhop;
+        miscellaneous[xorstr("movement")][xorstr("air_strafe")] = settings::miscellaneous::movement::air_strafe;
+
         miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("enable")] = settings::miscellaneous::globals::freecam::enable;
         miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("hotkey")][xorstr("key")] = settings::miscellaneous::globals::freecam::hotkey.key;
         miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("hotkey")][xorstr("type")] = settings::miscellaneous::globals::freecam::hotkey.type;
@@ -334,7 +337,6 @@ void config_manager::save(std::string name)
 
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("enable")] = settings::miscellaneous::globals::logs::enable;
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("lines")] = settings::miscellaneous::globals::logs::lines;
-        miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("open")] = settings::miscellaneous::globals::logs::colors::open;
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("u_death")] = settings::miscellaneous::globals::logs::colors::u_death;
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("u_kill")] = settings::miscellaneous::globals::logs::colors::u_kill;
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("k_death")] = settings::miscellaneous::globals::logs::colors::k_death;
@@ -343,20 +345,16 @@ void config_manager::save(std::string name)
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("k_damage")] = settings::miscellaneous::globals::logs::colors::k_damage;
         miscellaneous[xorstr("globals")][xorstr("logs")][xorstr("colors")][xorstr("other")] = settings::miscellaneous::globals::logs::colors::other;
 
-        miscellaneous[xorstr("globals")][xorstr("fullbright")] = settings::miscellaneous::globals::fullbright;
-
         miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitmarker")][xorstr("enable")] = settings::miscellaneous::globals::indicators::hitmarker::enable;
         miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitmarker")][xorstr("size")] = settings::miscellaneous::globals::indicators::hitmarker::size;
         miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitmarker")][xorstr("color")] = settings::miscellaneous::globals::indicators::hitmarker::color;
-
         miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitsound")][xorstr("enable")] = settings::miscellaneous::globals::indicators::hitsound::enable;
         miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("hitsound")][xorstr("selected")] = settings::miscellaneous::globals::indicators::hitsound::selected;
-
         miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("killsound")][xorstr("enable")] = settings::miscellaneous::globals::indicators::killsound::enable;
         miscellaneous[xorstr("globals")][xorstr("indicators")][xorstr("killsound")][xorstr("selected")] = settings::miscellaneous::globals::indicators::killsound::selected;
 
-        miscellaneous[xorstr("movement")][xorstr("bhop")] = settings::miscellaneous::movement::bhop;
-        miscellaneous[xorstr("movement")][xorstr("air_strafe")] = settings::miscellaneous::movement::air_strafe;
+        miscellaneous[xorstr("globals")][xorstr("fullbright")] = settings::miscellaneous::globals::fullbright;
+        miscellaneous[xorstr("globals")][xorstr("luaapi")] = settings::miscellaneous::globals::luaapi;
 
         nlohmann::json& lua = json[xorstr("settings")][xorstr("lua")];
         lua[xorstr("miscellaneous")][xorstr("dumper")] = settings::lua::miscellaneous::dumper;
@@ -376,6 +374,32 @@ void config_manager::save(std::string name)
     }
     catch (const std::exception& e)
     {
-        
+
     }
+}
+
+void config_manager::save_friends()
+{
+    nlohmann::json to_save;
+    for (auto& item : settings::aimbot::accuracy::friend_list.items())
+    {
+        if (item.value()["selected"].get<bool>())
+            to_save[item.key()] = item.value();
+    }
+
+    std::ofstream file("C:/nixware/friends.nixware");
+    if (file.is_open())
+        file << to_save.dump(4);
+}
+
+void config_manager::load_friends()
+{
+    std::ifstream file("C:/nixware/friends.nixware");
+    if (!file.is_open())
+        return;
+
+    try {
+        file >> settings::aimbot::accuracy::friend_list;
+    }
+    catch (...) {}
 }

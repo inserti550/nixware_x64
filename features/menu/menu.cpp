@@ -54,6 +54,24 @@ void menu::render()
             Checkbox(xorstr("Disable visual recoil"), &settings::aimbot::accuracy::disable_visual_recoil);
             SliderFloat(xorstr("Backtrack"), &settings::aimbot::accuracy::backtrack, 0.f, 1.f, xorstr("%.3f ms"), ImGuiSliderFlags_NoInput);
             SliderFloat(xorstr("Smooth"), &settings::aimbot::accuracy::smooth, 0.f, 20.f, xorstr("%.1f"), ImGuiSliderFlags_NoInput);
+            if (BeginCombo(xorstr("Friends"), xorstr("...")))
+            {
+                utilities::update_friend_list();
+
+                for (auto& item : settings::aimbot::accuracy::friend_list.items())
+                {
+                    bool selected = item.value()["selected"].get<bool>();
+                    std::string label = item.value()["name"].get<std::string>();
+
+                    if (Selectable(label.c_str(), &selected, ImGuiSelectableFlags_DontClosePopups))
+                    {
+                        item.value()["selected"] = selected;
+                        config_manager::save_friends();
+                    }
+                }
+
+                EndCombo();
+            }
         }
         EndChild();
 
@@ -251,7 +269,9 @@ void menu::render()
             SliderInt(xorstr("FreeCam speed"), &settings::miscellaneous::globals::freecam::speed, 1, 250);
             if (settings::miscellaneous::globals::freecam::enable) Checkbox(xorstr("Save FreeCam position"), &settings::miscellaneous::globals::freecam::saveposition);
             Checkbox(xorstr("Fullbright"), &settings::miscellaneous::globals::fullbright);
-
+            Checkbox(xorstr("Lua API"), &settings::miscellaneous::globals::luaapi); 
+            if (IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
+                SetTooltip(xorstr("You can enable it at any time, but to disable it you need to go back to the initialization reset level"));
             Checkbox(xorstr("HitMarker"), &settings::miscellaneous::globals::indicators::hitmarker::enable); ColorEdit4(xorstr("hitmarker color"), settings::miscellaneous::globals::indicators::hitmarker::color, color_edit4_flags);
             if (settings::miscellaneous::globals::indicators::hitmarker::enable)
             {

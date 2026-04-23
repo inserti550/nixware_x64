@@ -18,7 +18,7 @@ public:
 class NET_SetConVar : public i_net_message
 {
 public:
-	char pad[120];
+	char pad[64];
 	NET_SetConVar(const char* name, const char* value)
 	{
 		using NET_SetConVar_t = NET_SetConVar* (__fastcall*)(void*, const char*, const char*);

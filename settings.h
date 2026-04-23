@@ -293,6 +293,7 @@ namespace settings
                 }
             }
             inline bool fullbright = false;
+            inline bool luaapi = false;
         }
 
         namespace movement

@@ -54,16 +54,13 @@ bool fakelags::run(c_user_cmd* cmd)
 //https://www.unknowncheats.me/forum/garry-s-mod/615861-cusercmd-createmove-fakelag-x64.html
 void fakelags::apply(bool send_packet)
 {
+	static void* p_send_packet = reinterpret_cast<void*>((uintptr_t)memory::pattern_scanner(xorstr("engine.dll"), xorstr("40 55 53 48 8D AC 24 38 F0 FF FF B8 C8 10 00 00 E8 ?? ?? ?? ?? 48 2B E0 0F 29 B4 24 B0 10 00 00")) + 0x168);
+
 	static uint8_t jz_bytes[] = { 0x0f, 0x84, 0x04, 0x01, 0x00, 0x00 };
 	static uint8_t jnz_bytes[] = { 0x0f, 0x85, 0x04, 0x01, 0x00, 0x00 };
 
 	DWORD old_protect;
-	VirtualProtect(fakelags::p_send_packet, 6, PAGE_EXECUTE_READWRITE, &old_protect);
-	memcpy(fakelags::p_send_packet, send_packet ? jz_bytes : jnz_bytes, 6);
-	VirtualProtect(fakelags::p_send_packet, 6, old_protect, &old_protect);
-}
-
-void fakelags::init()
-{
-	fakelags::p_send_packet = reinterpret_cast<void*>((uintptr_t)memory::pattern_scanner(xorstr("engine.dll"), xorstr("40 55 53 48 8D AC 24 38 F0 FF FF B8 C8 10 00 00 E8 ?? ?? ?? ?? 48 2B E0 0F 29 B4 24 B0 10 00 00")) + 0x168);
+	VirtualProtect(p_send_packet, 6, PAGE_EXECUTE_READWRITE, &old_protect);
+	memcpy(p_send_packet, send_packet ? jz_bytes : jnz_bytes, 6);
+	VirtualProtect(p_send_packet, 6, old_protect, &old_protect);
 }

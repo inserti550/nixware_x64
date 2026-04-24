@@ -11,10 +11,9 @@ This is a cheat for [Garry's Mod](https://store.steampowered.com/app/4000/Garrys
 The cheat almost completely repeats the old nixware menu, which is why it has such a name
 
 # Features
-- Aimbot (Silent, Automatic fire, Penetrate walls (SWB, CW2), Hitbox, Priority, Smooth)
+- Aimbot (Silent, Automatic fire, Penetrate walls (M9K, SWB, CW2), Hitbox, Priority, Smooth)
 - Predict spread ([m9k](https://steamcommunity.com/sharedfiles/filedetails/?id=128089118), [swb](https://steamcommunity.com/sharedfiles/filedetails/?id=2279720120), [ptp](https://steamcommunity.com/sharedfiles/filedetails/?id=187933083), cw2, hl2)
 - Disable recoil
-- Backtrack
 - AntiAim (AA, Fakelag's, Fake duck)
 - ThirdPerson
 - OBS Bypass (ESP, CHAMS)

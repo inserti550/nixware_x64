@@ -29,16 +29,6 @@ namespace globals
 
 	inline bool lua_initialized = false;
 
-    inline bool charging = false;
-    inline bool shifting = false;
-    inline bool can_shift = false;
-    inline bool	bIsShifting = false;
-    inline bool	bIsRecharging = false;
-    inline bool	ShouldShift = false;
-    inline bool	ShouldRecharge = false;
-    inline int	maxTickbaseShift = 1;
-    inline int	minTickbaseShift = 1;
-    inline int	curTickbaseCharge = 0;
 
 }
 
@@ -247,6 +237,11 @@ namespace settings
             {
                 inline bool enable = false;
                 inline float value = 80;
+            }
+            namespace aspect_ratio
+            {
+                inline bool enable = false;
+                inline float value = 1.f;
             }
         }
     }

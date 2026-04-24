@@ -251,6 +251,9 @@ void menu::render()
 
             Checkbox(xorstr("Model fov changer"), &settings::visuals::world::model_fov_changer::enable);
             SliderFloat(xorstr("Value##2"), &settings::visuals::world::model_fov_changer::value, 30, 150, xorstr("%.1f"), ImGuiSliderFlags_NoInput);
+
+            Checkbox(xorstr("Aspect ratio"), &settings::visuals::world::aspect_ratio::enable);
+            SliderFloat(xorstr("Value##3"), &settings::visuals::world::aspect_ratio::value, 0, 2, xorstr("%.2f"), ImGuiSliderFlags_NoInput);
         }
         EndChild();
 

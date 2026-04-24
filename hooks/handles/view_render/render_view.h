@@ -1,7 +1,10 @@
-void __fastcall hooks::handles::render_view(i_view_render* view_render, c_view_setup& view, int flags, int to_draw)
+void __fastcall hooks::handles::render_view(i_view_render* view_render, c_view_setup & view, int flags, int to_draw)
 {
 	if (settings::visuals::world::model_fov_changer::enable)
 		view.fov_view_model = settings::visuals::world::model_fov_changer::value;
+
+	if (settings::visuals::world::aspect_ratio::enable)
+		view.aspect_ratio = settings::visuals::world::aspect_ratio::value;
 
 	miscellaneous::freecam::freecam(view);
 

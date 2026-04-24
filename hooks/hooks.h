@@ -74,11 +74,11 @@ namespace hooks
 			inline void(__thiscall* multiplayer_anim_state_update)(void*, float, float);
 			inline int(__thiscall* run_string_ex)(c_lua_interface*, const char*, const char*, const char*, bool, bool, bool, bool);
 			inline void(__thiscall* set_view_angles)(c_engine_client*, q_angle&);
-			inline void(__fastcall* cl_move)(float, bool) = nullptr;
+			inline void(__fastcall* cl_move)(float, bool);
             inline void(__fastcall* level_init)(void*, const char*);
 		}
 	}
-
+    
     static const char* sound[] = {
         "physics/metal/metal_solid_impact_bullet2.wav",
         "buttons/button14.wav",

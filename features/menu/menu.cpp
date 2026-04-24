@@ -312,6 +312,7 @@ void menu::render()
         {
             Checkbox(xorstr("Bunny hop"), &settings::miscellaneous::movement::bhop);
             Checkbox(xorstr("Air strafe"), &settings::miscellaneous::movement::air_strafe);
+            Checkbox(xorstr("Fast stop"), &settings::miscellaneous::movement::fast_stop);
         }
         EndChild();
 

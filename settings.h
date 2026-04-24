@@ -28,6 +28,18 @@ namespace globals
     inline std::deque<std::string> kill_log;
 
 	inline bool lua_initialized = false;
+
+    inline bool charging = false;
+    inline bool shifting = false;
+    inline bool can_shift = false;
+    inline bool	bIsShifting = false;
+    inline bool	bIsRecharging = false;
+    inline bool	ShouldShift = false;
+    inline bool	ShouldRecharge = false;
+    inline int	maxTickbaseShift = 1;
+    inline int	minTickbaseShift = 1;
+    inline int	curTickbaseCharge = 0;
+
 }
 
 namespace settings
@@ -300,6 +312,7 @@ namespace settings
         {
             inline bool bhop = false;
             inline bool air_strafe = false;
+			inline bool fast_stop = false;
 
         }
     }

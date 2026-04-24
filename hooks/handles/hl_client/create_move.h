@@ -31,7 +31,7 @@ void __fastcall hooks::handles::create_move(c_hl_client* client, int sequence_nu
 	antiaim::run(cmd, send_packet);
 	animfix::run(cmd, send_packet);
 	fakelags::apply(send_packet);
-
+	std::cout << "chocked " << interfaces::client_state->choked_commands << std::endl;
 	movement::fix(cmd, old_cmd);
 
 	verified_cmd->set_user_cmd(cmd);

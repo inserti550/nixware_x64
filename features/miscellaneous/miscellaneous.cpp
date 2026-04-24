@@ -17,8 +17,10 @@ void miscellaneous::third_person(c_view_setup& view)
 		return;
 
 	if (!settings::miscellaneous::globals::third_person::enable)
+	{
+		interfaces::input->camera_in_third_person = false;
 		return;
-
+	}
 	if (!settings::miscellaneous::globals::third_person::hotkey.check())
 		return;
 

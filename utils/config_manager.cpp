@@ -135,6 +135,8 @@ void config_manager::load(std::string name)
         visuals[xorstr("world")][xorstr("fov_changer")][xorstr("value")].get_to(settings::visuals::world::fov_changer::value);
         visuals[xorstr("world")][xorstr("model_fov_changer")][xorstr("enable")].get_to(settings::visuals::world::model_fov_changer::enable);
         visuals[xorstr("world")][xorstr("model_fov_changer")][xorstr("value")].get_to(settings::visuals::world::model_fov_changer::value);
+        visuals[xorstr("world")][xorstr("aspect_ratio")][xorstr("enable")].get_to(settings::visuals::world::aspect_ratio::enable);
+        visuals[xorstr("world")][xorstr("aspect_ratio")][xorstr("value")].get_to(settings::visuals::world::aspect_ratio::value);
 
         nlohmann::json& miscellaneous = json[xorstr("settings")][xorstr("miscellaneous")];
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("enable")].get_to(settings::miscellaneous::globals::third_person::enable);
@@ -144,6 +146,7 @@ void config_manager::load(std::string name)
 
         miscellaneous[xorstr("movement")][xorstr("bhop")].get_to(settings::miscellaneous::movement::bhop);
         miscellaneous[xorstr("movement")][xorstr("air_strafe")].get_to(settings::miscellaneous::movement::air_strafe);
+        miscellaneous[xorstr("movement")][xorstr("fast_stop")].get_to(settings::miscellaneous::movement::fast_stop);
 
         miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("enable")].get_to(settings::miscellaneous::globals::freecam::enable);
         miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("hotkey")][xorstr("key")].get_to(settings::miscellaneous::globals::freecam::hotkey.key);
@@ -319,6 +322,8 @@ void config_manager::save(std::string name)
         visuals[xorstr("world")][xorstr("fov_changer")][xorstr("value")] = settings::visuals::world::fov_changer::value;
         visuals[xorstr("world")][xorstr("model_fov_changer")][xorstr("enable")] = settings::visuals::world::model_fov_changer::enable;
         visuals[xorstr("world")][xorstr("model_fov_changer")][xorstr("value")] = settings::visuals::world::model_fov_changer::value;
+        visuals[xorstr("world")][xorstr("aspect_ratio")][xorstr("enable")] = settings::visuals::world::aspect_ratio::enable;
+        visuals[xorstr("world")][xorstr("aspect_ratio")][xorstr("value")] = settings::visuals::world::aspect_ratio::value;
 
         nlohmann::json& miscellaneous = json[xorstr("settings")][xorstr("miscellaneous")];
         miscellaneous[xorstr("globals")][xorstr("third_person")][xorstr("enable")] = settings::miscellaneous::globals::third_person::enable;
@@ -328,6 +333,7 @@ void config_manager::save(std::string name)
 
         miscellaneous[xorstr("movement")][xorstr("bhop")] = settings::miscellaneous::movement::bhop;
         miscellaneous[xorstr("movement")][xorstr("air_strafe")] = settings::miscellaneous::movement::air_strafe;
+        miscellaneous[xorstr("movement")][xorstr("fast_stop")] = settings::miscellaneous::movement::fast_stop;
 
         miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("enable")] = settings::miscellaneous::globals::freecam::enable;
         miscellaneous[xorstr("globals")][xorstr("freecam")][xorstr("hotkey")][xorstr("key")] = settings::miscellaneous::globals::freecam::hotkey.key;
